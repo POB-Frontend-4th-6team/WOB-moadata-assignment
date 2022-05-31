@@ -7,6 +7,7 @@ interface IRateObject {
   y: string
 }
 
+// TODO: 파일 분리
 const mergeArray = (firstArray: IRateObject[], secondArray: IRateObject[], key: string) =>
   firstArray
     .filter(
@@ -19,25 +20,57 @@ const mergeArray = (firstArray: IRateObject[], secondArray: IRateObject[], key: 
     )
     .concat(secondArray)
 
-const getTodayHeartRateData = (seq = 136, dateList = ['2022-04-19']) => {
+const getJsonData = (seq: number, type: string) => {
+  if (type === 'step') {
+    const stepData = stepRate[seq as keyof typeof stepRate]
+    return stepData.map((value) => {
+      return { x: value.steps, y: value.crt_ymdt }
+    })
+  }
   const heartData = heartRate[seq as keyof typeof heartRate]
+  return heartData.map((value) => {
+    return { x: value.avg_beat, y: value.crt_ymdt }
+  })
+}
 
-  const tmepHeartData: IRateObject[] = []
+const initializeDataObject = (type: string, dateList: string[]) => {
+  const tmepData: IRateObject[] = []
   dateList.forEach((dateValue) => {
-    tmepHeartData.push({ x: 60, y: dateValue })
+    if (type === 'step') tmepData.push({ x: 0, y: dateValue })
+    else tmepData.push({ x: 60, y: dateValue })
+  })
+  return tmepData
+}
+
+const filterDataByDate = (data: IRateObject[], dateList: string[]) => {
+  return data.filter((value) => value.y >= dateList[0] && value.y <= `${dateList[dateList.length - 1]} 23:59:59`)
+}
+
+const convertTodayData = (type: string, data: IRateObject[]) => {
+  const convertedData = data.map((value) => {
+    const tempDate = dayjs(value.y).format('HH:mm:ss')
+    return {
+      x: value.x,
+      y: tempDate,
+    }
   })
 
-  // TODO: filter 분리
-  const filteredHeartRate = heartData
-    .filter((value) => value.crt_ymdt >= dateList[0] && value.crt_ymdt <= `${dateList[dateList.length - 1]} 23:59:59`)
-    .map((value) => {
-      const tempDate = dayjs(value.crt_ymdt).format('HH-MM-SS')
-      return {
-        x: value.avg_beat,
-        y: tempDate,
-      }
+  if (type === 'step') {
+    convertedData.forEach((rate, index) => {
+      if (index < convertedData.length - 1) rate.x -= convertedData[index + 1].x
     })
-  return filteredHeartRate
+  }
+
+  return convertedData
+}
+
+// getRateData
+const getTodayRateData = (seq = 136, type = 'step', dateList = ['2022-04-19']) => {
+  const data = getJsonData(seq, type)
+  const filteredRate = filterDataByDate(data, dateList)
+  const convertedData = convertTodayData(type, filteredRate)
+
+  return convertedData
 }
 
 const getPeriodHeartRateData = (seq = 136, dateList = ['2022-04-19']) => {
@@ -48,11 +81,11 @@ const getPeriodHeartRateData = (seq = 136, dateList = ['2022-04-19']) => {
     tmepHeartData.push({ x: 60, y: dateValue })
   })
 
-  const filteredHeartRate = heartData.filter(
+  const filteredRate = heartData.filter(
     (value) => value.crt_ymdt >= dateList[0] && value.crt_ymdt <= `${dateList[dateList.length - 1]} 23:59:59`
   )
 
-  const convertedRate = filteredHeartRate.reduce(
+  const convertedRate = filteredRate.reduce(
     (acc: { [key: string]: { x: number; y: string; count: number } }, { avg_beat: value, crt_ymdt: date }) => {
       const getDate = dayjs(date).format('YYYY-MM-DD')
 
@@ -79,8 +112,7 @@ const getPeriodHeartRateData = (seq = 136, dateList = ['2022-04-19']) => {
   return result
 }
 
-// TODO: X,Y
-// TODO: 미완
+// TODO: 전체 기간 데이터 가져오기
 const getAllHeartRateData = (seq = 136, dateList = ['2022-04-19']) => {
   const heartData = heartRate[seq as keyof typeof heartRate]
   // all => date list 초기화
@@ -130,34 +162,7 @@ const getAllHeartRateData = (seq = 136, dateList = ['2022-04-19']) => {
   return result
 }
 
-// step~
-const getTodayStepRateData = (seq = 136, dateList = ['2022-04-19']) => {
-  const stepData = stepRate[seq as keyof typeof heartRate]
-
-  const tmep: IRateObject[] = []
-  dateList.forEach((dateValue) => {
-    tmep.push({ x: 0, y: dateValue })
-  })
-
-  const filteredStepData = stepData.filter(
-    (value) => value.crt_ymdt >= dateList[0] && value.crt_ymdt <= `${dateList[dateList.length - 1]} 23:59:59`
-  )
-
-  const todayStepRate = filteredStepData.map((rate) => {
-    const tempDate = dayjs(rate.crt_ymdt).format('HH-MM-SS')
-    return {
-      x: rate.steps,
-      y: tempDate,
-    }
-  })
-
-  todayStepRate.forEach((rate, index) => {
-    if (index < todayStepRate.length - 1) rate.x -= todayStepRate[index + 1].x
-  })
-  return todayStepRate
-}
-
-const getPeriodStepRateData = (seq = 136, dateList = ['2022-04-19']) => {
+const getPeriodStepRateData = (seq = 136, dateList = ['2022-02-26', '2022-04-17', '2022-04-18', '2022-04-19']) => {
   const stepData = stepRate[seq as keyof typeof heartRate]
 
   const tmep: IRateObject[] = []
@@ -187,10 +192,4 @@ const getPeriodStepRateData = (seq = 136, dateList = ['2022-04-19']) => {
   return result
 }
 
-export {
-  getTodayHeartRateData,
-  getPeriodHeartRateData,
-  getAllHeartRateData,
-  getTodayStepRateData,
-  getPeriodStepRateData,
-}
+export { getTodayRateData, getPeriodHeartRateData, getAllHeartRateData, getPeriodStepRateData }
