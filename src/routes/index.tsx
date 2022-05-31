@@ -6,8 +6,11 @@ import HomePage from './Home'
 import UserManage from './UserManage'
 import UserInfo from './UserInfo'
 import NotFoundPage from './NotFoundPage'
+import { getHeartRateData, getStepRateData } from 'services/health'
 
 const App = () => {
+  // getHeartRateData()
+  getStepRateData()
   return (
     <div className={styles.app}>
       <Routes>
