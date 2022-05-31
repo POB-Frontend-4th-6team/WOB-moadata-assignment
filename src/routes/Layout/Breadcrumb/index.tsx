@@ -5,14 +5,15 @@ interface IPaths {
   accPath: string
   path: string
 }
-const Breadcrumb = (): JSX.Element => {
+
+const Breadcrumb = () => {
   const location = useLocation()
 
-  const paths = location.pathname.split('/').reduce((acc: IPaths[], path, i) => {
+  const paths = location.pathname.split('/').reduce((acc: IPaths[], path) => {
     const prevAccPath = acc?.[acc.length - 1]?.accPath ?? ''
-
     const accPath = `${prevAccPath}/${path}`
     path && acc.push({ accPath, path })
+
     return acc
   }, [])
 
