@@ -1,6 +1,7 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/mixins/responsive';
+@use '/src/styles/mixins/position';
 
 .app {
   position: relative;
@@ -13,19 +14,35 @@
 
   main {
     @include flexbox.flexbox(start,center);
+    position: relative;
     width: 100%;
     height: 100%;
+    transition: 0.2s;
+
+    .sidebarButton {
+      @include position.absolute(10px 10px auto auto);
+    }
 
     .sidebarContainer {
+      @include position.absolute(0 auto auto -300px);
       width: 300px;
       height: 100%;
+      transition: 0.2s;
     }
 
     .pageContainer {
       @include flexbox.flexbox(start,center);
       flex-direction: column;
-      width: calc(100% - 300px);
+      width: 100%;
       height: 100%;
+    }
+
+    &.showSidebar {
+      padding-left: 300px;
+
+      .sidebarContainer {
+        transform: translateX(300px);
+      }
     }
   }
 }

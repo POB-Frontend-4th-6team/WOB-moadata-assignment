@@ -4,12 +4,21 @@ import styles from './layout.module.scss'
 import Sidebar from './Sidebar'
 import Header from './Header'
 import Breadcrumb from './Breadcrumb'
+import { useState } from 'react'
+import { cx } from 'styles'
 
 const Layout = () => {
+  const [showSidebar, setShowSidebar] = useState(false)
+  const toggleSidebarOpen = () => {
+    setShowSidebar((prev) => !prev)
+  }
   return (
     <div className={styles.app}>
       <Header />
-      <main>
+      <main className={cx({ [styles.showSidebar]: showSidebar })}>
+        <button className={styles.sidebarButton} type='button' onClick={toggleSidebarOpen}>
+          사이드바 열기
+        </button>
         <div className={styles.sidebarContainer}>
           <Sidebar />
         </div>
