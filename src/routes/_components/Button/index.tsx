@@ -1,7 +1,19 @@
+import { ReactNode } from 'react'
+import cx from 'classnames'
+
 import styles from './button.module.scss'
 
-const Button = () => {
-  return <div className={styles.container}>Button</div>
+interface IButtonProps {
+  children: ReactNode
+  size: 'small' | 'large'
+  primary?: boolean
+  onClick?: () => void
 }
 
-export default Button
+export const Button = ({ children, size, primary, onClick }: IButtonProps) => {
+  return (
+    <button type='button' className={cx(styles.button, styles[size], { [styles.primary]: primary })} onClick={onClick}>
+      {children}
+    </button>
+  )
+}
