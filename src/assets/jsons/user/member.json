@@ -1,0 +1,26 @@
+[
+    {
+		"member_seq" : 136,
+        	"user_id": "member136",
+		"nickname" : "모아데이터1",
+		"gender" : "남",
+		"birth" : "1998-02-22",
+		"registered_date" : "2022-04-01 17:51:29"
+    },
+    {
+		"member_seq" : 328,
+        	"user_id": "member328",
+		"nickname" : "모아데이터2",
+		"gender" : "여",
+		"birth" : "2000-11-21",
+		"registered_date" : "2022-03-01 17:51:29"
+    },
+    {
+		"member_seq" : 380,
+        	"user_id": "member380",
+		"nickname" : "모아데이터3",
+		"gender" : "남",
+		"birth" : "1996-05-26",
+		"registered_date" : "2022-02-01 17:51:29"
+    }
+]
