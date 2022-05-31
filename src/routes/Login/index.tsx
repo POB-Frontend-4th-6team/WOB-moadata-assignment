@@ -1,8 +1,7 @@
 import styles from './login.module.scss'
 import { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faEyeSlash, faUser, faXmark } from '@fortawesome/free-solid-svg-icons'
 import loginBackgroundImg from '../../assets/images/loginBackgroundImg.jpg'
+import { FaEye, FaEyeSlash, FaUser, FaTrash } from 'react-icons/fa'
 
 const UserManage = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -35,7 +34,7 @@ const UserManage = () => {
               }}
             />
             <label htmlFor='userId'>ID</label>
-            <FontAwesomeIcon className={styles.faUserIcon} icon={faUser} />
+            <FaUser className={styles.faUserIcon} />
           </div>
           <div className={styles.inputBox}>
             <input
@@ -48,9 +47,9 @@ const UserManage = () => {
             />
             <label htmlFor='password'>password</label>
             {showPassword ? (
-              <FontAwesomeIcon className={styles.faEyeIcon} icon={faEye} onClick={toggleVisiblePw} />
+              <FaEye className={styles.faEyeIcon} onClick={toggleVisiblePw} />
             ) : (
-              <FontAwesomeIcon className={styles.faEyeIcon} icon={faEyeSlash} onClick={toggleVisiblePw} />
+              <FaEyeSlash className={styles.faEyeIcon} onClick={toggleVisiblePw} />
             )}
           </div>
           <div className={styles.extraFeaturesWrapper}>
@@ -69,7 +68,7 @@ const UserManage = () => {
       <div className={styles.notificationPopUpContainer}>
         {/* 팝업메시지 컴포넌트화 시켜서 로그인 실패시 로그인 화면에서 해당 팝업메시지 fade in x클릭시 out, 로그인 성공시 홈화면에서, 로그아웃시 로그인화면에서 구현하면 될듯싶네요 */}
         <div className={styles.popUpMsg}>
-          Wrong password or ID. Try again <FontAwesomeIcon className={styles.handlePopUpIcon} icon={faXmark} />
+          Wrong password or ID. Try again <FaTrash className={styles.handlePopUpIcon} />
         </div>
       </div>
       {/*
