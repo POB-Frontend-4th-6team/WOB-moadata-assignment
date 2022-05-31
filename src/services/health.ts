@@ -1,6 +1,5 @@
-import dayjs from 'dayjs'
-
 import { heartRate, stepRate } from 'assets/jsons/index'
+import dayjs from 'dayjs'
 import {
   convertPeriodData,
   convertTodayData,
@@ -10,12 +9,7 @@ import {
   mergeArray,
 } from 'utils/chart'
 
-interface IRateObject {
-  x: number
-  y: string
-}
-
-const getTodayRateData = (seq = 136, type = 'step', dateList = ['2022-04-19']) => {
+const getTodayRateData = (seq = 136, type = 'step', dateList = ['2022-03-08']) => {
   const data = getJsonData(seq, type)
   const filteredData = filterDataByDate(data, dateList)
   const convertedData = convertTodayData(filteredData, type)
@@ -23,37 +17,42 @@ const getTodayRateData = (seq = 136, type = 'step', dateList = ['2022-04-19']) =
   return convertedData
 }
 
-const getPeriodRateData = (
-  seq = 136,
-  type = 'step',
-  dateList = ['2022-03-08', '2022-04-17', '2022-04-18', '2022-04-19']
-) => {
+const getPeriodRateData = (dateList: string[], type = 'step', seq = 136) => {
   const data = getJsonData(seq, type)
-  const initialTempData = initializeDataObject(type, dateList)
+  let tempDateList = dateList
 
-  const filteredData = filterDataByDate(data, dateList)
+  // 전체 기간인 경우
+  if (dateList.length === 0) {
+    const startDate = dayjs(data[data.length - 1].y).format('YYYY-MM-DD')
+    const endDate = dayjs(data[0].y).format('YYYY-MM-DD')
+
+    tempDateList = [startDate, endDate]
+  }
+
+  const initialTempData = initializeDataObject(type, tempDateList)
+
+  const filteredData = filterDataByDate(data, tempDateList)
   const convertedData = convertPeriodData(filteredData, type).reverse()
 
   const result = mergeArray(initialTempData, convertedData)
   return result
 }
 
-// TODO: 전체 기간 데이터 가져오기
-const getAllHeartRateData = (seq = 136, dateList = ['2022-04-19']) => {
-  const heartData = heartRate[seq as keyof typeof heartRate]
-  // all => date list 초기화
-  const startDate = heartData[heartData.length - 1].crt_ymdt
-  const endDate = heartData[0].crt_ymdt
-  console.log(startDate, endDate)
+// TODO: 전체 기간 데이터 가져오기 분리?
+const getAllHeartRateData = (seq = 136, type = 'step') => {
+  const data = getJsonData(seq, type)
 
-  // while (true) {
-  //   const tmp = dayjs(startDate).add(1, 'day').format('YYYY-MM-DD')
-  //   console.log(tmp)
+  const startDate = dayjs(data[data.length - 1].y).format('YYYY-MM-DD')
+  const endDate = dayjs(data[0].y).format('YYYY-MM-DD')
 
-  //   if(tmp <= endDate) {
+  const tempDateList = [startDate, endDate]
+  const initialTempData = initializeDataObject(type, tempDateList, true)
 
-  //   }
-  // }
+  const filteredData = filterDataByDate(data, tempDateList)
+  const convertedData = convertPeriodData(filteredData, type).reverse()
+
+  const result = mergeArray(initialTempData, convertedData)
+  return result
 }
 
 export { getTodayRateData, getPeriodRateData, getAllHeartRateData }

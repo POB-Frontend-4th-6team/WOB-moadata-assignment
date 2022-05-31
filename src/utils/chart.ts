@@ -7,6 +7,7 @@ interface IRateObject {
   y: string
 }
 
+// TODO: ID => SEQ
 const mergeArray = (firstArray: IRateObject[], secondArray: IRateObject[]) =>
   firstArray.reduce((acc: IRateObject[], { x, y }) => {
     const index = secondArray.findIndex((secondValue) => secondValue.y === y)
@@ -22,26 +23,27 @@ const getJsonData = (seq: number, type: string) => {
     const stepData = stepRate[seq as keyof typeof stepRate].map((value) => {
       return { x: value.steps, y: value.crt_ymdt }
     })
-
     return stepData
   }
 
   const heartData = heartRate[seq as keyof typeof heartRate].map((value) => {
     return { x: value.avg_beat, y: value.crt_ymdt }
   })
-
   return heartData
 }
 
-const initializeDataObject = (type: string, dateList: string[]) => {
-  const tmepData: IRateObject[] = []
+const initializeDataObject = (type: string, dateList: string[], all = false) => {
+  let tempDate = dateList[0]
+  const tempX = type === 'step' ? 0 : 60
+  const tmepInitialList: IRateObject[] = [{ x: tempX, y: tempDate }]
 
-  dateList.forEach((dateValue) => {
-    if (type === 'step') tmepData.push({ x: 0, y: dateValue })
-    else tmepData.push({ x: 60, y: dateValue })
-  })
+  while (tempDate < dateList[1]) {
+    tempDate = dayjs(tempDate).add(1, 'day').format('YYYY-MM-DD')
+    if (type === 'step') tmepInitialList.push({ x: tempX, y: tempDate })
+    else tmepInitialList.push({ x: tempX, y: tempDate })
+  }
 
-  return tmepData
+  return tmepInitialList
 }
 
 const filterDataByDate = (data: IRateObject[], dateList: string[]) => {
@@ -71,39 +73,20 @@ const convertTodayData = (data: IRateObject[], type: string) => {
 
 // TODO: Refactoring
 const convertPeriodData = (data: IRateObject[], type: string) => {
-  if (type === 'step') {
-    const convertedData = data.reduce((acc: { [key: string]: IRateObject }, { x, y }) => {
-      const getDate = dayjs(y).format('YYYY-MM-DD')
-      if (!acc[getDate]) {
-        acc[getDate] = { x, y: getDate }
-      }
-
-      return acc
-    }, {})
-
-    const rateValues = Object.keys(convertedData).map((key) => {
-      const tmp: { x: number; y: string } = convertedData[key]
-      return tmp
-    })
-
-    return rateValues
-  }
-
   const convertedData = data.reduce((acc: { [key: string]: { x: number; y: string; count: number } }, { x, y }) => {
     const getDate = dayjs(y).format('YYYY-MM-DD')
-
     if (!acc[getDate]) {
       acc[getDate] = { x, y: getDate, count: 1 }
-    } else {
+    } else if (type === 'heart') {
       acc[getDate].x += x
       acc[getDate].count += 1
     }
+
     return acc
   }, {})
 
-  // TODO: 네이밍
   const rateValues = Object.keys(convertedData).map((key) => {
-    convertedData[key].x = Math.floor(convertedData[key].x / convertedData[key].count)
+    if (type === 'heart') convertedData[key].x = Math.floor(convertedData[key].x / convertedData[key].count)
 
     const temp: { count?: number; x: number; y: string } = convertedData[key]
     delete temp.count
