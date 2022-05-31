@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styles from './breadcrumb.module.scss'
 
@@ -16,11 +15,6 @@ const Breadcrumb = (): JSX.Element => {
     path && acc.push({ accPath, path })
     return acc
   }, [])
-
-  useEffect(() => {
-    console.log(location)
-    console.log(paths)
-  }, [location])
 
   return (
     <ul className={styles.container}>
