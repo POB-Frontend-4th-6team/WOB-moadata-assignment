@@ -1,5 +1,110 @@
-.container {
+.loginComponentWrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 960px;
+
+  img {
+    width: 800px;
+    max-width: 100%;
+    height: inherit;
+  }
+
+  .loginContainer {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 300px;
+    text-align: center;
+
+    .loginTitle {
+      display: inline-block;
+      font-size: 2.5rem;
+    }
+
+    .inputBox {
+      position: relative;
+      margin-top: 30px;
+
+      input {
+        padding: 20px 0 5px;
+        font-size: 14px;
+        border-bottom: solid 1px #cccccc;
+      }
+
+      input:focus + label,
+      label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 14px;
+        color: #c0c0c0;
+        transition: all 1s ease;
+      }
+
+      input:focus {
+        border-bottom: solid 1px #4876ef;
+        outline: none;
+      }
+
+      .faUserIcon,
+      .faEyeIcon {
+        position: absolute;
+        top: 15px;
+        right: 0;
+        color: #c0c0c0;
+      }
+
+      .faEyeIcon {
+        cursor: pointer;
+      }
+    }
+
+    .extraFeaturesWrapper {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 12px;
+
+      label {
+        font-weight: 500;
+        color: #c0c0c0;
+
+        input {
+          width: 12px;
+          height: 12px;
+          border: 1px solid #cccccccc;
+          border-radius: 3px;
+        }
+      }
+
+      .recoveryPassword {
+        font-weight: 500;
+        color: #464cd2;
+      }
+    }
+
+    .floatingMsg {
+      margin-top: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgb(241, 31, 31);
+    }
+
+    .loginButton {
+      width: 100%;
+      height: 2.3rem;
+      margin-top: 30px;
+      font-weight: 500;
+      color: #ffffff;
+      background-color: #4876ef;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .loginButton:hover {
+      background-color: #464cd2;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+  }
 }
