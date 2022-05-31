@@ -70,7 +70,7 @@
         input {
           width: 12px;
           height: 12px;
-          border: 1px solid #cccccccc;
+          border: 1px solid #c0c0c0;
           border-radius: 3px;
         }
       }
@@ -104,7 +104,45 @@
     }
 
     .hidden {
-      visibility: hidden;
+      display: none;
+    }
+  }
+
+  .notificationPopUpContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+
+    .popUpMsg {
+      position: relative;
+      width: 360px;
+      height: 50px;
+      padding: 15px;
+      margin: 10px;
+      font-weight: 500;
+      color: #ffffff;
+      background: #4876ef;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 60%);
+      animation: toastInRight 1s;
+
+      .handlePopUpIcon {
+        position: absolute;
+        right: 30px;
+        color: #c0c0c0;
+        cursor: pointer;
+      }
+    }
+  }
+
+  @keyframes toastInRight {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0);
     }
   }
 }
