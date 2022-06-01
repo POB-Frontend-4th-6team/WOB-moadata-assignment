@@ -1,0 +1,44 @@
+@use '/src/styles/constants/colors';
+
+.container {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 800px;
+}
+
+.inputs {
+  label {
+    margin-right: 20px;
+  }
+
+  input {
+    width: fit-content;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid colors.$GRAYA;
+    border-radius: 10px;
+  }
+}
+
+.calendarIcon {
+  width: 30px;
+  height: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.buttons {
+  display: flex;
+}
+
+.datePicker {
+  position: absolute;
+  top: 50px;
+  left: 100px;
+}

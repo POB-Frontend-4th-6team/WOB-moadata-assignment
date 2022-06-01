@@ -1,5 +1,35 @@
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .infoContainer {
+    width: 80%;
+    border: 1px solid black;
+
+    dl {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+
+      div {
+        display: flex;
+        margin: 10px;
+        line-height: 30px;
+
+        dt {
+          width: 100px;
+        }
+
+        dd {
+          width: 200px;
+          padding: 0 10px;
+          margin-left: 20px;
+          border: 1px solid black;
+        }
+      }
+    }
+  }
 }
