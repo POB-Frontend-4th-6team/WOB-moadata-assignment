@@ -1,7 +1,7 @@
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryTooltip, VictoryVoronoiContainer } from 'victory'
 
-import { useEffect, useState } from 'hooks'
-import { getPeriodRateData } from 'services/health'
+import { useEffect, useMemo, useState } from 'hooks'
+import { getPeriodRateData, getTodayRateData } from 'services/health'
 import SearchDateRange from 'routes/_components/SearchDateRange'
 
 import styles from './stepRate.module.scss'
@@ -14,10 +14,17 @@ interface ChartProps {
 
 const StepRate = () => {
   const [chartData, setChartData] = useState<ChartProps[]>([])
-  const [weeks, setWeeks] = useState<string[]>(['2022-02-26', '2022-04-24'])
+  const [weeks, setWeeks] = useState<string[]>([])
+  const total = useMemo(() => chartData.reduce((prev, cur) => prev + cur.y, 0), [chartData])
+  const date = useMemo(() => {
+    if (chartData.length === 1) return chartData[0].x
+    if (chartData.length === 0) return ''
+    return `${chartData[0].x} ~ ${chartData[chartData.length - 1].x}`
+  }, [chartData])
 
   useEffect(() => {
-    setChartData(getPeriodRateData(weeks, 'member136', 'step'))
+    if (weeks.length && weeks[0] === weeks[1]) setChartData(getTodayRateData(weeks, 'member136', 'step'))
+    else setChartData(getPeriodRateData(weeks, 'member136', 'step'))
   }, [weeks])
 
   return (
@@ -27,7 +34,7 @@ const StepRate = () => {
         <div className={styles.chart}>
           <VictoryChart
             height={300}
-            width={1000}
+            width={800}
             domainPadding={20}
             containerComponent={
               <VictoryVoronoiContainer
@@ -40,17 +47,14 @@ const StepRate = () => {
                     flyoutPadding={15}
                   />
                 }
+                responsive={false}
               />
             }
           >
-            <VictoryAxis dependentAxis />
+            <VictoryAxis dependentAxis tickFormat={(y) => (y < 1 ? '0' : `${y / 1000}k`)} />
             <VictoryAxis fixLabelOverlap style={{ tickLabels: { fontSize: 16 } }} />
             <VictoryBar
               data={chartData}
-              animate={{
-                duration: 0,
-                onLoad: { duration: 100 },
-              }}
               style={{
                 data: {
                   fill: '#fe612c',
@@ -65,9 +69,9 @@ const StepRate = () => {
         <div className={styles.info}>
           <p className={styles.title}>
             <Step />
-            <span>총 13,230 걸음</span>
+            <span>총 {total.toLocaleString()} 걸음</span>
           </p>
-          <p className={styles.date}>2022-04-20</p>
+          <p className={styles.date}>{date}</p>
         </div>
         <SearchDateRange setWeeks={setWeeks} />
       </div>

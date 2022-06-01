@@ -25,9 +25,21 @@
     box-shadow: colors.$BOX_SHADOW 0 8px 24px;
 
     .chart {
-      width: 100%;
-      padding: 20px;
+      padding-left: 10px;
+      overflow-x: scroll;
+      overflow-y: hidden;
       border: 1px solid colors.$BORDER_COLOR_2;
+
+      &::-webkit-scrollbar {
+        display: block;
+        height: 20px;
+        background-color: colors.$WHITE;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: colors.$BLACK;
+        border-radius: 10px;
+      }
     }
 
     .info {
