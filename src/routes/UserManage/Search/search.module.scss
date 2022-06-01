@@ -1,5 +1,32 @@
 .container {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  width: 1000px;
+  border: 1px solid black;
+
+  div {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  input {
+    height: 30px;
+    padding: 0 10px;
+    margin: 0 10px;
+    border: 1px solid black;
+  }
+
+  label {
+    margin-left: 30px;
+  }
+}
+
+.dateRangeInputContainer {
+  display: flex;
+}
+
+.formButtonsContainer {
+  display: flex;
+  margin-right: 20px;
+  margin-left: auto;
 }
