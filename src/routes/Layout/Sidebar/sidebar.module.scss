@@ -1,0 +1,13 @@
+@use '/src/styles/mixins/flexbox';
+
+.container {
+  @include flexbox.flexbox(start,center);
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
