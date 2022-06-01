@@ -31,8 +31,6 @@ export const filterUserWithIdAndDate = (id: string, startDate: number, endDate: 
 
   const result = idIncludeUsers.filter((ids) => includeDateArray.find((date) => ids.member_seq === date.member_seq))
 
-  console.log(result)
-
   return result
 }
 
@@ -43,9 +41,17 @@ export const filterUserWithNumberAndDate = (number: number, startDate: number, e
 
   const result = numberIncludeUsers.filter((ids) => includeDateArray.find((date) => ids.member_seq === date.member_seq))
 
-  console.log(result)
-
   return result
+}
+
+export const filterUserWithOnlyDate = (startDate: number, endDate: number) => {
+  const includeDateArray = dateIncludeUsersArray(users, startDate, endDate)
+
+  return includeDateArray
+}
+
+export const removeTimeInDate = (date: string) => {
+  return date.slice(0, 10)
 }
 
 // if (startDate <= dateToNumber <= endDate) return dateToNumber
