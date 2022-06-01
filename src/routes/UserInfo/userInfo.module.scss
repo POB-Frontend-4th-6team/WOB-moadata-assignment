@@ -1,35 +1,57 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
+
 .container {
   width: 100%;
 
-  h1 {
+  h2 {
+    margin-bottom: 30px;
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 600;
+    color: colors.$MAIN_TEXT_COLOR;
   }
 
   .infoContainer {
-    width: 80%;
-    border: 1px solid black;
+    padding: 30px 20px;
+    background: colors.$WHITE;
+    border-radius: 20px;
+    box-shadow: colors.$BOX_SHADOW 0 8px 24px;
 
     dl {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
+      gap: 30px;
+      justify-items: center;
 
-      div {
-        display: flex;
-        margin: 10px;
+      .infoBox {
+        width: 90%;
+        @include flexbox.flexbox(between, center);
         line-height: 30px;
 
         dt {
-          width: 100px;
+          width: 20%;
+          font-size: 15px;
+          color: colors.$MAIN_TEXT_COLOR;
         }
 
         dd {
-          width: 200px;
-          padding: 0 10px;
-          margin-left: 20px;
-          border: 1px solid black;
+          width: 60%;
+          padding: 3px 14px;
+          color: colors.$MAIN_TEXT_COLOR;
+          border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
+          border-radius: 8px;
         }
       }
     }
+  }
+}
+
+.charts {
+  width: 100%;
+  margin-top: 30px;
+
+  @include responsive.after(LD) {
+    @include flexbox.flexbox(between, center);
   }
 }
