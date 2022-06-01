@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 
@@ -66,6 +66,14 @@ const Search = () => {
       })
     }
   }
+
+  console.log(weeks)
+
+  useEffect(() => {
+    if (weeks.length === 0) {
+      setWeeks(['20220101', today])
+    }
+  }, [weeks])
 
   console.log(userInputData)
 
