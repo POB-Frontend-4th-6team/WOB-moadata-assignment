@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom'
 
 interface Props {
   data: {
-    registerNumber: number
-    registerDate: string
-    loginId: string
+    member_seq: number
+    nickname: string
+    user_id: string
     gender: string
-    birthday: string
+    birth: string
+    registered_date: string
   }
 }
 
@@ -33,11 +34,11 @@ const Result = ({ data }: Props) => {
       </thead>
       <tbody>
         <tr className={styles.tableBody}>
-          <td>{data.registerNumber}</td>
-          <td>{data.registerDate}</td>
-          <td>{data.loginId}</td>
+          <td>{data.member_seq}</td>
+          <td>{data.registered_date}</td>
+          <td>{data.user_id}</td>
           <td>{data.gender}</td>
-          <td>{data.birthday}</td>
+          <td>{data.birth}</td>
           <td>
             <button type='button' onClick={setUserAtomAndNavigate}>
               관리

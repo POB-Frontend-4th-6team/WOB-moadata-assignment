@@ -1,14 +1,19 @@
 import styles from './userManage.module.scss'
 import Result from './Result'
-
-const DATAS = [
-  { registerNumber: 1, registerDate: '2018.03.17', loginId: 'iamchho', gender: '남', birthday: '1995.12.01' },
-  { registerNumber: 2, registerDate: '2018.10.21', loginId: 'rowastudy', gender: '여', birthday: '1997.1.20' },
-  { registerNumber: 3, registerDate: '2018.08.16', loginId: 'choco123', gender: '남', birthday: '1997.3.17' },
-]
+import { getMemberInfo } from 'services/user'
+import { useMount, useState } from 'hooks'
+import { MemberStateProps } from 'types/user'
 
 const UserManage = () => {
-  const Results: JSX.Element[] = DATAS.map((data) => <Result data={data} key={data.loginId} />)
+  const [member, setMember] = useState<MemberStateProps[]>([])
+
+  useMount(() => {
+    const searchedMemberList = getMemberInfo({ id: undefined, number: 136, startDate: 20220401, endDate: 20220514 })
+    console.log('searchedMemberList', searchedMemberList)
+    setMember(searchedMemberList)
+  })
+
+  const Results: JSX.Element[] = member.map((data) => <Result data={data} key={`userId_${data.nickname}`} />)
 
   return <div className={styles.container}>{Results}</div>
 }
