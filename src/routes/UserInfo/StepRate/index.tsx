@@ -1,9 +1,9 @@
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryTooltip, VictoryVoronoiContainer } from 'victory'
-import stepData from 'assets/jsons/steprate/steprate_136.json'
+
+import { useEffect, useState } from 'hooks'
+import { getPeriodRateData } from 'services/health'
 
 import styles from './stepRate.module.scss'
-import { useEffect, useState } from 'hooks'
-import dayjs from 'dayjs'
 
 interface ChartProps {
   x: string
@@ -12,44 +12,11 @@ interface ChartProps {
 
 const StepRate = () => {
   const [chartData, setChartData] = useState<ChartProps[]>([])
-  const weeks = [
-    '2022-03-08',
-    '2022-04-13',
-    '2022-04-14',
-    '2022-04-15',
-    '2022-04-16',
-    '2022-04-17',
-    '2022-04-18',
-    '2022-04-19',
-    '2022-04-20',
-    '2022-04-21',
-    '2022-04-22',
-    '2022-04-23',
-    '2022-04-24',
-  ]
-  const values: number[] = []
+  const [weeks, setWeeks] = useState<string[]>(['2022-02-26', '2022-04-24'])
 
   useEffect(() => {
-    values.splice(0, values.length)
-    weeks.forEach((week) => {
-      let maxStep = -1
-      stepData.forEach((data) => {
-        if (dayjs(week).isSame(dayjs(data.crt_ymdt).format('YYYY-MM-DD')) && data.steps > maxStep) {
-          maxStep = data.steps
-        }
-      })
-      values.push(maxStep === -1 ? 0 : maxStep)
-    })
-
-    setChartData(
-      weeks.map((week, idx) => {
-        return {
-          x: week,
-          y: values[idx],
-        }
-      })
-    )
-  }, [])
+    setChartData(getPeriodRateData(weeks, 'member136', 'step'))
+  }, [weeks])
 
   return (
     <div className={styles.container}>
@@ -74,7 +41,6 @@ const StepRate = () => {
         <VictoryAxis dependentAxis />
         <VictoryAxis fixLabelOverlap style={{ tickLabels: { fontSize: 16 } }} />
         <VictoryBar
-          barWidth={30}
           data={chartData}
           animate={{
             duration: 0,
