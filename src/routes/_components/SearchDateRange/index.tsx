@@ -58,7 +58,7 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
         <input
           id='dateRange'
           type='text'
-          placeholder={`${startDate}`}
+          placeholder={startDate}
           value={startDate}
           onChange={handleStartDateInput}
           disabled={isDatePickerOpen}
@@ -66,7 +66,7 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
         &nbsp;&nbsp; ~&nbsp;&nbsp;&nbsp;
         <input
           type='text'
-          placeholder={`${endDate}`}
+          placeholder={endDate}
           value={endDate}
           onChange={handleEndDateInput}
           disabled={isDatePickerOpen}
