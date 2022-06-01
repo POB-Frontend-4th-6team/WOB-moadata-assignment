@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { cx } from 'styles'
 import styles from './breadcrumb.module.scss'
 
 interface IPaths {
@@ -24,14 +25,16 @@ const Breadcrumb = () => {
 
       return acc
     },
-    [{ accPath: '/', name: '홈' }]
+    [{ accPath: '', name: '홈' }]
   )
 
   return (
     <ul className={styles.container}>
       {paths.map((path) => (
-        <li key={`path-key-${path}`}>
-          <Link to={path.accPath}>{path.name}</Link>
+        <li key={`path-key-${path.accPath}`}>
+          <NavLink className={({ isActive }) => cx({ [styles.active]: isActive })} to={path.accPath}>
+            {path.name}
+          </NavLink>
         </li>
       ))}
     </ul>
