@@ -10,6 +10,7 @@ const UserManage = () => {
   useMount(() => {
     const searchedMemberList = getMemberInfo({ id: undefined, number: 136, startDate: 20220401, endDate: 20220514 })
     console.log('searchedMemberList', searchedMemberList)
+    setMember(searchedMemberList)
   })
 
   const Results: JSX.Element[] = member.map((data) => <Result data={data} key={`userId_${data.nickname}`} />)
