@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import styles from './layout.module.scss'
 import Sidebar from './Sidebar'
 import Header from './Header'
-import Breadcrumb from './Breadcrumb'
+import Breadcrumb from './Header/Breadcrumb'
 
 const Layout = () => {
   return (
@@ -13,7 +13,6 @@ const Layout = () => {
       </div>
       <main>
         <Header />
-        <Breadcrumb />
         <Outlet />
       </main>
     </div>

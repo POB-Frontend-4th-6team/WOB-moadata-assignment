@@ -28,6 +28,7 @@ const Breadcrumb = () => {
     },
     [{ accPath: '', name: '홈' }]
   )
+  console.log(location)
 
   const isPathsValid =
     (splitPathname.length === 1 && splitPathname[0] === '') || splitPathname.every((path) => !!PATH_NAMES[path])

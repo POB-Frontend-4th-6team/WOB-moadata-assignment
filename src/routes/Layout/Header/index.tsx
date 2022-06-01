@@ -1,9 +1,10 @@
+import Breadcrumb from './Breadcrumb'
 import styles from './header.module.scss'
 
 const Header = () => {
   return (
     <header>
-      <p>백오피스</p>
+      <Breadcrumb />
       <div className={styles.userMenus}>
         <p>admin님</p>
         <button type='button'>로그아웃</button>
