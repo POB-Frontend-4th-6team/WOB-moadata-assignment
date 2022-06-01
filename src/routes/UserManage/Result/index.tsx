@@ -18,7 +18,7 @@ const Result = ({ data }: Props) => {
   return (
     <tr className={styles.tableBody}>
       <td>{data.member_seq}</td>
-      <td>{data.registered_date}</td>
+      <td>{removeTimeInDate(data.registered_date)}</td>
       <td>{data.nickname}</td>
       <td>{data.user_id}</td>
       <td>{data.gender}</td>

@@ -1,3 +1,4 @@
+import Search from './Search'
 import styles from './userManage.module.scss'
 import Result from './Result'
 import { getMemberInfo } from 'services/user'
@@ -17,6 +18,8 @@ const UserManage = () => {
 
   return (
     <div className={styles.container}>
+      <h2>UserManage</h2>
+      <Search />
       <table>
         <thead>
           <tr>
