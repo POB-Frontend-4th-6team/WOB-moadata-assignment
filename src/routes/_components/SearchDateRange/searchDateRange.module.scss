@@ -1,21 +1,24 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
 
 .container {
   position: relative;
-  display: flex;
+  @include flexbox.flexbox(center, center);
   gap: 20px;
-  align-items: center;
-  justify-content: center;
-  width: 900px;
+  width: 100%;
 }
 
 .inputs {
+  @include flexbox.flexbox(center, center);
+  flex-wrap: nowrap;
+
   label {
     margin-right: 20px;
+    white-space: nowrap;
   }
 
   input {
-    width: fit-content;
+    width: 40%;
     height: 40px;
     font-size: 16px;
     text-align: center;
@@ -35,6 +38,7 @@
 
 .buttons {
   display: flex;
+  flex-wrap: nowrap;
 }
 
 .datePicker {
