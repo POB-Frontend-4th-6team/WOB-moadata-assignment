@@ -1,0 +1,36 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+
+header {
+  width: calc(100% - 30px);
+  height: 60px;
+  padding: 0 30px;
+  margin-left: 30px;
+  @include flexbox.flexbox(between, center);
+
+  .userMenus {
+    @include flexbox.flexbox(around, center);
+    gap: 15px;
+
+    li {
+      @include flexbox.flexbox(center, center);
+
+      &:nth-child(2) {
+        width: 100px;
+
+        span {
+          margin-left: 5px;
+          color: colors.$MAIN_TEXT_COLOR;
+        }
+      }
+
+      button {
+        width: 70px;
+        padding: 5px 8px;
+        color: colors.$SIGNATURE_COLOR;
+        border: 1px solid colors.$SIGNATURE_COLOR;
+        border-radius: 8px;
+      }
+    }
+  }
+}
