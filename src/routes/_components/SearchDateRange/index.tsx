@@ -7,13 +7,10 @@ import { CalendarIcon } from 'assets/svgs'
 import DatePickerModal from '../DatePickerModal'
 
 interface IProps {
-  weeks: string[]
   setWeeks: Dispatch<SetStateAction<string[]>>
 }
 
-const SearchDateRange = ({ weeks, setWeeks }: IProps) => {
-  console.log('weeks:', weeks)
-
+const SearchDateRange = ({ setWeeks }: IProps) => {
   const today = new Date()
 
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
@@ -35,36 +32,42 @@ const SearchDateRange = ({ weeks, setWeeks }: IProps) => {
 
   const handleSetToToday = () => {
     setSelectedPeriod('오늘')
+    setStartDate(dayjs(today).format('YYYY-MM-DD'))
+    setEndDate(dayjs(today).format('YYYY-MM-DD'))
     setWeeks([dayjs(today).format('YYYY-MM-DD'), dayjs(today).format('YYYY-MM-DD')])
   }
 
   const handleSetToOneWeek = () => {
     setSelectedPeriod('일주일')
+    setStartDate(dayjs(today).add(-6, 'day').format('YYYY-MM-DD'))
+    setEndDate(dayjs(today).format('YYYY-MM-DD'))
     setWeeks([dayjs(today).add(-6, 'day').format('YYYY-MM-DD'), dayjs(today).format('YYYY-MM-DD')])
   }
 
   const handleSetToAll = () => {
     setSelectedPeriod('전체')
+    setStartDate('전체')
+    setEndDate('전체')
     setWeeks(['전체', '전체'])
   }
 
   return (
-    <form className={styles.container}>
+    <section className={styles.container}>
       <div className={styles.inputs}>
         <label htmlFor='dateRange'>조회 기간</label>
         <input
           id='dateRange'
           type='text'
-          placeholder={`${weeks[0]}`}
-          value={weeks[0]}
+          placeholder={startDate}
+          value={startDate}
           onChange={handleStartDateInput}
           disabled={isDatePickerOpen}
         />
         &nbsp;&nbsp; ~&nbsp;&nbsp;&nbsp;
         <input
           type='text'
-          placeholder={`${weeks[1]}`}
-          value={weeks[1]}
+          placeholder={endDate}
+          value={endDate}
           onChange={handleEndDateInput}
           disabled={isDatePickerOpen}
         />
@@ -83,10 +86,16 @@ const SearchDateRange = ({ weeks, setWeeks }: IProps) => {
       </div>
       {isDatePickerOpen && (
         <div className={styles.datePicker}>
-          <DatePickerModal setIsDatePickerOpen={setIsDatePickerOpen} setWeeks={setWeeks} />
+          <DatePickerModal
+            setIsDatePickerOpen={setIsDatePickerOpen}
+            setWeeks={setWeeks}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
+            setSelectedPeriod={setSelectedPeriod}
+          />
         </div>
       )}
-    </form>
+    </section>
   )
 }
 
