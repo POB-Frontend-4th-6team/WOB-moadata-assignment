@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const SearchDateRange = ({ weeks, setWeeks }: IProps) => {
-  console.log(weeks)
+  console.log('weeks:', weeks)
 
   const today = new Date()
 
