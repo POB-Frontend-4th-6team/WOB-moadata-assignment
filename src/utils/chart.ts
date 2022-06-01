@@ -1,5 +1,4 @@
 import dayjs from 'dayjs'
-
 import { stepRate, heartRate } from 'assets/jsons/index'
 
 interface IRateObject {
@@ -32,7 +31,7 @@ const getJsonData = (seq: number, type: string) => {
   return heartData
 }
 
-const initializeDataObject = (type: string, dateList: string[], all = false) => {
+const initializeDataObject = (type: string, dateList: string[]) => {
   let tempDate = dateList[0]
   const tempX = type === 'step' ? 0 : 60
   const tmepInitialList: IRateObject[] = [{ x: tempX, y: tempDate }]
@@ -93,7 +92,7 @@ const convertPeriodData = (data: IRateObject[], type: string) => {
     return temp
   })
 
-  return rateValues
+  return rateValues.reverse()
 }
 
 export { mergeArray, getJsonData, initializeDataObject, filterDataByDate, convertTodayData, convertPeriodData }
