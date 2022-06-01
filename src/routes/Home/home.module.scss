@@ -1,5 +1,13 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: colors.$MAIN_TEXT_COLOR;
+  }
 }
