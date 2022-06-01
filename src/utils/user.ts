@@ -1,4 +1,5 @@
 import users from 'assets/jsons/user/member.json'
+import { getRegExp } from 'korean-regexp'
 
 interface Props {
   member_seq: number
@@ -25,7 +26,11 @@ const dateIncludeUsersArray = (props: Props[], startDate: number, endDate: numbe
 }
 
 export const filterUserWithIdAndDate = (id: string, startDate: number, endDate: number) => {
-  const idIncludeUsers = users.filter((user) => user.user_id.includes(id))
+  const inputRegex = getRegExp(id, {
+    fuzzy: true,
+  })
+
+  const idIncludeUsers = users.filter((user) => user.user_id.match(inputRegex))
 
   const includeDateArray = dateIncludeUsersArray(users, startDate, endDate)
 

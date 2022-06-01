@@ -8,7 +8,7 @@ const UserManage = () => {
   const [member, setMember] = useState<MemberStateProps[]>([])
 
   useMount(() => {
-    const searchedMemberList = getMemberInfo({ id: undefined, number: 136, startDate: 20220401, endDate: 20220514 })
+    const searchedMemberList = getMemberInfo({ id: '', number: undefined, startDate: 20200401, endDate: 20220514 })
     console.log('searchedMemberList', searchedMemberList)
     setMember(searchedMemberList)
   })
