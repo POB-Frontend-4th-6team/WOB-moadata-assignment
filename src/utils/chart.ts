@@ -1,10 +1,6 @@
 import dayjs from 'dayjs'
 import { stepRate, heartRate } from 'assets/jsons/index'
-
-interface IRateObject {
-  x: string
-  y: number
-}
+import { IHeartRate, IRateObject, IStepRate } from 'types/health'
 
 const mergeArray = (firstArray: IRateObject[], secondArray: IRateObject[]) =>
   firstArray.reduce((acc: IRateObject[], { x, y }) => {
@@ -18,13 +14,13 @@ const mergeArray = (firstArray: IRateObject[], secondArray: IRateObject[]) =>
 
 const getJsonData = (seq: number, type: string) => {
   if (type === 'step') {
-    const stepData = stepRate[seq as keyof typeof stepRate].map((value) => {
+    const stepData = stepRate[seq as keyof typeof stepRate].map((value: IStepRate) => {
       return { x: value.crt_ymdt, y: value.steps }
     })
     return stepData
   }
 
-  const heartData = heartRate[seq as keyof typeof heartRate].map((value) => {
+  const heartData = heartRate[seq as keyof typeof heartRate].map((value: IHeartRate) => {
     return { x: value.crt_ymdt, y: value.avg_beat }
   })
   return heartData
