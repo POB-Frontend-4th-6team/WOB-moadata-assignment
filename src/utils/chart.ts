@@ -6,7 +6,6 @@ interface IRateObject {
   y: string
 }
 
-// TODO: ID => SEQ
 const mergeArray = (firstArray: IRateObject[], secondArray: IRateObject[]) =>
   firstArray.reduce((acc: IRateObject[], { x, y }) => {
     const index = secondArray.findIndex((secondValue) => secondValue.y === y)
@@ -84,15 +83,17 @@ const convertPeriodData = (data: IRateObject[], type: string) => {
     return acc
   }, {})
 
-  const rateValues = Object.keys(convertedData).map((key) => {
-    if (type === 'heart') convertedData[key].x = Math.floor(convertedData[key].x / convertedData[key].count)
+  const rateValues = Object.keys(convertedData)
+    .map((key) => {
+      if (type === 'heart') convertedData[key].x = Math.floor(convertedData[key].x / convertedData[key].count)
 
-    const temp: { count?: number; x: number; y: string } = convertedData[key]
-    delete temp.count
-    return temp
-  })
+      const temp: { count?: number; x: number; y: string } = convertedData[key]
+      delete temp.count
+      return temp
+    })
+    .reverse()
 
-  return rateValues.reverse()
+  return rateValues
 }
 
 export { mergeArray, getJsonData, initializeDataObject, filterDataByDate, convertTodayData, convertPeriodData }
