@@ -8,7 +8,6 @@ interface IPaths {
 
 const Breadcrumb = () => {
   const location = useLocation()
-  console.log(location)
 
   const paths = location.pathname.split('/').reduce((acc: IPaths[], path) => {
     const prevAccPath = acc?.[acc.length - 1]?.accPath ?? ''
@@ -17,7 +16,6 @@ const Breadcrumb = () => {
 
     return acc
   }, [])
-  console.log(paths)
 
   return (
     <ul className={styles.container}>
