@@ -20,7 +20,7 @@ const Search = () => {
         <input id='userId' type='text' />
       </div>
       <div className={styles.dateRange}>
-        <SearchDateRange weeks={weeks} setWeeks={setWeeks} />
+        <SearchDateRange setWeeks={setWeeks} />
       </div>
 
       <div className={styles.formButtonsContainer}>

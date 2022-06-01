@@ -11,9 +11,12 @@ import 'react-date-range/dist/theme/default.css'
 interface IProps {
   setWeeks: Dispatch<SetStateAction<string[]>>
   setIsDatePickerOpen: Dispatch<SetStateAction<boolean>>
+  setStartDate: Dispatch<SetStateAction<string>>
+  setEndDate: Dispatch<SetStateAction<string>>
+  setSelectedPeriod: Dispatch<SetStateAction<string>>
 }
 
-const DatePickerModal = ({ setWeeks, setIsDatePickerOpen }: IProps) => {
+const DatePickerModal = ({ setWeeks, setIsDatePickerOpen, setStartDate, setEndDate, setSelectedPeriod }: IProps) => {
   const today = new Date()
   const [dateRange, setDateRange] = useState<Range[]>([
     {
@@ -29,7 +32,10 @@ const DatePickerModal = ({ setWeeks, setIsDatePickerOpen }: IProps) => {
 
   const handleSetPickedDateRange = () => {
     setWeeks([dayjs(dateRange[0].startDate).format('YYYY-MM-DD'), dayjs(dateRange[0].endDate).format('YYYY-MM-DD')])
+    setStartDate(dayjs(dateRange[0].startDate).format('YYYY-MM-DD'))
+    setEndDate(dayjs(dateRange[0].endDate).format('YYYY-MM-DD'))
     setIsDatePickerOpen(false)
+    setSelectedPeriod('')
   }
 
   return (
