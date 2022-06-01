@@ -33,11 +33,11 @@ const getJsonData = (seq: number, type: string) => {
 const initializeDataObject = (type: string, dateList: string[]) => {
   let tempDate = dateList[0]
   const tempX = type === 'step' ? 0 : 60
-  const tmepInitialList: IRateObject[] = [{ x: tempDate, y: tempX }]
+  const tmepInitialList: IRateObject[] = [{ x: dayjs(tempDate).format('YY-MM-DD'), y: tempX }]
 
   while (tempDate < dateList[1]) {
     tempDate = dayjs(tempDate).add(1, 'day').format('YYYY-MM-DD')
-    if (type === 'step') tmepInitialList.push({ x: tempDate, y: tempX })
+    if (type === 'step') tmepInitialList.push({ x: dayjs(tempDate).format('YY-MM-DD'), y: tempX })
     else tmepInitialList.push({ x: tempDate, y: tempX })
   }
 
@@ -53,7 +53,7 @@ const filterDataByDate = (data: IRateObject[], dateList: string[]) => {
 
 const convertTodayData = (data: IRateObject[], type: string) => {
   const convertedData = data.map((value) => {
-    const tempDate = dayjs(value.x).format('HH:mm:ss')
+    const tempDate = dayjs(value.x).format('HH:mm')
     return {
       x: tempDate,
       y: value.y,
@@ -71,7 +71,7 @@ const convertTodayData = (data: IRateObject[], type: string) => {
 
 const convertPeriodData = (data: IRateObject[], type: string) => {
   const convertedData = data.reduce((acc: { [key: string]: { x: string; y: number; count: number } }, { x, y }) => {
-    const getDate = dayjs(x).format('YYYY-MM-DD')
+    const getDate = dayjs(x).format('YY-MM-DD')
     if (!acc[getDate]) {
       acc[getDate] = { x: getDate, y, count: 1 }
     } else if (type === 'heart') {
