@@ -70,7 +70,7 @@ const StepRate = () => {
           </p>
           <p className={styles.date}>2022-04-20</p>
         </div>
-        <SearchDateRange weeks={weeks} setWeeks={setWeeks} />
+        <SearchDateRange setWeeks={setWeeks} />
       </div>
     </section>
   )
