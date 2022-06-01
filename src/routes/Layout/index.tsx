@@ -8,17 +8,13 @@ import Breadcrumb from './Breadcrumb'
 const Layout = () => {
   return (
     <div className={styles.app}>
-      <Header />
+      <div className={styles.sidebarContainer}>
+        <Sidebar />
+      </div>
       <main>
-        <div className={styles.sidebarContainer}>
-          <Sidebar />
-        </div>
-        <div className={styles.pageContainer}>
-          <Breadcrumb />
-          <div className={styles.pageContents}>
-            <Outlet />
-          </div>
-        </div>
+        <Header />
+        <Breadcrumb />
+        <Outlet />
       </main>
     </div>
   )
