@@ -67,6 +67,7 @@
         color: colors.$LOGIN_SUB_COLOR;
 
         input {
+          -webkit-appearance: checkbox;
           width: 12px;
           height: 12px;
           border: 1px solid colors.$LOGIN_SUB_COLOR;
