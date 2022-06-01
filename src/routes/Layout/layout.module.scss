@@ -24,14 +24,14 @@
     }
 
     .sidebarContainer {
-      @include position.absolute(0 auto auto -270px);
-      width: 300px;
+      @include position.absolute(0 auto auto 0);
+      width: 30px;
       height: 100%;
-      border: 1px solid black;
+      overflow: hidden;
       transition: 0.2s;
 
       &:hover {
-        transform: translateX(270px);
+        width: 300px;
       }
     }
 
