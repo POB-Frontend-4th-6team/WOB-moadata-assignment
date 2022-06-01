@@ -48,7 +48,7 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
     setSelectedPeriod('전체')
     setStartDate('전체')
     setEndDate('전체')
-    setWeeks(['전체', '전체'])
+    setWeeks([])
   }
 
   return (
