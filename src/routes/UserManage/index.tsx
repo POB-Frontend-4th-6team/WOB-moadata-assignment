@@ -22,6 +22,7 @@ const UserManage = () => {
           <tr>
             <th>회원번호</th>
             <th>가입일</th>
+            <th>닉네임</th>
             <th>로그인 ID</th>
             <th>성별</th>
             <th>생년월일</th>
