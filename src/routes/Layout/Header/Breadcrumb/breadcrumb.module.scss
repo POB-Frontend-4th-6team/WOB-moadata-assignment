@@ -2,7 +2,7 @@
 
 .container {
   @include flexbox.flexbox(start, center);
-  width: 100%;
+  flex: 1;
 
   a {
     color: inherit;

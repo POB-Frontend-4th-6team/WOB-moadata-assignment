@@ -13,7 +13,6 @@ const Layout = () => {
       </div>
       <main>
         <Header />
-        <Breadcrumb />
         <Outlet />
       </main>
     </div>
