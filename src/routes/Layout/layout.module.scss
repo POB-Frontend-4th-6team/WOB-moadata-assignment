@@ -23,10 +23,6 @@
         width: 300px;
       }
     }
-
-    @include responsive.after(LD) {
-      width: 90px;
-    }
   }
 
   main {

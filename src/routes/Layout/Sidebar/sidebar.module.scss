@@ -30,29 +30,13 @@
           margin: 20px;
 
           span {
-            position: absolute;
-            top: 30%;
-            left: 50px;
+            @include position.absolute(30% auto auto 50px);
           }
         }
       }
 
       li:hover {
         color: colors.$MAIN_TEXT_COLOR;
-      }
-    }
-  }
-
-  @include responsive.after(LD) {
-    ul {
-      .desktopMenu {
-        a {
-          margin: 20px 30px;
-
-          span {
-            left: 60px;
-          }
-        }
       }
     }
   }
