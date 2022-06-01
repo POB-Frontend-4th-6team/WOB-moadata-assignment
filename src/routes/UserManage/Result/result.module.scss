@@ -1,5 +1,12 @@
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+table {
+  margin: 10px;
+
+  th {
+    padding: 10px;
+  }
+
+  td {
+    padding: 10px;
+    border: 1px solid black;
+  }
 }

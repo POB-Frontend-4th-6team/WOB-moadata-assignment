@@ -1,5 +1,5 @@
-import HeartRate from './HeartRate'
 import StepRate from './StepRate'
+import HeartRate from './HeartRate'
 import styles from './userInfo.module.scss'
 
 const UserInfo = () => {
