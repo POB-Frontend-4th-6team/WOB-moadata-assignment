@@ -3,6 +3,7 @@
 
 .button {
   @include flexbox.flexbox;
+  margin-left: auto;
   border: 1px solid colors.$GRAYA;
   transition: 200ms;
 

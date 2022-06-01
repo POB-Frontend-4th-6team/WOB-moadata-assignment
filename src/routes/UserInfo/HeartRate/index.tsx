@@ -1,44 +1,68 @@
+import { Heartrate } from 'assets/svgs'
 import styles from './heartRate.module.scss'
-import { VictoryChart, VictoryLine, VictoryTheme, VictoryAxis, VictoryVoronoiContainer, VictoryTooltip } from 'victory'
-import jsonData from 'assets/jsons/heartrate/heartrate_136.json'
+import { VictoryChart, VictoryLine, VictoryAxis, VictoryVoronoiContainer, VictoryTooltip } from 'victory'
+
+import SearchDateRange from 'routes/_components/SearchDateRange'
+import { useEffect, useState } from 'hooks'
+import { getPeriodRateData } from 'services/health'
+
+interface ChartProps {
+  x: string
+  y: number
+}
 
 const HeartRate = () => {
-  const data = jsonData.map((e) => ({ x: e.crt_ymdt, y: e.avg_beat }))
+  const [chartData, setChartData] = useState<ChartProps[]>([])
+  const [weeks, setWeeks] = useState<string[]>(['2022-02-26', '2022-04-24'])
 
-  // console.log(data)
+  useEffect(() => {
+    setChartData(getPeriodRateData(weeks, 'member136', 'heart'))
+  }, [weeks])
 
   return (
-    <div className={styles.container}>
-      <VictoryChart
-        theme={VictoryTheme.material}
-        containerComponent={
-          <VictoryVoronoiContainer
-            labels={({ datum }) => `${datum.y}bpm`}
-            labelComponent={
-              <VictoryTooltip
-                flyoutStyle={{
-                  stroke: 'black',
-                  fill: 'white',
-                }}
-                flyoutPadding={10}
+    <section className={styles.heartContainer}>
+      <h3>심박수</h3>
+      <div className={styles.heartRate}>
+        <div className={styles.chart}>
+          <VictoryChart
+            containerComponent={
+              <VictoryVoronoiContainer
+                labels={({ datum }) => `${datum.y}bpm`}
+                labelComponent={
+                  <VictoryTooltip
+                    style={{ fill: 'white', fontSize: 14 }}
+                    flyoutStyle={{ fill: '#3a474e' }}
+                    flyoutHeight={40}
+                    flyoutPadding={15}
+                  />
+                }
               />
             }
-          />
-        }
-        width={1000}
-      >
-        <VictoryAxis fixLabelOverlap />
-        <VictoryAxis dependentAxis tickValues={[60, 82, 105, 127, 150]} />
-        <VictoryLine
-          style={{
-            data: { stroke: '#c43a31' },
-            parent: { border: '1px solid #ccc' },
-          }}
-          interpolation='natural'
-          data={data}
-        />
-      </VictoryChart>
-    </div>
+            width={1000}
+            height={300}
+          >
+            <VictoryAxis fixLabelOverlap />
+            <VictoryAxis dependentAxis tickValues={[60, 82, 105, 127, 150]} />
+            <VictoryLine
+              style={{
+                data: { stroke: '#c43a31' },
+                parent: { border: '1px solid #ccc' },
+              }}
+              interpolation='natural'
+              data={chartData}
+            />
+          </VictoryChart>
+        </div>
+        <div className={styles.info}>
+          <p className={styles.title}>
+            <Heartrate />
+            <span>평균 82bpm</span>
+          </p>
+          <p className={styles.date}>2022-04-20</p>
+          <SearchDateRange setWeeks={setWeeks} />
+        </div>
+      </div>
+    </section>
   )
 }
 
