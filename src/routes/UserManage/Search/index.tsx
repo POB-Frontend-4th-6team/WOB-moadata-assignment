@@ -37,8 +37,6 @@ const Search = () => {
     setIsDropDownOpen(false)
   }
 
-  console.log(weeks)
-
   const handleSetUserInputData = () => {
     if (userInput === '') {
       setUserInputData({
