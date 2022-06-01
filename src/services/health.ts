@@ -36,6 +36,7 @@ const getPeriodRateData = (dateList: string[], id: string, type: string) => {
   const convertedData = convertPeriodData(filteredData, type)
 
   const result = mergeArray(initialTempData, convertedData)
+
   return result
 }
 
