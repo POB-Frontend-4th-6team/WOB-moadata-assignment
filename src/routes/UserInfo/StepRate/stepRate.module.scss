@@ -48,34 +48,5 @@
         color: colors.$MAIN_TEXT_COLOR;
       }
     }
-
-    .inquiry {
-      .datePicker {
-        margin-top: 20px;
-        @include flexbox.flexbox(start, center);
-
-        span {
-          margin-right: 30px;
-          color: colors.$MAIN_TEXT_COLOR;
-        }
-
-        .start,
-        .end {
-          width: 200px;
-          height: 30px;
-          border: 1px solid colors.$BORDER_COLOR;
-          border-radius: 5px;
-        }
-
-        .sign {
-          margin: 0 10px;
-        }
-
-        .btns {
-          margin-left: 20px;
-          @include flexbox.flexbox(start, center);
-        }
-      }
-    }
   }
 }

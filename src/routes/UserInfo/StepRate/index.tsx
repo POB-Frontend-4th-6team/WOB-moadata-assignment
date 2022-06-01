@@ -3,6 +3,7 @@ import { VictoryAxis, VictoryBar, VictoryChart, VictoryTooltip, VictoryVoronoiCo
 import { useEffect, useState } from 'hooks'
 import { getPeriodRateData } from 'services/health'
 import { Button } from 'routes/_components/Button'
+import SearchDateRange from 'routes/_components/SearchDateRange'
 
 import styles from './stepRate.module.scss'
 import { Step } from 'assets/svgs'
@@ -69,22 +70,7 @@ const StepRate = () => {
           </p>
           <p className={styles.date}>2022-04-20</p>
         </div>
-        <div className={styles.inquiry}>
-          <div className={styles.datePicker}>
-            <span>조회기간</span>
-            <div className={styles.start}>{/* 시작일 */}</div>
-            <span className={styles.sign}>~</span>
-            <div className={styles.end}>{/* 끝 */}</div>
-
-            <div className={styles.btns}>
-              <Button size='small'>오늘</Button>
-              <Button size='small'>1주일</Button>
-              <Button size='small' primary>
-                전체
-              </Button>
-            </div>
-          </div>
-        </div>
+        <SearchDateRange weeks={weeks} setWeeks={setWeeks} />
       </div>
     </section>
   )
