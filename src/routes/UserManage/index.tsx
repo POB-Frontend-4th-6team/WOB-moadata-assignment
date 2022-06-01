@@ -1,18 +1,29 @@
-import Search from './Search'
+import { useEffect, useState } from 'hooks'
+
 import styles from './userManage.module.scss'
+import Search from './Search'
 import Result from './Result'
-import { getMemberInfo } from 'services/user'
-import { useMount, useState } from 'hooks'
+
 import { MemberStateProps } from 'types/user'
+import { userInputDataState } from 'states/userSearch'
+import { getMemberInfo } from 'services/user'
+import { useRecoilValue } from 'recoil'
 
 const UserManage = () => {
   const [member, setMember] = useState<MemberStateProps[]>([])
 
-  useMount(() => {
-    const searchedMemberList = getMemberInfo({ id: '', number: undefined, startDate: 20200401, endDate: 20220514 })
-    console.log('searchedMemberList', searchedMemberList)
-    setMember(searchedMemberList)
+  const searchOptions = useRecoilValue(userInputDataState)
+
+  const searchedMemberList = getMemberInfo({
+    id: searchOptions.userId,
+    number: searchOptions.userNumber,
+    startDate: searchOptions.startDate,
+    endDate: searchOptions.endDate,
   })
+
+  useEffect(() => {
+    setMember(searchedMemberList)
+  }, [searchOptions])
 
   const Results: JSX.Element[] = member.map((data) => <Result data={data} key={`userId_${data.nickname}`} />)
 
