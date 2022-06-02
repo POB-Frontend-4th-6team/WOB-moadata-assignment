@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import { cx } from 'styles'
+
 import styles from './breadcrumb.module.scss'
 
 interface IPaths {
