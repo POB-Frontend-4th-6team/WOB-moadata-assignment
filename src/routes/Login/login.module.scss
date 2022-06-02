@@ -34,7 +34,7 @@
       width: 100%;
       height: 250px;
       background: colors.$SIGNATURE_COLOR;
-      @include flexbox.flexbox(center,center);
+      @include flexbox.flexbox(center, center);
 
       svg {
         transform: scale(0.8);
@@ -66,7 +66,7 @@
     }
 
     .right {
-      @include flexbox.flexbox(center,center);
+      @include flexbox.flexbox(center, center);
       flex-direction: column;
       width: 100%;
       height: calc(100vh - 250px);
@@ -146,7 +146,7 @@
         }
 
         .rememberBox {
-          @include flexbox.flexbox(start,center);
+          @include flexbox.flexbox(start, center);
           margin: 15px 0 0;
           font-size: 12px;
 
