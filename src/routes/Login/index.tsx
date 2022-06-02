@@ -70,6 +70,7 @@ const UserManage = () => {
             <div className={styles.inputBox}>
               <label htmlFor='userId'>ID</label>
               <input value={adminId} type='text' name='userId' onChange={handleIdInput} />
+              <span className={styles.separator}> </span>
               <FaUser className={styles.faUserIcon} />
             </div>
             <div className={styles.inputBox}>
@@ -80,6 +81,7 @@ const UserManage = () => {
                 name='password'
                 onChange={handlePasswordInput}
               />
+              <span className={styles.separator}> </span>
               {isVisible ? (
                 <FaEye className={styles.faEyeIcon} onClick={toggleVisiblePw} />
               ) : (
