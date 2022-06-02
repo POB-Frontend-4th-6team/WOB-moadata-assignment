@@ -24,17 +24,7 @@ const Result = ({ data }: Props) => {
       <td>{data.gender}</td>
       <td>{data.birth}</td>
       <td>
-        <Link
-          to='userInfo'
-          state={{
-            user_seq: data.member_seq,
-            user_nickname: data.nickname,
-            user_id: data.user_id,
-            user_gender: data.gender,
-            user_birth: data.birth,
-            user_registerDate: removeTimeInDate(data.registered_date),
-          }}
-        >
+        <Link to={`userInfo/${data.user_id}`}>
           <button type='button'>관리</button>
         </Link>
       </td>
