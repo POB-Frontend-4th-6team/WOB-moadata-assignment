@@ -66,23 +66,24 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
     <section className={styles.container}>
       <div className={styles.inputs}>
         <label htmlFor='dateRange'>조회 기간</label>
-        <input
-          id='dateRange'
-          type='text'
-          placeholder={startDate}
-          value={startDate}
-          onChange={handleStartDateInput}
-          onClick={handleOpenDatePickerModal}
-        />
-        <span className={styles.endDate}>~</span>
-        <input
-          type='text'
-          placeholder={endDate}
-          value={endDate}
-          onChange={handleEndDateInput}
-          onClick={handleOpenDatePickerModal}
-          className={styles.endDate}
-        />
+        <div className={styles.inputContainer}>
+          <input
+            id='dateRange'
+            type='text'
+            placeholder={startDate}
+            value={startDate}
+            onChange={handleStartDateInput}
+            onClick={handleOpenDatePickerModal}
+          />
+          <span>~</span>
+          <input
+            type='text'
+            placeholder={endDate}
+            value={endDate}
+            onChange={handleEndDateInput}
+            onClick={handleOpenDatePickerModal}
+          />
+        </div>
       </div>
       <div className={styles.buttons}>
         <Button size='large' primary={selectedPeriod === '오늘'} onClick={handleSetToToday}>

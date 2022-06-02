@@ -4,71 +4,104 @@
 
 .container {
   display: grid;
-  gap: 30px;
+  grid-template-rows: 1fr 2fr;
   width: 100%;
   min-width: 400px;
-  padding: 30px 20px;
+  padding: 10px 20px 30px;
   background-color: colors.$WHITE;
   border-radius: 20px;
   box-shadow: colors.$BOX_SHADOW 0 8px 24px;
 
+  @include responsive.after(MD) {
+    gap: 20px;
+    padding: 30px 20px;
+  }
+
   .column {
-    @include flexbox.flexbox(center, center);
+    @include flexbox.flexbox(between, center);
+    width: 100%;
     line-height: 30px;
+
+    @include responsive.after(ML) {
+      @include flexbox.flexbox(start, center);
+      grid-template-rows: 40px 40px 40px;
+
+      input {
+        width: 70%;
+        max-width: 300px;
+      }
+    }
 
     .dropDown {
       display: flex;
       align-items: center;
+      justify-content: center;
+      width: 40%;
+      max-width: 140px;
       padding: 3px 14px;
+      margin-right: 10px;
       border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
       border-radius: 8px;
     }
 
     input {
+      width: 70%;
+      max-width: 300px;
       padding: 3px 14px;
-      margin: 0 10px;
       line-height: 30px;
       border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
       border-radius: 8px;
     }
 
-    @include responsive.after(SD) {
-      @include flexbox.flexbox(start, center);
-      grid-template-rows: 40px 40px 40px;
+    span {
+      margin: 0 10px;
     }
   }
 
   .secondColumn {
     display: grid;
-    grid-template-rows: 100px 40px;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr;
     gap: 20px;
+    width: 100%;
 
     @include responsive.after(MD) {
-      grid-template-rows: 40px 40px;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr;
     }
 
     @include responsive.after(LD) {
-      grid-template-rows: 40px;
-      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-template-columns: 3fr 1fr;
     }
   }
 
   .formButtonsContainer {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     width: 100%;
 
     button {
-      margin-left: 0;
+      width: 50%;
 
       + button {
         margin-left: 16px;
       }
     }
 
-    @include responsive.after(SD) {
+    @include responsive.after(ML) {
       justify-content: flex-end;
+
+      button {
+        width: 150px;
+      }
+    }
+
+    @include responsive.after(LD) {
+      button {
+        width: 100px;
+      }
     }
   }
 }
