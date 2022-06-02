@@ -1,13 +1,92 @@
 @use '/src/styles/mixins/flexbox';
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/responsive';
+@use '/src/styles/mixins/position';
 
 .container {
-  @include flexbox.flexbox(start,center);
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+  color: colors.$MAIN_TEXT_COLOR;
+
+  .desktopMenu {
+    display: none;
+  }
+
+  @include responsive.after(ML) {
+    height: 100%;
+    color: colors.$WHITE;
+    background-color: colors.$SIGNATURE_COLOR;
+
+    ul {
+      @include flexbox.flexbox(center, center);
+      flex-direction: column;
+
+      .desktopMenu {
+        display: block;
+        width: 100%;
+        transition: 200ms;
+
+        a {
+          position: relative;
+          display: block;
+          margin: 20px;
+
+          span {
+            @include position.absolute(30% auto auto 50px);
+          }
+        }
+      }
+
+      li:hover {
+        color: colors.$MAIN_TEXT_COLOR;
+      }
+    }
+  }
 
   a {
     color: inherit;
     text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .mobileMenu {
+    .hamburgerMenu {
+      width: 28px;
+      height: 28px;
+      margin: 10px 20px;
+    }
+
+    @include responsive.after(ML) {
+      display: none;
+    }
+  }
+}
+
+.mobileMenuWrapper {
+  @include flexbox.flexbox(center, center);
+  flex-direction: column;
+  gap: 10px;
+  width: 100vw;
+  height: 100px;
+  background-color: colors.$WHITE;
+
+  li {
+    width: 130px;
+    transition: 200ms;
+
+    a {
+      @include flexbox.flexbox(start, center);
+
+      svg {
+        margin-right: 7px;
+      }
+    }
+  }
+
+  li:hover {
+    color: colors.$SIGNATURE_COLOR;
+  }
+
+  @include responsive.after(ML) {
+    display: none;
+    background-color: colors.$SIGNATURE_COLOR;
   }
 }
