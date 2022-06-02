@@ -59,8 +59,8 @@ const HeartRate = () => {
             <span>평균 82bpm</span>
           </p>
           <p className={styles.date}>2022-04-20</p>
-          <SearchDateRange setWeeks={setWeeks} />
         </div>
+        <SearchDateRange setWeeks={setWeeks} />
       </div>
     </section>
   )
