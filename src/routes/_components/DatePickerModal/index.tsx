@@ -62,10 +62,10 @@ const DatePickerModal = ({
           fixedHeight
         />
         <div className={styles.buttonContainer}>
-          <Button size='large' onClick={handleCloseDatePickerModal}>
+          <Button type='button' size='large' onClick={handleCloseDatePickerModal}>
             취소
           </Button>
-          <Button size='large' primary onClick={handleSetPickedDateRange}>
+          <Button type='button' size='large' primary onClick={handleSetPickedDateRange}>
             적용
           </Button>
         </div>

@@ -86,13 +86,13 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
         </div>
       </div>
       <div className={styles.buttons}>
-        <Button size='large' primary={selectedPeriod === '오늘'} onClick={handleSetToToday}>
+        <Button type='button' size='large' primary={selectedPeriod === '오늘'} onClick={handleSetToToday}>
           오늘
         </Button>
-        <Button size='large' primary={selectedPeriod === '일주일'} onClick={handleSetToOneWeek}>
+        <Button type='button' size='large' primary={selectedPeriod === '일주일'} onClick={handleSetToOneWeek}>
           일주일
         </Button>
-        <Button size='large' primary={selectedPeriod === '전체'} onClick={handleSetToAll}>
+        <Button type='button' size='large' primary={selectedPeriod === '전체'} onClick={handleSetToAll}>
           전체
         </Button>
       </div>

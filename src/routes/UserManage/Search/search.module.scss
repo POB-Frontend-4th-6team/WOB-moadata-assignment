@@ -32,30 +32,24 @@
       }
     }
 
-    .dropDown {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40%;
-      max-width: 140px;
-      padding: 3px 14px;
-      margin-right: 10px;
-      border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
-      border-radius: 8px;
-    }
-
-    input {
+    .dropDownInput {
       width: 70%;
       max-width: 300px;
+      height: 40px;
       padding: 3px 14px;
+      margin-left: 20px;
       line-height: 30px;
       border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
       border-radius: 8px;
+
+      @include responsive.after(ML) {
+        max-width: 280px;
+      }
     }
 
-    span {
-      margin: 0 10px;
-    }
+    // span {
+    //   margin: 0 10px;
+    // }
   }
 
   .secondColumn {
@@ -76,7 +70,7 @@
     }
   }
 
-  .formButtonsContainer {
+  .buttonContainer {
     display: flex;
     align-items: center;
     justify-content: space-between;
