@@ -7,9 +7,7 @@ import Header from './Header'
 const Layout = () => {
   return (
     <div className={styles.app}>
-      <div className={styles.sidebarContainer}>
-        <Sidebar />
-      </div>
+      <Sidebar />
       <Header />
       <main>
         <Outlet />
