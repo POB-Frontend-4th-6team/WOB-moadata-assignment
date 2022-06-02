@@ -65,26 +65,33 @@
 .mobileMenuWrapper {
   @include flexbox.flexbox(center, center);
   flex-direction: column;
-  gap: 10px;
   width: 100vw;
-  height: 100px;
+  margin-top: 12px;
   background-color: colors.$WHITE;
+  box-shadow: colors.$BOX_SHADOW 0 8px 8px 0;
 
   li {
-    width: 130px;
+    width: 100%;
     transition: 200ms;
 
     a {
-      @include flexbox.flexbox(start, center);
+
+      @include flexbox.flexbox(center, center);
+      padding: 10px;
 
       svg {
-        margin-right: 7px;
+        margin-right: 5px;
+      }
+
+      span {
+        width: 80px;
+        text-align: center;
       }
     }
   }
 
   li:hover {
-    color: colors.$SIGNATURE_COLOR;
+    background: rgba(colors.$SUB_TEXT_COLOR, 0.03);
   }
 
   @include responsive.after(ML) {

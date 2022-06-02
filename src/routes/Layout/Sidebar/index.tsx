@@ -17,13 +17,13 @@ const Sidebar = () => {
         <li>
           <Link to='/' onClick={handleMobileClick}>
             <BiHomeAlt size='30px' />
-            백오피스 홈
+            <span>백오피스 홈</span>
           </Link>
         </li>
         <li>
           <Link to='userManage' onClick={handleMobileClick}>
             <BiIdCard size='30px' />
-            회원 관리
+            <span>회원 관리</span>
           </Link>
         </li>
       </ul>
