@@ -17,7 +17,15 @@
     transition: 0.2s;
 
     &:hover {
-      width: 300px;
+      width: 175px;
+
+      .desktopMenu li:first-child a {
+        width: 100%;
+
+        .logo {
+          transform: scale(0.7) translateX(20px);
+        }
+      }
     }
   }
 
@@ -52,10 +60,14 @@
 
         &:first-child {
           a {
-            display: inline-block;
+            width: 27px;
+            overflow: hidden;
+            transition: 0.3s all;
 
             .logo {
-              transform: translateX(4px);
+              margin-left: -33px;
+              transition: 0.3s all;
+              transform: scale(0.6) translateX(2px);
             }
           }
         }

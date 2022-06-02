@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 
 import { sidebarDrawer } from 'states/sidebarDrawer'
 import { BiHomeAlt, BiIdCard } from 'react-icons/bi'
-import { SmallLogo } from 'assets/svgs'
+import { LogoImage } from 'assets/svgs'
 import styles from './sidebar.module.scss'
 
 const Sidebar = () => {
@@ -34,7 +34,7 @@ const Sidebar = () => {
       <ul className={styles.desktopMenu}>
         <li>
           <Link to='/'>
-            <SmallLogo className={styles.logo} />
+            <LogoImage className={styles.logo} />
           </Link>
         </li>
         <li>
