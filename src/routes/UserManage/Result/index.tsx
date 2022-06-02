@@ -25,7 +25,7 @@ const Result = ({ data }: Props) => {
       <td>{data.birth}</td>
       <td>
         <Link
-          to='/userInfo'
+          to='userInfo'
           state={{
             user_seq: data.member_seq,
             user_nickname: data.nickname,

@@ -1,7 +1,7 @@
-import { NavLink, useLocation } from 'react-router-dom'
-import { cx } from 'styles'
+import { Link, useLocation } from 'react-router-dom'
 
 import styles from './breadcrumb.module.scss'
+import Item from './Item'
 
 interface IPaths {
   accPath: string
@@ -29,7 +29,6 @@ const Breadcrumb = () => {
     },
     [{ accPath: '', name: '홈' }]
   )
-  console.log(location)
 
   const isPathsValid =
     (splitPathname.length === 1 && splitPathname[0] === '') || splitPathname.every((path) => !!PATH_NAMES[path])
@@ -37,12 +36,8 @@ const Breadcrumb = () => {
   if (!isPathsValid) return null
   return (
     <ul className={styles.container}>
-      {paths.map((path) => (
-        <li key={`path-key-${path.accPath}`}>
-          <NavLink className={({ isActive }) => cx({ [styles.active]: isActive })} to={path.accPath}>
-            {path.name}
-          </NavLink>
-        </li>
+      {paths.map((path, i) => (
+        <Item isLast={i === paths.length - 1} path={path} key={`breadcrumb-item-${path.accPath}`} />
       ))}
     </ul>
   )

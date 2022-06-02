@@ -19,10 +19,6 @@
     }
   }
 
-  .active {
-    font-weight: 500;
-  }
-
   @include responsive.after(ML) {
     padding-left: 0;
   }
