@@ -17,13 +17,13 @@
     transition: 0.2s;
 
     &:hover {
-      width: 175px;
+      width: 185px;
 
       .desktopMenu li:first-child a {
         width: 100%;
 
         .logo {
-          transform: scale(0.7) translateX(20px);
+          transform: scale(0.65) translateX(20px);
         }
       }
     }
@@ -116,10 +116,5 @@
 
   li:hover {
     background: rgba(colors.$SUB_TEXT_COLOR, 0.03);
-  }
-
-  @include responsive.after(ML) {
-    display: none;
-    background-color: colors.$SIGNATURE_COLOR;
   }
 }
