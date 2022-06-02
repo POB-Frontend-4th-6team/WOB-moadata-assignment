@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 
 import LoginPage from './Login'
 import HomePage from './Home'
@@ -6,8 +6,16 @@ import UserManage from './UserManage'
 import UserInfo from './UserInfo'
 import NotFoundPage from './NotFoundPage'
 import Layout from './Layout'
+import { useEffect } from 'react'
 
 const App = () => {
+  const isLogin = !!sessionStorage.getItem('admin')
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!isLogin) navigate('login')
+  }, [isLogin, navigate])
+
   return (
     <Routes>
       <Route path='/' element={<Layout />}>

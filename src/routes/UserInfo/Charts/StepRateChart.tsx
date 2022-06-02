@@ -1,33 +1,36 @@
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryTooltip, VictoryVoronoiContainer } from 'victory'
 
-import { useEffect, useState } from 'hooks'
-import { getPeriodRateData } from 'services/health'
-import SearchDateRange from 'routes/_components/SearchDateRange'
-
-import styles from './stepRate.module.scss'
+import { useEffect, useMemo, useState } from 'hooks'
+import { getPeriodRateData, getTodayRateData } from 'services/health'
+import { IChartObject } from 'types/chart.d'
 import { Step } from 'assets/svgs'
 
-interface ChartProps {
-  x: string
-  y: number
-}
+import styles from './chart.module.scss'
+import SearchDateRange from 'routes/_components/SearchDateRange'
 
-const StepRate = () => {
-  const [chartData, setChartData] = useState<ChartProps[]>([])
-  const [weeks, setWeeks] = useState<string[]>(['2022-02-26', '2022-04-24'])
+const StepRateChart = () => {
+  const [chartData, setChartData] = useState<IChartObject[]>([])
+  const [weeks, setWeeks] = useState<string[]>([])
+  const total = useMemo(() => chartData.reduce((prev, cur) => prev + cur.y, 0), [chartData])
+  const date = useMemo(() => {
+    if (chartData.length === 1) return chartData[0].x
+    if (chartData.length === 0) return ''
+    return `${chartData[0].x} ~ ${chartData[chartData.length - 1].x}`
+  }, [chartData])
 
   useEffect(() => {
-    setChartData(getPeriodRateData(weeks, 'member136', 'step'))
+    if (weeks.length && weeks[0] === weeks[1]) setChartData(getTodayRateData(weeks, 'member136', 'step'))
+    else setChartData(getPeriodRateData(weeks, 'member136', 'step'))
   }, [weeks])
 
   return (
-    <section className={styles.stepContainer}>
+    <section className={styles.container}>
       <h3>걸음수</h3>
-      <div className={styles.stepChart}>
+      <div className={styles.chartContainer}>
         <div className={styles.chart}>
           <VictoryChart
+            width={800}
             height={300}
-            width={1000}
             domainPadding={20}
             containerComponent={
               <VictoryVoronoiContainer
@@ -40,17 +43,14 @@ const StepRate = () => {
                     flyoutPadding={15}
                   />
                 }
+                responsive={false}
               />
             }
           >
-            <VictoryAxis dependentAxis />
+            <VictoryAxis dependentAxis tickFormat={(y) => (y < 1 ? '0' : `${y / 1000}k`)} />
             <VictoryAxis fixLabelOverlap style={{ tickLabels: { fontSize: 16 } }} />
             <VictoryBar
               data={chartData}
-              animate={{
-                duration: 0,
-                onLoad: { duration: 100 },
-              }}
               style={{
                 data: {
                   fill: '#fe612c',
@@ -64,10 +64,10 @@ const StepRate = () => {
         </div>
         <div className={styles.info}>
           <p className={styles.title}>
-            <Step />
-            <span>총 13,230 걸음</span>
+            <Step width={20} height={20} />
+            <span>총 {total.toLocaleString()} 걸음</span>
           </p>
-          <p className={styles.date}>2022-04-20</p>
+          <p className={styles.date}>{date}</p>
         </div>
         <SearchDateRange setWeeks={setWeeks} />
       </div>
@@ -75,4 +75,4 @@ const StepRate = () => {
   )
 }
 
-export default StepRate
+export default StepRateChart

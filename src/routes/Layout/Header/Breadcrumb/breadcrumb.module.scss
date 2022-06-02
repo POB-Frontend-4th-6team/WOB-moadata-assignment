@@ -1,8 +1,11 @@
 @use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
+@use '/src/styles/constants/colors';
 
 .container {
   @include flexbox.flexbox(start, center);
   flex: 1;
+  padding-left: 10px;
 
   a {
     color: inherit;
@@ -10,7 +13,7 @@
   }
 
   li {
-    + li::before {
+    +li::before {
       margin: 0 10px;
       content: '>';
     }
@@ -18,5 +21,9 @@
 
   .active {
     font-weight: 500;
+  }
+
+  @include responsive.after(ML) {
+    padding-left: 0;
   }
 }

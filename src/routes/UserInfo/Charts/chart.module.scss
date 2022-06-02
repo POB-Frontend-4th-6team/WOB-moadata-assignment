@@ -2,7 +2,7 @@
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/mixins/responsive';
 
-.heartContainer {
+.container {
   width: 100%;
   margin-top: 30px;
 
@@ -18,21 +18,31 @@
     color: colors.$MAIN_TEXT_COLOR;
   }
 
-  .heartRate {
+  .chartContainer {
     padding: 30px;
     background: colors.$WHITE;
     border-radius: 20px;
     box-shadow: colors.$BOX_SHADOW 0 8px 24px;
 
     .chart {
-      width: 100%;
-      padding: 20px;
+      padding-left: 10px;
+      overflow-x: scroll;
+      overflow-y: hidden;
       border: 1px solid colors.$BORDER_COLOR_2;
+
+      &::-webkit-scrollbar {
+        display: block;
+        height: 15px;
+        background-color: colors.$WHITE;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: colors.$BLACK;
+        border-radius: 10px;
+      }
     }
 
     .info {
-      width: 100%;
-
       .title {
         margin-top: 20px;
         @include flexbox.flexbox(start, center);
@@ -46,7 +56,7 @@
       }
 
       .date {
-        margin-top: 20px;
+        margin: 20px 0;
         color: colors.$MAIN_TEXT_COLOR;
       }
     }

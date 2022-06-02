@@ -3,8 +3,37 @@
 @use '/src/styles/mixins/responsive';
 @use '/src/styles/mixins/position';
 
-.container {
+.sidebarContainer {
+  position: absolute;
+  z-index: 20;
+  overflow: hidden;
   color: colors.$MAIN_TEXT_COLOR;
+  box-shadow: rgba(colors.$SIGNATURE_COLOR, 0.1) 2px 8px 24px;
+
+  @include responsive.after(ML) {
+    width: 70px;
+    height: 100%;
+    box-shadow: rgba(colors.$SIGNATURE_COLOR, 0.5) 2px 8px 24px;
+    transition: 0.2s;
+
+    &:hover {
+      width: 220px;
+
+      .desktopMenu li {
+        a {
+          margin: 20px 38px;
+        }
+
+        &:first-child a {
+          width: 60%;
+
+          .logo {
+            transform: scale(0.65) translateX(20px);
+          }
+        }
+      }
+    }
+  }
 
   .desktopMenu {
     display: none;
@@ -15,11 +44,12 @@
     color: colors.$WHITE;
     background-color: colors.$SIGNATURE_COLOR;
 
-    ul {
+    .desktopMenu {
+      display: block;
       @include flexbox.flexbox(center, center);
       flex-direction: column;
 
-      .desktopMenu {
+      li {
         display: block;
         width: 100%;
         transition: 200ms;
@@ -28,15 +58,32 @@
           position: relative;
           display: block;
           margin: 20px;
+          transition: 300ms all;
 
           span {
             @include position.absolute(30% auto auto 50px);
+            width: 80px;
+            text-align: center;
+          }
+        }
+
+        &:first-child {
+          a {
+            width: 27px;
+            overflow: hidden;
+            transition: 0.3s all;
+
+            .logo {
+              margin-left: -33px;
+              transition: 0.3s all;
+              transform: scale(0.6) translateX(2px);
+            }
           }
         }
       }
 
       li:hover {
-        color: colors.$MAIN_TEXT_COLOR;
+        color: rgba(colors.$MAIN_TEXT_COLOR, 0.8);
       }
     }
   }
@@ -46,47 +93,37 @@
     text-decoration: none;
     white-space: nowrap;
   }
-
-  .mobileMenu {
-    .hamburgerMenu {
-      width: 28px;
-      height: 28px;
-      margin: 10px 20px;
-    }
-
-    @include responsive.after(ML) {
-      display: none;
-    }
-  }
 }
 
 .mobileMenuWrapper {
   @include flexbox.flexbox(center, center);
   flex-direction: column;
-  gap: 10px;
   width: 100vw;
-  height: 100px;
+  margin-top: 60px;
   background-color: colors.$WHITE;
+  box-shadow: colors.$BOX_SHADOW 0 8px 8px 0;
 
   li {
-    width: 130px;
+    width: 100%;
     transition: 200ms;
 
     a {
-      @include flexbox.flexbox(start, center);
+
+      @include flexbox.flexbox(center, center);
+      padding: 10px;
 
       svg {
-        margin-right: 7px;
+        margin-right: 5px;
+      }
+
+      span {
+        width: 80px;
+        text-align: center;
       }
     }
   }
 
   li:hover {
-    color: colors.$SIGNATURE_COLOR;
-  }
-
-  @include responsive.after(ML) {
-    display: none;
-    background-color: colors.$SIGNATURE_COLOR;
+    background: rgba(colors.$SUB_TEXT_COLOR, 0.03);
   }
 }
