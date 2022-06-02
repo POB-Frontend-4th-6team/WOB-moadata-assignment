@@ -17,13 +17,19 @@
     transition: 0.2s;
 
     &:hover {
-      width: 185px;
+      width: 220px;
 
-      .desktopMenu li:first-child a {
-        width: 100%;
+      .desktopMenu li {
+        a {
+          margin: 20px 38px;
+        }
 
-        .logo {
-          transform: scale(0.65) translateX(20px);
+        &:first-child a {
+          width: 60%;
+
+          .logo {
+            transform: scale(0.65) translateX(20px);
+          }
         }
       }
     }
@@ -52,9 +58,12 @@
           position: relative;
           display: block;
           margin: 20px;
+          transition: 300ms all;
 
           span {
             @include position.absolute(30% auto auto 50px);
+            width: 80px;
+            text-align: center;
           }
         }
 
