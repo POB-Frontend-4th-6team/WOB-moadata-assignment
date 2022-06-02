@@ -1,4 +1,5 @@
 export { ReactComponent as LogoImage } from './logo.svg'
+export { ReactComponent as SmallLogo } from './logo2.svg'
 export { ReactComponent as CalendarIcon } from './calendar.svg'
 export { ReactComponent as Alarm } from './alarm.svg'
 export { ReactComponent as Profile } from './profile.svg'
