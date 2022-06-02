@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Outlet } from 'react-router-dom'
 
 import LoginPage from './Login'
 import HomePage from './Home'
@@ -12,8 +12,10 @@ const App = () => {
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route path='' element={<HomePage />} />
-        <Route path='userManage' element={<UserManage />} />
-        <Route path='userInfo' element={<UserInfo />} />
+        <Route path='userManage' element={<Outlet />}>
+          <Route path='' element={<UserManage />} />
+          <Route path='userInfo' element={<UserInfo />} />
+        </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Route>
       <Route path='login' element={<LoginPage />} />
