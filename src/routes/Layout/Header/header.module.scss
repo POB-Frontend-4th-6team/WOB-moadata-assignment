@@ -36,7 +36,7 @@ header {
     }
   }
 
-  @include responsive.after(SD) {
+  @include responsive.after(ML) {
     width: calc(100% - 70px);
     margin-left: 70px;
   }

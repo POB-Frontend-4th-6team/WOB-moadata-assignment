@@ -14,7 +14,7 @@
     z-index: 1;
     overflow: hidden;
 
-    @include responsive.after(SD) {
+    @include responsive.after(ML) {
       width: 70px;
       height: 100%;
       transition: 0.2s;
