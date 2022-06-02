@@ -32,7 +32,11 @@
     width: calc(100% - 30px);
     height: 100%;
     padding: 30px;
-    margin-left: 30px;
     transition: 0.2s;
+
+    @include responsive.after(ML) {
+      width: calc(100% - 70px);
+      margin-left: 70px;
+    }
   }
 }

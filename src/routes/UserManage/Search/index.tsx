@@ -82,35 +82,39 @@ const Search = () => {
   return (
     <form className={styles.container}>
       {/* 로그인ID / 회원번호 중에 택일하도록 할 드롭다운 입니다 */}
-      <div className={styles.userInfoInputsContainer}>
-        <div className={styles.dropDown}>
-          {currentCategory}
-          <DownArrow
-            className={cx(styles.downArrowIcon, { [styles.dropDownOpen]: isDropDownOpen })}
-            onClick={handleDropDownToggle}
-          />
-          {isDropDownOpen && (
-            <ul className={cx(styles.selectMenuList, { [styles.selectMenuListOpen]: isDropDownOpen })}>
-              {USERDATA_CATEGORIES?.map((category) => (
-                <li aria-selected role='option' key={category} data-value={category} onClick={handleCategorySelect}>
-                  {category}
-                </li>
-              ))}
-            </ul>
-          )}
+      <div className={styles.column}>
+        <div className={styles.userInfoInputsContainer}>
+          <div className={styles.dropDown}>
+            {currentCategory}
+            <DownArrow
+              className={cx(styles.downArrowIcon, { [styles.dropDownOpen]: isDropDownOpen })}
+              onClick={handleDropDownToggle}
+            />
+            {isDropDownOpen && (
+              <ul className={cx(styles.selectMenuList, { [styles.selectMenuListOpen]: isDropDownOpen })}>
+                {USERDATA_CATEGORIES?.map((category) => (
+                  <li aria-selected role='option' key={category} data-value={category} onClick={handleCategorySelect}>
+                    {category}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <input type='text' onChange={handleUserInput} placeholder={`${placeholder}를 검색하세요`} value={userInput} />
         </div>
-        <input type='text' onChange={handleUserInput} placeholder={`${placeholder}를 검색하세요`} value={userInput} />
       </div>
-      <div className={styles.dateRange}>
-        <SearchDateRange setWeeks={setWeeks} />
-      </div>
-      <div className={styles.formButtonsContainer}>
-        <Button size='large' onClick={resetSearchOption}>
-          초기화
-        </Button>
-        <Button size='large' primary onClick={handleSetUserInputData}>
-          검색
-        </Button>
+      <div className={styles.column}>
+        <div className={styles.dateRange}>
+          <SearchDateRange setWeeks={setWeeks} />
+        </div>
+        <div className={styles.formButtonsContainer}>
+          <Button size='large' onClick={resetSearchOption}>
+            초기화
+          </Button>
+          <Button size='large' primary onClick={handleSetUserInputData}>
+            검색
+          </Button>
+        </div>
       </div>
     </form>
   )

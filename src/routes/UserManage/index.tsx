@@ -28,24 +28,26 @@ const UserManage = () => {
   const Results: JSX.Element[] = member.map((data) => <Result data={data} key={`userId_${data.nickname}`} />)
 
   return (
-    <div className={styles.container}>
-      <h2>UserManage</h2>
-      <Search />
-      <table>
-        <thead>
-          <tr>
-            <th>회원번호</th>
-            <th>가입일</th>
-            <th>닉네임</th>
-            <th>로그인 ID</th>
-            <th>성별</th>
-            <th>생년월일</th>
-            <th>상세</th>
-          </tr>
-        </thead>
-        <tbody>{Results}</tbody>
-      </table>
-    </div>
+    <section className={styles.container}>
+      <h2>회원 관리</h2>
+      <div className={styles.userManageContainer}>
+        <Search />
+        <table>
+          <thead>
+            <tr>
+              <th>회원번호</th>
+              <th>가입일</th>
+              <th>닉네임</th>
+              <th>로그인 ID</th>
+              <th>성별</th>
+              <th>생년월일</th>
+              <th>상세</th>
+            </tr>
+          </thead>
+          <tbody>{Results}</tbody>
+        </table>
+      </div>
+    </section>
   )
 }
 

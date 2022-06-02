@@ -1,23 +1,28 @@
+@use '/src/styles/constants/colors';
+
 .container {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  padding: 30px 20px;
+  background-color: colors.$WHITE;
+  border-radius: 20px;
+  box-shadow: colors.$BOX_SHADOW 0 8px 24px;
 
-  div {
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
+  // div {
+  //   margin-top: 10px;
+  //   margin-bottom: 20px;
+  // }
 
-  input {
-    height: 30px;
-    padding: 0 10px;
-    margin: 0 10px;
-    border: 1px solid black;
-  }
+  // input {
+  //   height: 30px;
+  //   padding: 0 10px;
+  //   margin: 0 10px;
+  //   border: 1px solid black;
+  // }
 
-  label {
-    margin-left: 30px;
-  }
+  // label {
+  //   margin-left: 30px;
+  // }
 }
 
 .userInfoInputsContainer {
@@ -26,6 +31,7 @@
 
   .dropDown {
     height: 30px;
+    margin: 0;
     border: 1px solid black;
   }
 }
