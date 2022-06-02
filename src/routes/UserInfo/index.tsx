@@ -1,8 +1,10 @@
-import StepRate from './StepRate'
-import HeartRate from './HeartRate'
-import styles from './userInfo.module.scss'
 import { useLocation } from 'react-router-dom'
+
 import { LinkMemberStateProps } from 'types/user'
+
+import styles from './userInfo.module.scss'
+import HeartRateChart from './Charts/HeartRateChart'
+import StepRateChart from './Charts/StepRateChart'
 
 const UserInfo = () => {
   const location = useLocation()
@@ -43,8 +45,8 @@ const UserInfo = () => {
         </div>
       </section>
       <div className={styles.charts}>
-        <HeartRate />
-        <StepRate />
+        <HeartRateChart />
+        <StepRateChart />
       </div>
     </>
   )

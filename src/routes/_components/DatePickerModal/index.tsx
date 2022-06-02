@@ -1,7 +1,9 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { DateRange, Range } from 'react-date-range'
 import dayjs from 'dayjs'
 import ko from 'date-fns/locale/ko'
+
+import { useOnClickOutside } from 'hooks'
 
 import { Button } from '../Button'
 import styles from './datePickerModal.module.scss'
@@ -9,6 +11,8 @@ import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
 
 interface IProps {
+  dateRange: Range[]
+  setDateRange: Dispatch<SetStateAction<Range[]>>
   setWeeks: Dispatch<SetStateAction<string[]>>
   setIsDatePickerOpen: Dispatch<SetStateAction<boolean>>
   setStartDate: Dispatch<SetStateAction<string>>
@@ -16,16 +20,15 @@ interface IProps {
   setSelectedPeriod: Dispatch<SetStateAction<string>>
 }
 
-const DatePickerModal = ({ setWeeks, setIsDatePickerOpen, setStartDate, setEndDate, setSelectedPeriod }: IProps) => {
-  const today = new Date()
-  const [dateRange, setDateRange] = useState<Range[]>([
-    {
-      startDate: dayjs(today).add(-1, 'day').toDate(),
-      endDate: today,
-      key: 'selection',
-    },
-  ])
-
+const DatePickerModal = ({
+  dateRange,
+  setDateRange,
+  setWeeks,
+  setIsDatePickerOpen,
+  setStartDate,
+  setEndDate,
+  setSelectedPeriod,
+}: IProps) => {
   const handleCloseDatePickerModal = () => {
     setIsDatePickerOpen(false)
   }
@@ -38,11 +41,13 @@ const DatePickerModal = ({ setWeeks, setIsDatePickerOpen, setStartDate, setEndDa
     setSelectedPeriod('')
   }
 
+  const datePickerRef = useOnClickOutside(() => setIsDatePickerOpen(false))
+
   return (
-    <aside className={styles.container}>
+    <aside className={styles.container} ref={datePickerRef}>
       <section className={styles.calendarContainer}>
         <DateRange
-          editableDateInputs={false}
+          editableDateInputs
           onChange={(item) => setDateRange([item.selection])}
           ranges={dateRange}
           locale={ko}
@@ -53,16 +58,17 @@ const DatePickerModal = ({ setWeeks, setIsDatePickerOpen, setStartDate, setEndDa
           showPreview={false}
           monthDisplayFormat='yyyy년 MM월'
           rangeColors={['#586cf5']}
-          showDateDisplay={false}
+          showDateDisplay
+          fixedHeight
         />
-      </section>
-      <section className={styles.buttonContainer}>
-        <Button size='large' onClick={handleCloseDatePickerModal}>
-          취소
-        </Button>
-        <Button size='large' primary onClick={handleSetPickedDateRange}>
-          적용
-        </Button>
+        <div className={styles.buttonContainer}>
+          <Button size='large' onClick={handleCloseDatePickerModal}>
+            취소
+          </Button>
+          <Button size='large' primary onClick={handleSetPickedDateRange}>
+            적용
+          </Button>
+        </div>
       </section>
     </aside>
   )

@@ -1,50 +1,49 @@
 import { Link } from 'react-router-dom'
-import styles from './sidebar.module.scss'
+import { useMemo } from 'react'
+import { useRecoilValue } from 'recoil'
+
+import { sidebarDrawer } from 'states/sidebarDrawer'
 import { BiHomeAlt, BiIdCard } from 'react-icons/bi'
-import { HamburgerMenu } from 'assets/svgs'
-import { useMemo, useState } from 'react'
+import { LogoImage } from 'assets/svgs'
+import styles from './sidebar.module.scss'
 
 const Sidebar = () => {
-  const [isMobileOpen, setIsMobileOpen] = useState(false)
-
-  const handleMobileClick = () => {
-    setIsMobileOpen((prev) => !prev)
-  }
+  const isSidebarShow = useRecoilValue(sidebarDrawer)
 
   const mobileMenuBtnList = useMemo(() => {
-    return isMobileOpen ? (
+    return isSidebarShow ? (
       <ul className={styles.mobileMenuWrapper}>
         <li>
-          <Link to='/' onClick={handleMobileClick}>
+          <Link to='/'>
             <BiHomeAlt size='30px' />
-            백오피스 홈
+            <span>백오피스 홈</span>
           </Link>
         </li>
         <li>
-          <Link to='userManage' onClick={handleMobileClick}>
+          <Link to='userManage'>
             <BiIdCard size='30px' />
-            회원 관리
+            <span>회원 관리</span>
           </Link>
         </li>
       </ul>
     ) : null
-  }, [isMobileOpen])
+  }, [isSidebarShow])
 
   return (
-    <aside className={styles.container}>
-      <ul>
-        <li className={styles.mobileMenu}>
-          <button type='button' onClick={handleMobileClick}>
-            <HamburgerMenu className={styles.hamburgerMenu} />
-          </button>
+    <aside className={styles.sidebarContainer}>
+      <ul className={styles.desktopMenu}>
+        <li>
+          <Link to='/'>
+            <LogoImage className={styles.logo} />
+          </Link>
         </li>
-        <li className={styles.desktopMenu}>
+        <li>
           <Link to='/'>
             <BiHomeAlt size='30px' className={styles.icon} />
             <span>백오피스 홈</span>
           </Link>
         </li>
-        <li className={styles.desktopMenu}>
+        <li>
           <Link to='userManage'>
             <BiIdCard size='30px' className={styles.icon} />
             <span>회원 관리</span>

@@ -2,11 +2,13 @@
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/mixins/responsive';
 
-.heartContainer {
+.container {
   width: 100%;
+  margin-top: 30px;
 
   @include responsive.after(LD) {
     width: calc(50% - 15px);
+    margin-top: 0;
   }
 
   h3 {
@@ -16,16 +18,26 @@
     color: colors.$MAIN_TEXT_COLOR;
   }
 
-  .heartRate {
+  .chartContainer {
     padding: 30px;
     background: colors.$WHITE;
     border-radius: 20px;
     box-shadow: colors.$BOX_SHADOW 0 8px 24px;
 
     .chart {
-      width: 100%;
-      height: 400px;  // 임의로 나타낸 height
-      border: 1px solid colors.$BORDER_COLOR_2;
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      &::-webkit-scrollbar {
+        display: block;
+        height: 10px;
+        background-color: colors.$WHITE;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(colors.$MAIN_TEXT_COLOR, 0.1);
+        border-radius: 10px;
+      }
     }
 
     .info {
@@ -42,37 +54,8 @@
       }
 
       .date {
-        margin-top: 20px;
+        margin: 20px 0;
         color: colors.$MAIN_TEXT_COLOR;
-      }
-    }
-
-    .inquiry {
-      .datePicker {
-        margin-top: 20px;
-        @include flexbox.flexbox(start,center);
-
-        span {
-          margin-right: 30px;
-          color: colors.$MAIN_TEXT_COLOR;
-        }
-
-        .start,
-        .end {
-          width: 200px;
-          height: 30px;
-          border: 1px solid colors.$BORDER_COLOR;
-          border-radius: 5px;
-        }
-
-        .sign {
-          margin: 0 10px;
-        }
-
-        .btns {
-          margin-left: 20px;
-          @include flexbox.flexbox(start,center);
-        }
       }
     }
   }
