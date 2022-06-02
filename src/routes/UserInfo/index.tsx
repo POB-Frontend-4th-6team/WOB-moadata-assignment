@@ -9,8 +9,6 @@ const UserInfo = () => {
 
   const userInfo: LinkMemberStateProps = location.state as LinkMemberStateProps
 
-  console.log(userInfo)
-
   return (
     <>
       <section className={styles.container}>

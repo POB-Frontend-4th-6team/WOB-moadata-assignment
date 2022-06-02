@@ -2,7 +2,7 @@
 
 .container {
   @include flexbox.flexbox(start, center);
-  width: 100%;
+  flex: 1;
 
   a {
     color: inherit;
@@ -14,5 +14,9 @@
       margin: 0 10px;
       content: '>';
     }
+  }
+
+  .active {
+    font-weight: 500;
   }
 }

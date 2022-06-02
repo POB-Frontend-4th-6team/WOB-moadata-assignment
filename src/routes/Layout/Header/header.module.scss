@@ -2,11 +2,11 @@
 @use '/src/styles/constants/colors';
 
 header {
+  @include flexbox.flexbox(between, center);
   width: calc(100% - 30px);
   height: 60px;
   padding: 0 30px;
   margin-left: 30px;
-  @include flexbox.flexbox(between, center);
   background: colors.$WHITE;
 
   .userMenus {
