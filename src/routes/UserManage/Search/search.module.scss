@@ -40,8 +40,12 @@
 
   .secondColumn {
     display: grid;
-    grid-template-rows: 100px 50px;
+    grid-template-rows: 100px 40px;
     gap: 20px;
+
+    @include responsive.after(MD) {
+      grid-template-rows: 40px 40px;
+    }
 
     @include responsive.after(LD) {
       grid-template-rows: 40px;
