@@ -2,10 +2,10 @@
 
 .container {
   position: relative;
+  z-index: 1000;
   display: flex;
   gap: 20px;
   align-items: center;
-  justify-content: center;
   width: 900px;
 }
 
@@ -18,9 +18,15 @@
     width: fit-content;
     height: 40px;
     font-size: 16px;
+    color: colors.$TRANSPARENT;
     text-align: center;
+    text-shadow: 0 0 0 black;
     border: 1px solid colors.$GRAYA;
     border-radius: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
@@ -37,8 +43,6 @@
   display: flex;
 }
 
-.datePicker {
-  position: absolute;
-  top: 50px;
-  left: 100px;
+.dateRange {
+  height: 400px;
 }
