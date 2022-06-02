@@ -51,9 +51,10 @@ const StepRateChart = () => {
             <VictoryAxis fixLabelOverlap style={{ tickLabels: { fontSize: 16 } }} />
             <VictoryBar
               data={chartData}
+              barWidth={12}
               style={{
                 data: {
-                  fill: '#fe612c',
+                  fill: '#6e6ae1',
                 },
                 labels: {
                   fontSize: 16,
