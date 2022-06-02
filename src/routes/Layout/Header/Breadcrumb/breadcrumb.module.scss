@@ -13,22 +13,9 @@
   }
 
   li {
-    &:first-child {
-      position: relative;
-      margin-right: 30px;
-      color: colors.$SUB_TEXT_COLOR;
-
-      &::before {
-        position: absolute;
-        top: 0;
-        right: -20px;
-        content: '>';
-      }
-    }
-
-    &:last-child {
-      font-weight: 600;
-      color: colors.$MAIN_TEXT_COLOR;
+    +li::before {
+      margin: 0 10px;
+      content: '>';
     }
   }
 
