@@ -3,8 +3,23 @@
 @use '/src/styles/mixins/responsive';
 @use '/src/styles/mixins/position';
 
-.container {
+.sidebarContainer {
+  position: absolute;
+  z-index: 20;
+  overflow: hidden;
   color: colors.$MAIN_TEXT_COLOR;
+  box-shadow: rgba(colors.$SIGNATURE_COLOR, 0.1) 2px 8px 24px;
+
+  @include responsive.after(ML) {
+    width: 70px;
+    height: 100%;
+    box-shadow: rgba(colors.$SIGNATURE_COLOR, 0.5) 2px 8px 24px;
+    transition: 0.2s;
+
+    &:hover {
+      width: 300px;
+    }
+  }
 
   .desktopMenu {
     display: none;
@@ -15,11 +30,12 @@
     color: colors.$WHITE;
     background-color: colors.$SIGNATURE_COLOR;
 
-    ul {
+    .desktopMenu {
+      display: block;
       @include flexbox.flexbox(center, center);
       flex-direction: column;
 
-      .desktopMenu {
+      li {
         display: block;
         width: 100%;
         transition: 200ms;
@@ -33,10 +49,20 @@
             @include position.absolute(30% auto auto 50px);
           }
         }
+
+        &:first-child {
+          a {
+            display: inline-block;
+
+            .logo {
+              transform: translateX(4px);
+            }
+          }
+        }
       }
 
       li:hover {
-        color: colors.$MAIN_TEXT_COLOR;
+        color: rgba(colors.$MAIN_TEXT_COLOR, 0.8);
       }
     }
   }
@@ -46,27 +72,13 @@
     text-decoration: none;
     white-space: nowrap;
   }
-
-  .mobileMenu {
-    margin: 18px 0 0 30px;
-
-    .hamburgerMenu {
-      width: 25px;
-      height: 25px;
-      fill: colors.$MAIN_TEXT_COLOR;
-    }
-
-    @include responsive.after(ML) {
-      display: none;
-    }
-  }
 }
 
 .mobileMenuWrapper {
   @include flexbox.flexbox(center, center);
   flex-direction: column;
   width: 100vw;
-  margin-top: 12px;
+  margin-top: 60px;
   background-color: colors.$WHITE;
   box-shadow: colors.$BOX_SHADOW 0 8px 8px 0;
 
