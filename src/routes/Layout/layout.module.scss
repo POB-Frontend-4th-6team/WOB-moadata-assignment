@@ -12,18 +12,21 @@
   .sidebarContainer {
     @include position.absolute(0 auto auto 0);
     z-index: 1;
-    width: 30px;
-    height: 100%;
     overflow: hidden;
-    transition: 0.2s;
 
-    &:hover {
-      width: 300px;
+    @include responsive.after(ML) {
+      width: 70px;
+      height: 100%;
+      transition: 0.2s;
+
+      &:hover {
+        width: 300px;
+      }
     }
   }
 
   main {
-    @include flexbox.flexbox(start,center);
+    @include flexbox.flexbox(start, center);
     position: relative;
     flex-direction: column;
     width: calc(100% - 30px);

@@ -1,6 +1,6 @@
 import users from 'assets/jsons/user/member.json'
 import adminData from '../assets/jsons/user/admin.json'
-import { filterUserWithIdAndDate, filterUserWithNumberAndDate } from 'utils/user'
+import { filterUserWithIdAndDate, filterUserWithNumberAndDate, filterUserWithOnlyDate } from 'utils/user'
 
 interface Props {
   id: string | undefined
@@ -17,6 +17,7 @@ const getMemberSeq = (id: string) => {
 export const getMemberInfo = (props: Props) => {
   if (props.id && !props.number) return filterUserWithIdAndDate(props.id, props.startDate, props.endDate)
   if (props.number && !props.id) return filterUserWithNumberAndDate(props.number, props.startDate, props.endDate)
+  if (!props.number && !props.id) return filterUserWithOnlyDate(props.startDate, props.endDate)
 
   return []
 }

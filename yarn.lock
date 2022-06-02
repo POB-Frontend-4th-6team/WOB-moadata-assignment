@@ -6147,6 +6147,11 @@ known-css-properties@^0.25.0:
   resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.25.0.tgz#6ebc4d4b412f602e5cfbeb4086bd544e34c0a776"
   integrity sha512-b0/9J1O9Jcyik1GC6KC42hJ41jKwdO/Mq8Mdo5sYN+IuRTXs2YFHZC3kZSx6ueusqa95x3wLYe/ytKjbAfGixA==
 
+korean-regexp@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/korean-regexp/-/korean-regexp-1.0.9.tgz#474d9b16e4050a13c496e0066ed857d1933855bd"
+  integrity sha512-rhuYSVkwH2NDskWhaZbzeOC480t/wr8a/WED1gFk60NPeZIM7Ohl1F2/Mtn038V9Op2XXvQ4cSRAhtm44V+lfg==
+
 language-subtag-registry@~0.3.2:
   version "0.3.21"
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.21.tgz#04ac218bea46f04cb039084602c6da9e788dd45a"
