@@ -1,14 +1,23 @@
 import Breadcrumb from './Breadcrumb'
+import { Alarm, Profile } from 'assets/svgs'
 import styles from './header.module.scss'
 
 const Header = () => {
   return (
     <header>
       <Breadcrumb />
-      <div className={styles.userMenus}>
-        <p>admin님</p>
-        <button type='button'>로그아웃</button>
-      </div>
+      <ul className={styles.userMenus}>
+        <li>
+          <Alarm />
+        </li>
+        <li>
+          <Profile />
+          <span>admin님</span>
+        </li>
+        <li>
+          <button type='button'>로그아웃</button>
+        </li>
+      </ul>
     </header>
   )
 }

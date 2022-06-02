@@ -11,8 +11,8 @@ const Layout = () => {
       <div className={styles.sidebarContainer}>
         <Sidebar />
       </div>
+      <Header />
       <main>
-        <Header />
         <Outlet />
       </main>
     </div>
