@@ -1,18 +1,15 @@
-import { Heartrate } from 'assets/svgs'
-import styles from './chart.module.scss'
 import { VictoryChart, VictoryLine, VictoryAxis, VictoryVoronoiContainer, VictoryTooltip } from 'victory'
 
-import SearchDateRange from 'routes/_components/SearchDateRange'
 import { useEffect, useState } from 'hooks'
 import { getPeriodRateData } from 'services/health'
+import { IChartObject } from 'types/chart.d'
+import { Heartrate } from 'assets/svgs'
 
-interface ChartProps {
-  x: string
-  y: number
-}
+import styles from './chart.module.scss'
+import SearchDateRange from 'routes/_components/SearchDateRange'
 
 const HeartRateChart = () => {
-  const [chartData, setChartData] = useState<ChartProps[]>([])
+  const [chartData, setChartData] = useState<IChartObject[]>([])
   const [weeks, setWeeks] = useState<string[]>(['2022-02-26', '2022-04-24'])
 
   useEffect(() => {

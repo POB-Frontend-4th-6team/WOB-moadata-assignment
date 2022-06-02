@@ -2,18 +2,14 @@ import { VictoryAxis, VictoryBar, VictoryChart, VictoryTooltip, VictoryVoronoiCo
 
 import { useEffect, useMemo, useState } from 'hooks'
 import { getPeriodRateData, getTodayRateData } from 'services/health'
-import SearchDateRange from 'routes/_components/SearchDateRange'
-
-import styles from './chart.module.scss'
+import { IChartObject } from 'types/chart.d'
 import { Step } from 'assets/svgs'
 
-interface ChartProps {
-  x: string
-  y: number
-}
+import styles from './chart.module.scss'
+import SearchDateRange from 'routes/_components/SearchDateRange'
 
 const StepRateChart = () => {
-  const [chartData, setChartData] = useState<ChartProps[]>([])
+  const [chartData, setChartData] = useState<IChartObject[]>([])
   const [weeks, setWeeks] = useState<string[]>([])
   const total = useMemo(() => chartData.reduce((prev, cur) => prev + cur.y, 0), [chartData])
   const date = useMemo(() => {
