@@ -48,10 +48,12 @@
   }
 
   .mobileMenu {
+    margin: 18px 0 0 30px;
+
     .hamburgerMenu {
-      width: 28px;
-      height: 28px;
-      margin: 10px 20px;
+      width: 25px;
+      height: 25px;
+      fill: colors.$MAIN_TEXT_COLOR;
     }
 
     @include responsive.after(ML) {
