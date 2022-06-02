@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 
 import { userInputDataState } from 'states/userSearch'
@@ -67,6 +67,8 @@ const Search = () => {
     }
   }
 
+  const resetSearchOption = useResetRecoilState(userInputDataState)
+
   console.log(weeks)
 
   useEffect(() => {
@@ -103,7 +105,9 @@ const Search = () => {
         <SearchDateRange setWeeks={setWeeks} />
       </div>
       <div className={styles.formButtonsContainer}>
-        <Button size='large'>초기화</Button>
+        <Button size='large' onClick={resetSearchOption}>
+          초기화
+        </Button>
         <Button size='large' primary onClick={handleSetUserInputData}>
           검색
         </Button>

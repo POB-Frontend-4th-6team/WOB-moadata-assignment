@@ -59,15 +59,16 @@ const DatePickerModal = ({
           monthDisplayFormat='yyyy년 MM월'
           rangeColors={['#586cf5']}
           showDateDisplay
+          fixedHeight
         />
-      </section>
-      <section className={styles.buttonContainer}>
-        <Button size='large' onClick={handleCloseDatePickerModal}>
-          취소
-        </Button>
-        <Button size='large' primary onClick={handleSetPickedDateRange}>
-          적용
-        </Button>
+        <div className={styles.buttonContainer}>
+          <Button size='large' onClick={handleCloseDatePickerModal}>
+            취소
+          </Button>
+          <Button size='large' primary onClick={handleSetPickedDateRange}>
+            적용
+          </Button>
+        </div>
       </section>
     </aside>
   )

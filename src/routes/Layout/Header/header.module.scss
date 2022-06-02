@@ -1,5 +1,6 @@
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/responsive';
 
 header {
   @include flexbox.flexbox(between, center);
@@ -33,5 +34,10 @@ header {
         border-radius: 8px;
       }
     }
+  }
+
+  @include responsive.after(ML) {
+    width: calc(100% - 70px);
+    margin-left: 70px;
   }
 }

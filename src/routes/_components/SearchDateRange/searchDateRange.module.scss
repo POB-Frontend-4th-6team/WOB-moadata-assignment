@@ -1,21 +1,24 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
 
 .container {
+  @include flexbox.flexbox(center, center);
   position: relative;
   z-index: 1000;
-  display: flex;
   gap: 20px;
-  align-items: center;
-  width: 900px;
 }
 
 .inputs {
+  @include flexbox.flexbox(center, center);
+  flex-wrap: nowrap;
+
   label {
     margin-right: 20px;
+    white-space: nowrap;
   }
 
   input {
-    width: fit-content;
+    width: 40%;
     height: 40px;
     font-size: 16px;
     color: colors.$TRANSPARENT;
@@ -41,6 +44,7 @@
 
 .buttons {
   display: flex;
+  flex-wrap: nowrap;
 }
 
 .dateRange {

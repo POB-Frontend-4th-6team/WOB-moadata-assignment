@@ -74,7 +74,7 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
           onChange={handleStartDateInput}
           onClick={handleOpenDatePickerModal}
         />
-        &nbsp;&nbsp; ~&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
         <input
           type='text'
           placeholder={endDate}

@@ -24,10 +24,14 @@ const getJsonData = (seq: number, type: string) => {
     return stepData
   }
 
-  const heartData = heartRate[seq as keyof typeof heartRate].map((value) => {
-    return { x: value.crt_ymdt, y: value.avg_beat }
-  })
-  return heartData
+  if (type === 'heart') {
+    const heartData = heartRate[seq as keyof typeof heartRate].map((value) => {
+      return { x: value.crt_ymdt, y: value.avg_beat }
+    })
+    return heartData
+  }
+
+  throw new Error('Error')
 }
 
 const initializeDataObject = (type: string, dateList: string[]) => {
@@ -37,8 +41,7 @@ const initializeDataObject = (type: string, dateList: string[]) => {
 
   while (tempDate < dateList[1]) {
     tempDate = dayjs(tempDate).add(1, 'day').format('YYYY-MM-DD')
-    if (type === 'step') tmepInitialList.push({ x: dayjs(tempDate).format('YY-MM-DD'), y: tempX })
-    else tmepInitialList.push({ x: tempDate, y: tempX })
+    tmepInitialList.push({ x: dayjs(tempDate).format('YY-MM-DD'), y: tempX })
   }
 
   return tmepInitialList
