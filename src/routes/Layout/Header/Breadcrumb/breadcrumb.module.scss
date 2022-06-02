@@ -1,8 +1,11 @@
 @use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
+@use '/src/styles/constants/colors';
 
 .container {
   @include flexbox.flexbox(start, center);
   flex: 1;
+  padding-left: 40px;
 
   a {
     color: inherit;
@@ -10,13 +13,30 @@
   }
 
   li {
-    + li::before {
-      margin: 0 10px;
-      content: '>';
+    &:first-child {
+      position: relative;
+      margin-right: 30px;
+      color: colors.$SUB_TEXT_COLOR;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        right: -20px;
+        content: '>';
+      }
+    }
+
+    &:last-child {
+      font-weight: 600;
+      color: colors.$MAIN_TEXT_COLOR;
     }
   }
 
   .active {
     font-weight: 500;
+  }
+
+  @include responsive.after(ML) {
+    padding-left: 0;
   }
 }
