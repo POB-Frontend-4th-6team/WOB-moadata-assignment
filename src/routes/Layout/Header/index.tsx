@@ -1,5 +1,6 @@
 import { Alarm, Profile } from 'assets/svgs'
-import Breadcrumb from '../Breadcrumb'
+
+import Breadcrumb from './Breadcrumb'
 import styles from './header.module.scss'
 
 const Header = () => {

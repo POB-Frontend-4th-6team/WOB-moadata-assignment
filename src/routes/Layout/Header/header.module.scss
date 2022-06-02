@@ -3,11 +3,11 @@
 @use '/src/styles/mixins/responsive';
 
 header {
-  width: 100%;
+  @include flexbox.flexbox(between, center);
+  width: calc(100% - 30px);
   height: 60px;
   padding: 0 30px;
-
-  @include flexbox.flexbox(between, center);
+  margin-left: 30px;
   background: colors.$WHITE;
 
   .userMenus {
