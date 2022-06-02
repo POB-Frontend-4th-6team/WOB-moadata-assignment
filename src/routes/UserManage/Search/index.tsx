@@ -19,7 +19,7 @@ const Search = () => {
   const [weeks, setWeeks] = useState(['20220101', today])
   const [currentCategory, setCurrentCategory] = useState('로그인 ID')
   const [userInput, setUserInput] = useState('')
-  const [placeholder, setPlaceholder] = useState('검색할 ID를 입력하세요')
+  const [placeholder, setPlaceholder] = useState('로그인 ID')
   const [isDropDownOpen, setIsDropDownOpen] = useState(false)
 
   const handleUserInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -83,30 +83,26 @@ const Search = () => {
     <form className={styles.container}>
       {/* 로그인ID / 회원번호 중에 택일하도록 할 드롭다운 입니다 */}
       <div className={styles.column}>
-        <div className={styles.userInfoInputsContainer}>
-          <div className={styles.dropDown}>
-            {currentCategory}
-            <DownArrow
-              className={cx(styles.downArrowIcon, { [styles.dropDownOpen]: isDropDownOpen })}
-              onClick={handleDropDownToggle}
-            />
-            {isDropDownOpen && (
-              <ul className={cx(styles.selectMenuList, { [styles.selectMenuListOpen]: isDropDownOpen })}>
-                {USERDATA_CATEGORIES?.map((category) => (
-                  <li aria-selected role='option' key={category} data-value={category} onClick={handleCategorySelect}>
-                    {category}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <input type='text' onChange={handleUserInput} placeholder={`${placeholder}를 검색하세요`} value={userInput} />
+        <div className={styles.dropDown}>
+          <span>{currentCategory}</span>
+          <DownArrow
+            className={cx(styles.downArrowIcon, { [styles.dropDownOpen]: isDropDownOpen })}
+            onClick={handleDropDownToggle}
+          />
+          {isDropDownOpen && (
+            <ul className={cx(styles.selectMenuList, { [styles.selectMenuListOpen]: isDropDownOpen })}>
+              {USERDATA_CATEGORIES?.map((category) => (
+                <li aria-selected role='option' key={category} data-value={category} onClick={handleCategorySelect}>
+                  {category}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
+        <input type='text' onChange={handleUserInput} placeholder={`${placeholder}를 검색하세요`} value={userInput} />
       </div>
-      <div className={styles.column}>
-        <div className={styles.dateRange}>
-          <SearchDateRange setWeeks={setWeeks} />
-        </div>
+      <div className={cx(styles.column, styles.secondColumn)}>
+        <SearchDateRange setWeeks={setWeeks} />
         <div className={styles.formButtonsContainer}>
           <Button size='large' onClick={resetSearchOption}>
             초기화

@@ -1,47 +1,70 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 30px;
+  width: 100%;
+  min-width: 400px;
   padding: 30px 20px;
   background-color: colors.$WHITE;
   border-radius: 20px;
   box-shadow: colors.$BOX_SHADOW 0 8px 24px;
 
-  // div {
-  //   margin-top: 10px;
-  //   margin-bottom: 20px;
-  // }
+  .column {
+    @include flexbox.flexbox(center, center);
+    line-height: 30px;
 
-  // input {
-  //   height: 30px;
-  //   padding: 0 10px;
-  //   margin: 0 10px;
-  //   border: 1px solid black;
-  // }
+    .dropDown {
+      display: flex;
+      align-items: center;
+      padding: 3px 14px;
+      border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
+      border-radius: 8px;
+    }
 
-  label {
-    margin-left: 30px;
+    input {
+      padding: 3px 14px;
+      margin: 0 10px;
+      line-height: 30px;
+      border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
+      border-radius: 8px;
+    }
+
+    @include responsive.after(SD) {
+      @include flexbox.flexbox(start, center);
+      grid-template-rows: 40px 40px 40px;
+    }
   }
-}
 
-.userInfoInputsContainer {
-  display: flex;
-  align-items: center;
+  .secondColumn {
+    display: grid;
+    grid-template-rows: 100px 50px;
+    gap: 20px;
 
-  .dropDown {
-    height: 30px;
-    margin: 0;
-    border: 1px solid black;
+    @include responsive.after(LD) {
+      grid-template-rows: 40px;
+      grid-template-columns: 1fr 1fr;
+    }
   }
-}
 
-.dateRangeInputContainer {
-  display: flex;
-}
+  .formButtonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 
-.formButtonsContainer {
-  display: flex;
-  margin-right: 20px;
-  margin-left: auto;
+    button {
+      margin-left: 0;
+
+      + button {
+        margin-left: 16px;
+      }
+    }
+
+    @include responsive.after(SD) {
+      justify-content: flex-end;
+    }
+  }
 }

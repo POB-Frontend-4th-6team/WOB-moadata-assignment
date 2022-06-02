@@ -74,13 +74,14 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
           onChange={handleStartDateInput}
           onClick={handleOpenDatePickerModal}
         />
-        &nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
+        <span className={styles.endDate}>~</span>
         <input
           type='text'
           placeholder={endDate}
           value={endDate}
           onChange={handleEndDateInput}
           onClick={handleOpenDatePickerModal}
+          className={styles.endDate}
         />
       </div>
       <div className={styles.buttons}>
