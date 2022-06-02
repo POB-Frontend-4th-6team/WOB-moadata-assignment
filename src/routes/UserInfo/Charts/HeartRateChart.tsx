@@ -43,7 +43,7 @@ const HeartRateChart = () => {
             <VictoryAxis dependentAxis tickValues={[60, 82, 105, 127, 150]} />
             <VictoryLine
               style={{
-                data: { stroke: '#c43a31' },
+                data: { stroke: '#6e6ae1' },
                 parent: { border: '1px solid #ccc' },
               }}
               interpolation='natural'

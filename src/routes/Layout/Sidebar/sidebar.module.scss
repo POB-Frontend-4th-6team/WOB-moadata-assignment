@@ -13,7 +13,7 @@
   @include responsive.after(ML) {
     width: 70px;
     height: 100%;
-    box-shadow: rgba(colors.$SIGNATURE_COLOR, 0.5) 2px 8px 24px;
+    box-shadow: rgba(colors.$SIGNATURE_COLOR, 0.5) 2px 8px 10px;
     transition: 0.2s;
 
     &:hover {

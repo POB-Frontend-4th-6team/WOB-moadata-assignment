@@ -25,19 +25,17 @@
     box-shadow: colors.$BOX_SHADOW 0 8px 24px;
 
     .chart {
-      padding-left: 10px;
       overflow-x: scroll;
       overflow-y: hidden;
-      border: 1px solid colors.$BORDER_COLOR_2;
 
       &::-webkit-scrollbar {
         display: block;
-        height: 15px;
+        height: 10px;
         background-color: colors.$WHITE;
       }
 
       &::-webkit-scrollbar-thumb {
-        background-color: colors.$BLACK;
+        background-color: rgba(colors.$MAIN_TEXT_COLOR, 0.1);
         border-radius: 10px;
       }
     }
