@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'hooks'
 import { getPeriodRateData, getTodayRateData } from 'services/health'
 import SearchDateRange from 'routes/_components/SearchDateRange'
 
-import styles from './stepRate.module.scss'
+import styles from './chart.module.scss'
 import { Step } from 'assets/svgs'
 
 interface ChartProps {
@@ -12,7 +12,7 @@ interface ChartProps {
   y: number
 }
 
-const StepRate = () => {
+const StepRateChart = () => {
   const [chartData, setChartData] = useState<ChartProps[]>([])
   const [weeks, setWeeks] = useState<string[]>([])
   const total = useMemo(() => chartData.reduce((prev, cur) => prev + cur.y, 0), [chartData])
@@ -28,13 +28,13 @@ const StepRate = () => {
   }, [weeks])
 
   return (
-    <section className={styles.stepContainer}>
+    <section className={styles.container}>
       <h3>걸음수</h3>
-      <div className={styles.stepChart}>
+      <div className={styles.chartContainer}>
         <div className={styles.chart}>
           <VictoryChart
-            height={300}
             width={800}
+            height={300}
             domainPadding={20}
             containerComponent={
               <VictoryVoronoiContainer
@@ -68,7 +68,7 @@ const StepRate = () => {
         </div>
         <div className={styles.info}>
           <p className={styles.title}>
-            <Step />
+            <Step width={20} height={20} />
             <span>총 {total.toLocaleString()} 걸음</span>
           </p>
           <p className={styles.date}>{date}</p>
@@ -79,4 +79,4 @@ const StepRate = () => {
   )
 }
 
-export default StepRate
+export default StepRateChart
