@@ -1,6 +1,7 @@
 import StepRate from './StepRate'
-import HeartRate from './HeartRate'
 import styles from './userInfo.module.scss'
+import HeartRate from './HeartRate/index'
+
 import { useLocation } from 'react-router-dom'
 import { LinkMemberStateProps } from 'types/user'
 

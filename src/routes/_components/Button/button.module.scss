@@ -3,6 +3,8 @@
 
 .button {
   @include flexbox.flexbox;
+  margin-left: auto;
+  white-space: nowrap;
   border: 1px solid colors.$GRAYA;
   transition: 200ms;
 

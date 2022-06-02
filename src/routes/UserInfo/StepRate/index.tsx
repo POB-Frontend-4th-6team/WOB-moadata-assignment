@@ -2,7 +2,6 @@ import { VictoryAxis, VictoryBar, VictoryChart, VictoryTooltip, VictoryVoronoiCo
 
 import { useEffect, useState } from 'hooks'
 import { getPeriodRateData } from 'services/health'
-import { Button } from 'routes/_components/Button'
 import SearchDateRange from 'routes/_components/SearchDateRange'
 
 import styles from './stepRate.module.scss'
