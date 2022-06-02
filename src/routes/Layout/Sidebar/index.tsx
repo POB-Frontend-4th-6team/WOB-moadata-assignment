@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { sidebarDrawer } from 'states/sidebarDrawer'
