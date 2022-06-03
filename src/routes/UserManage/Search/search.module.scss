@@ -20,7 +20,6 @@
   .column {
     @include flexbox.flexbox(between, center);
     width: 100%;
-    line-height: 30px;
 
     @include responsive.after(ML) {
       @include flexbox.flexbox(start, center);
