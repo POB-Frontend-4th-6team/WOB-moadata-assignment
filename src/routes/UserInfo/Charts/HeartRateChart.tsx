@@ -8,14 +8,13 @@ import { Heartrate } from 'assets/svgs'
 import styles from './chart.module.scss'
 import SearchDateRange from 'routes/_components/SearchDateRange'
 
-const HeartRateChart = ({ userId }: { userId: string | undefined }) => {
+const HeartRateChart = ({ userId }: { userId: string }) => {
   const [chartData, setChartData] = useState<IChartObject[]>([])
   const [weeks, setWeeks] = useState<string[]>([])
   const average = Math.round(chartData.reduce((a, c) => a + c.y, 0) / chartData.length)
   const period = `${chartData[0]?.x} ~ ${chartData[chartData.length - 1]?.x}`
 
   useEffect(() => {
-    if (!userId) return
     setChartData(getPeriodRateData(weeks, userId, 'heart'))
   }, [weeks, userId])
 
