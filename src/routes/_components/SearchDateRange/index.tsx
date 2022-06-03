@@ -63,7 +63,7 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
   }
 
   return (
-    <section className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.inputs}>
         <label htmlFor='dateRange'>조회 기간</label>
         <div className={styles.inputContainer}>
@@ -107,7 +107,7 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
           setSelectedPeriod={setSelectedPeriod}
         />
       )}
-    </section>
+    </div>
   )
 }
 
