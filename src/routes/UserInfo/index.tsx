@@ -60,7 +60,7 @@ const UserInfo = () => {
         </section>
       )}
       <div className={styles.charts}>
-        <HeartRateChart />
+        <HeartRateChart userId={user?.user_id} />
         <StepRateChart />
       </div>
     </>
