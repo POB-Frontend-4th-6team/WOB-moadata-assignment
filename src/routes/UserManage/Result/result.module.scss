@@ -28,7 +28,7 @@
 
     thead {
       height: 50px;
-      background-color: colors.$BORDER_COLOR_2;
+      background-color: colors.$TABLE_HEAD;
       border-bottom: 1px solid colors.$BORDER_COLOR;
     }
 
@@ -46,7 +46,7 @@
 
     .linkButton {
       height: 30px;
-      padding: 0 12px;
+      padding: 0 16px;
       white-space: nowrap;
       background-color: colors.$BG_COLOR;
       border: 1px solid colors.$BORDER_COLOR;
