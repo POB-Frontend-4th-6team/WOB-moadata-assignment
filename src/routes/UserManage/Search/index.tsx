@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useRecoilState, useResetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 
-import { userInputDataState } from 'states/userSearch'
+import { isSearchInputResetState, userInputDataState } from 'states/userSearch'
 
 import { Button } from 'routes/_components/Button'
 import SearchDateRange from 'routes/_components/SearchDateRange'
@@ -17,6 +17,8 @@ const today = dayjs(new Date()).format('YYYYMMDD')
 
 const Search = () => {
   const [userInputData, setUserInputData] = useRecoilState(userInputDataState)
+  const [, setIsSearchInputReset] = useRecoilState(isSearchInputResetState)
+
   const [weeks, setWeeks] = useState(['20220101', today])
   const [currentCategory, setCurrentCategory] = useState('로그인 ID')
   const [userInput, setUserInput] = useState('')
@@ -31,6 +33,8 @@ const Search = () => {
     if (userInput === '') {
       setUserInputData({
         ...userInputData,
+        userId: undefined,
+        userNumber: undefined,
         startDate: Number(dayjs(weeks[0]).format('YYYYMMDD')),
         endDate: Number(dayjs(weeks[1]).format('YYYYMMDD')),
       })
@@ -58,7 +62,19 @@ const Search = () => {
     }
   }
 
-  const resetSearchOption = useResetRecoilState(userInputDataState)
+  const resetSearchOption = () => {
+    setIsSearchInputReset(true)
+    setCurrentCategory('로그인 ID')
+    setUserInput('')
+    setWeeks(['20220101', today])
+    setUserInputData({
+      ...userInputData,
+      userId: undefined,
+      userNumber: undefined,
+      startDate: 20220101,
+      endDate: Number(today),
+    })
+  }
 
   useEffect(() => {
     if (weeks.length === 0) {
