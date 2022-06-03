@@ -11,9 +11,7 @@ import StepRateChart from './Charts/StepRateChart'
 
 const UserInfo = () => {
   const { userId } = useParams()
-
   const user = getUserInfoWithId(userId)
-
   const setBreadcrumb = useSetRecoilState(breadcrumb)
 
   useMount(() => {
