@@ -3,6 +3,7 @@
 @use '/src/styles/mixins/responsive';
 
 .container {
+  position: relative;
   display: grid;
   grid-template-rows: 1fr 1fr;
   gap: 20px;
