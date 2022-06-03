@@ -101,20 +101,11 @@ const Login = () => {
       </section>
       {isError && (
         <div className={styles.notificationPopUpContainer}>
-          {/* 팝업메시지 컴포넌트화 시켜서 로그인 실패시 로그인 화면에서 해당 팝업메시지 fade in x클릭시 out, 로그인 성공시 홈화면에서, 로그아웃시 로그인화면에서 구현하면 될듯싶네요 */}
           <div className={styles.popUpMsg}>
             Wrong password or ID. Try again <FaTrash className={styles.handlePopUpIcon} onClick={closeMessage} />
           </div>
         </div>
       )}
-      {/*
-      <div className={styles.notificationPopUpContainer}>
-        <div className={styles.popUpMsg}>login succeeded</div>
-      </div>
-      <div className={styles.notificationPopUpContainer}>
-        <div className={styles.popUpMsg}>logout succeeded</div>
-      </div> 
-      */}
     </div>
   )
 }
