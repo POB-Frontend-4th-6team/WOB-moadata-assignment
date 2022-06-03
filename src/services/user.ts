@@ -2,7 +2,7 @@ import users from 'assets/jsons/user/member.json'
 import adminData from '../assets/jsons/user/admin.json'
 import { filterUserWithIdAndDate, filterUserWithNumberAndDate, filterUserWithOnlyDate } from 'utils/user'
 
-interface Props {
+interface IProps {
   id: string | undefined
   number: number | undefined
   startDate: number
@@ -19,7 +19,7 @@ export const getUserInfoWithId = (id: string | undefined) => {
   return findUser
 }
 
-export const getMemberInfo = (props: Props) => {
+export const getMemberInfo = (props: IProps) => {
   if (props.id && !props.number) return filterUserWithIdAndDate(props.id, props.startDate, props.endDate)
   if (props.number && !props.id) return filterUserWithNumberAndDate(props.number, props.startDate, props.endDate)
   if (!props.number && !props.id) return filterUserWithOnlyDate(props.startDate, props.endDate)

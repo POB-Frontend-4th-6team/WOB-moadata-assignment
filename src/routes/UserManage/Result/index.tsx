@@ -4,11 +4,11 @@ import { removeTimeInDate } from 'utils/user'
 import { Link } from 'react-router-dom'
 import { MemberStateProps } from 'types/user'
 
-interface Props {
+interface IProps {
   memberList: MemberStateProps[]
 }
 
-const Result = ({ memberList }: Props) => {
+const Result = ({ memberList }: IProps) => {
   const TableBody: JSX.Element[] = memberList.map((member, idx) => {
     const key = `member-${idx}`
 
