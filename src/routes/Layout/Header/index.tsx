@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import store from 'store'
 import { useRecoilState } from 'recoil'
 
 import { sidebarDrawer } from 'states/sidebarDrawer'
@@ -14,7 +13,6 @@ const Header = () => {
 
   const handleLogOut = () => {
     sessionStorage.removeItem('admin')
-    store.remove('admin')
     navigate('login')
   }
   const handleMobileClick = () => {

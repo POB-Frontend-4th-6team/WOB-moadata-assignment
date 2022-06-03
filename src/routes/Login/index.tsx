@@ -8,18 +8,20 @@ import styles from './login.module.scss'
 import { FaEye, FaEyeSlash, FaUser, FaTrash } from 'react-icons/fa'
 import { LogoImage } from 'assets/svgs'
 
-const UserManage = () => {
-  const [adminId, setAdminId] = useState('')
+const Login = () => {
+  const rememberId = store.get('admin')
+
+  const [adminId, setAdminId] = useState(rememberId || '')
   const [password, setPassword] = useState('')
 
   const [isVisible, setIsVisible] = useState(false)
   const [isError, setIsError] = useState(false)
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(!!rememberId || false)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (sessionStorage.getItem('admin') || store.get('admin')) {
+    if (sessionStorage.getItem('admin')) {
       navigate('/')
     }
   }, [navigate])
@@ -117,4 +119,4 @@ const UserManage = () => {
   )
 }
 
-export default UserManage
+export default Login
