@@ -1,14 +1,30 @@
 import { useParams } from 'react-router-dom'
+import { useSetRecoilState } from 'recoil'
+
+import { useMount } from 'hooks'
+import { getUserInfoWithId } from 'services/user'
+import { breadcrumb } from 'states/breadcrumb'
 
 import styles from './userInfo.module.scss'
 import HeartRateChart from './Charts/HeartRateChart'
 import StepRateChart from './Charts/StepRateChart'
-import { getUserInfoWithId } from 'services/user'
 
 const UserInfo = () => {
   const { userId } = useParams()
 
   const user = getUserInfoWithId(userId)
+
+  const setBreadcrumb = useSetRecoilState(breadcrumb)
+
+  useMount(() => {
+    setBreadcrumb({
+      text: [
+        { text: '홈', disabled: false, href: '/' },
+        { text: '회원정보', disabled: false, href: 'userManage' },
+        { text: '회원상세정보', disabled: true, href: 'userInfo' },
+      ],
+    })
+  })
 
   return (
     <>
