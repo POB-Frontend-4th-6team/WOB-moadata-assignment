@@ -11,9 +11,6 @@ import { getMemberInfo } from 'services/user'
 import { breadcrumb } from 'states/breadcrumb'
 
 const UserManage = () => {
-  const [member, setMember] = useState<MemberStateProps[]>([])
-
-const UserManage = () => {
   const searchOptions = useRecoilValue(userInputDataState)
   const setBreadcrumb = useSetRecoilState(breadcrumb)
 
