@@ -74,7 +74,7 @@ const Search = () => {
         </DropDown>
         <input type='text' onChange={handleInputChange} value={userInput} className={styles.dropDownInput} />
       </div>
-      <div className={cx(styles.column, styles.secondColumn)}>
+      <div className={cx(styles.column, styles.secondColumn, styles.searchControl)}>
         <SearchDateRange setWeeks={setWeeks} />
         <div className={styles.buttonContainer}>
           <Button type='button' size='large' onClick={resetSearchOption}>
