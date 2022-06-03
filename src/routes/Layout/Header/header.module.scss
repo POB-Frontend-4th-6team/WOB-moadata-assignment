@@ -11,14 +11,11 @@ header {
 
   .userMenus {
     @include flexbox.flexbox(around, center);
-    gap: 10px;
 
     li {
       @include flexbox.flexbox(center, center);
 
       &:nth-child(2) {
-        width: 100px;
-
         span {
           margin-left: 5px;
           color: colors.$MAIN_TEXT_COLOR;

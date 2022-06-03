@@ -17,6 +17,10 @@
     padding: 30px 20px;
   }
 
+  @include responsive.after(LD) {
+    padding: 30px 20px 10px;
+  }
+
   .column {
     @include flexbox.flexbox(between, center);
     width: 100%;
