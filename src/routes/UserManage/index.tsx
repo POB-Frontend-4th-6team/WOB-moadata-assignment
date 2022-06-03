@@ -13,7 +13,6 @@ import { breadcrumb } from 'states/breadcrumb'
 const UserManage = () => {
   const searchOptions = useRecoilValue(userInputDataState)
   const setBreadcrumb = useSetRecoilState(breadcrumb)
-
   const [member, setMember] = useState<MemberStateProps[]>([])
 
   const searchedMemberList = getMemberInfo({
