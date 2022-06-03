@@ -12,7 +12,7 @@ const HeartRateChart = ({ userId }: { userId: string | undefined }) => {
   const [chartData, setChartData] = useState<IChartObject[]>([])
   const [weeks, setWeeks] = useState<string[]>([])
   const average = Math.round(chartData.reduce((a, c) => a + c.y, 0) / chartData.length)
-  const preiod = `${chartData[0]?.x} ~ ${chartData[chartData.length - 1]?.x}`
+  const period = `${chartData[0]?.x} ~ ${chartData[chartData.length - 1]?.x}`
 
   useEffect(() => {
     if (!userId) return
@@ -59,7 +59,7 @@ const HeartRateChart = ({ userId }: { userId: string | undefined }) => {
             <Heartrate width={20} height={20} />
             <span>평균 {average} bpm</span>
           </p>
-          <p className={styles.date}>{preiod}</p>
+          <p className={styles.date}>{period}</p>
         </div>
         <SearchDateRange setWeeks={setWeeks} />
       </div>
