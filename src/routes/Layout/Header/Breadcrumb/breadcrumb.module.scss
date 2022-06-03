@@ -1,0 +1,28 @@
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
+@use '/src/styles/constants/colors';
+
+.container {
+  display: none;
+  padding-left: 10px;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  li {
+    +li::before {
+      margin: 0 10px;
+      content: '>';
+    }
+    white-space: nowrap;
+  }
+  @include responsive.after(SD) {
+    @include flexbox.flexbox(start, center);
+    flex: 1;
+  }
+  @include responsive.after(ML) {
+    padding-left: 0;
+  }
+}

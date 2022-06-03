@@ -1,22 +1,89 @@
 @use '/src/styles/mixins/flexbox';
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/responsive';
+@use '/src/styles/mixins/position';
 
-.container {
-  width: 300px;
-  height: 100%;
-  color: colors.$WHITE;
-  background-color: colors.$SIGNATURE_COLOR;
+.sidebarContainer {
+  position: absolute;
+  z-index: 20;
+  overflow: hidden;
+  color: colors.$MAIN_TEXT_COLOR;
+  box-shadow: rgba(colors.$SIGNATURE_COLOR, 0.1) 2px 8px 24px;
 
-  ul {
-    @include flexbox.flexbox(start,center);
-    flex-direction: column;
-    gap: 10px;
+  @include responsive.after(ML) {
+    width: 70px;
+    height: 100%;
+    box-shadow: rgba(colors.$SIGNATURE_COLOR, 0.5) 2px 8px 10px;
+    transition: 0.2s;
 
-    li {
-      width: 100%;
+    &:hover {
+      width: 220px;
 
-      a {
-        @include flexbox.flexbox(start,center);
+      .desktopMenu li {
+        a {
+          margin: 20px 38px;
+        }
+
+        &:first-child a {
+          width: 60%;
+
+          .logo {
+            transform: scale(0.65) translateX(20px);
+          }
+        }
+      }
+    }
+  }
+
+  .desktopMenu {
+    display: none;
+  }
+
+  @include responsive.after(ML) {
+    height: 100%;
+    color: colors.$WHITE;
+    background-color: colors.$SIGNATURE_COLOR;
+
+    .desktopMenu {
+      display: block;
+      @include flexbox.flexbox(center, center);
+      flex-direction: column;
+
+      li {
+        display: block;
+        width: 100%;
+        transition: 200ms;
+
+        a {
+          position: relative;
+          display: block;
+          margin: 20px;
+          transition: 300ms all;
+
+          span {
+            @include position.absolute(30% auto auto 50px);
+            width: 80px;
+            text-align: center;
+          }
+        }
+
+        &:first-child {
+          a {
+            width: 27px;
+            overflow: hidden;
+            transition: 0.3s all;
+
+            .logo {
+              margin-left: -33px;
+              transition: 0.3s all;
+              transform: scale(0.6) translateX(2px);
+            }
+          }
+        }
+      }
+
+      li:hover {
+        color: rgba(colors.$MAIN_TEXT_COLOR, 0.8);
       }
     }
   }
@@ -25,5 +92,41 @@
     color: inherit;
     text-decoration: none;
     white-space: nowrap;
+  }
+}
+
+.mobileMenuWrapper {
+  @include flexbox.flexbox(center, center);
+  flex-direction: column;
+  width: 100vw;
+  margin-top: 60px;
+  background-color: colors.$WHITE;
+  box-shadow: colors.$BOX_SHADOW 0 8px 8px 0;
+
+  @include responsive.after(ML) {
+    display: none;
+  }
+
+  li {
+    width: 100%;
+    transition: 200ms;
+
+    a {
+      @include flexbox.flexbox(center, center);
+      padding: 10px;
+
+      svg {
+        margin-right: 5px;
+      }
+
+      span {
+        width: 80px;
+        text-align: center;
+      }
+    }
+  }
+
+  li:hover {
+    background: rgba(colors.$SUB_TEXT_COLOR, 0.03);
   }
 }
