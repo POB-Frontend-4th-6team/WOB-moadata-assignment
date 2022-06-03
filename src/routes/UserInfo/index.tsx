@@ -19,7 +19,7 @@ const UserInfo = () => {
       text: [
         { text: '홈', disabled: false, href: '/' },
         { text: '회원정보', disabled: false, href: 'userManage' },
-        { text: '회원상세정보', disabled: true, href: 'userInfo' },
+        { text: '회원상세', disabled: true, href: 'userInfo' },
       ],
     })
   })
