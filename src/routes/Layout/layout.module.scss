@@ -17,6 +17,7 @@
     height: 100%;
     padding: 30px;
     margin-left: 0;
+    overflow-y: auto;
     transition: 0.2s;
 
     @include responsive.after(ML) {
