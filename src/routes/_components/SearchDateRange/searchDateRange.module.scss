@@ -37,7 +37,9 @@
       max-width: 200px;
       height: 40px;
       font-size: 15px;
+      color: colors.$TRANSPARENT;
       text-align: center;
+      text-shadow: 0 0 0 black;
       border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
       border-radius: 8px;
 
