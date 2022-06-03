@@ -1,6 +1,9 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import dayjs from 'dayjs'
 import { Range } from 'react-date-range'
+import { useRecoilState } from 'recoil'
+
+import { isSearchInputResetState } from 'states/userSearch'
 
 import { Button } from '../Button'
 import styles from './searchDateRange.module.scss'
@@ -20,6 +23,8 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
       key: 'selection',
     },
   ])
+
+  const [isSearchInputReset, setIsSearchInputReset] = useRecoilState(isSearchInputResetState)
 
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
   const [startDate, setStartDate] = useState('전체')
@@ -62,8 +67,19 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
     setDateRange([{ ...dateRange[0], startDate: today, endDate: today }])
   }
 
+  useEffect(() => {
+    if (isSearchInputReset) {
+      setSelectedPeriod('전체')
+      setStartDate('전체')
+      setEndDate('전체')
+      setWeeks([])
+      setDateRange([{ ...dateRange[0], startDate: new Date('2022-01-01'), endDate: new Date() }])
+      setIsSearchInputReset(false)
+    }
+  }, [dateRange, isSearchInputReset, setIsSearchInputReset, setWeeks])
+
   return (
-    <section className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.inputs}>
         <label htmlFor='dateRange'>조회 기간</label>
         <div className={styles.inputContainer}>
@@ -107,7 +123,7 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
           setSelectedPeriod={setSelectedPeriod}
         />
       )}
-    </section>
+    </div>
   )
 }
 
