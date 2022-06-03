@@ -14,6 +14,11 @@ const getMemberSeq = (id: string) => {
   return findUser?.member_seq
 }
 
+export const getUserInfoWithId = (id: string | undefined) => {
+  const findUser = users.find((value) => value.user_id === id)
+  return findUser
+}
+
 export const getMemberInfo = (props: Props) => {
   if (props.id && !props.number) return filterUserWithIdAndDate(props.id, props.startDate, props.endDate)
   if (props.number && !props.id) return filterUserWithNumberAndDate(props.number, props.startDate, props.endDate)

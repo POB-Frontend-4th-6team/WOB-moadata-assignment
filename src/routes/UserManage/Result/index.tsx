@@ -11,28 +11,17 @@ interface Props {
 const Result = ({ memberList }: Props) => {
   const TableBody: JSX.Element[] = memberList.map((member, idx) => {
     const key = `member-${idx}`
-    const { member_seq: memberSeq, registered_date: registeredDate, nickname, user_id: userId, gender, birth } = member
 
     return (
       <tr key={key} className={styles.tableBody}>
-        <td>{memberSeq}</td>
-        <td>{removeTimeInDate(registeredDate)}</td>
-        <td>{nickname}</td>
-        <td>{userId}</td>
-        <td>{gender}</td>
-        <td>{birth}</td>
+        <td>{member.member_seq}</td>
+        <td>{removeTimeInDate(member.registered_date)}</td>
+        <td>{member.nickname}</td>
+        <td>{member.user_id}</td>
+        <td>{member.gender}</td>
+        <td>{member.birth}</td>
         <td>
-          <Link
-            to='userInfo'
-            state={{
-              user_seq: memberSeq,
-              user_nickname: nickname,
-              user_id: userId,
-              user_gender: gender,
-              user_birth: birth,
-              user_registerDate: removeTimeInDate(registeredDate),
-            }}
-          >
+          <Link to={`userInfo/${member.user_id}`}>
             <button type='button' className={styles.linkButton}>
               관리
             </button>

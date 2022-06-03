@@ -146,7 +146,7 @@
         }
 
         .rememberBox {
-          @include flexbox.flexbox(start, center);
+          @include flexbox.flexbox(start,center);
           margin: 15px 0 0;
           font-size: 12px;
 

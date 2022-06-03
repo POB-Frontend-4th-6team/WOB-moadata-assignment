@@ -8,18 +8,20 @@ import styles from './login.module.scss'
 import { FaEye, FaEyeSlash, FaUser, FaTrash } from 'react-icons/fa'
 import { LogoImage } from 'assets/svgs'
 
-const UserManage = () => {
-  const [adminId, setAdminId] = useState('')
+const Login = () => {
+  const rememberId = store.get('admin')
+
+  const [adminId, setAdminId] = useState(rememberId || '')
   const [password, setPassword] = useState('')
 
   const [isVisible, setIsVisible] = useState(false)
   const [isError, setIsError] = useState(false)
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked, setIsChecked] = useState(!!rememberId || false)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (sessionStorage.getItem('admin') || store.get('admin')) {
+    if (sessionStorage.getItem('admin')) {
       navigate('/')
     }
   }, [navigate])
@@ -99,22 +101,13 @@ const UserManage = () => {
       </section>
       {isError && (
         <div className={styles.notificationPopUpContainer}>
-          {/* 팝업메시지 컴포넌트화 시켜서 로그인 실패시 로그인 화면에서 해당 팝업메시지 fade in x클릭시 out, 로그인 성공시 홈화면에서, 로그아웃시 로그인화면에서 구현하면 될듯싶네요 */}
           <div className={styles.popUpMsg}>
             Wrong password or ID. Try again <FaTrash className={styles.handlePopUpIcon} onClick={closeMessage} />
           </div>
         </div>
       )}
-      {/*
-      <div className={styles.notificationPopUpContainer}>
-        <div className={styles.popUpMsg}>login succeeded</div>
-      </div>
-      <div className={styles.notificationPopUpContainer}>
-        <div className={styles.popUpMsg}>logout succeeded</div>
-      </div> 
-      */}
     </div>
   )
 }
 
-export default UserManage
+export default Login

@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from 'hooks'
+import { useEffect, useState } from 'hooks'
+import { useRecoilValue } from 'recoil'
 
 import styles from './userManage.module.scss'
 import Search from './Search'
@@ -7,7 +8,6 @@ import Result from './Result'
 import { MemberStateProps } from 'types/user'
 import { userInputDataState } from 'states/userSearch'
 import { getMemberInfo } from 'services/user'
-import { useRecoilValue } from 'recoil'
 
 const UserManage = () => {
   const searchOptions = useRecoilValue(userInputDataState)

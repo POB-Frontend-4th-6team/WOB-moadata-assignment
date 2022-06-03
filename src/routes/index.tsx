@@ -22,7 +22,7 @@ const App = () => {
         <Route path='' element={<HomePage />} />
         <Route path='userManage' element={<Outlet />}>
           <Route path='' element={<UserManage />} />
-          <Route path='userInfo' element={<UserInfo />} />
+          <Route path='userInfo/:userId' element={<UserInfo />} />
         </Route>
         <Route path='*' element={<NotFoundPage />} />
       </Route>
