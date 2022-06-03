@@ -103,12 +103,15 @@
   background-color: colors.$WHITE;
   box-shadow: colors.$BOX_SHADOW 0 8px 8px 0;
 
+  @include responsive.after(ML) {
+    display: none;
+  }
+
   li {
     width: 100%;
     transition: 200ms;
 
     a {
-
       @include flexbox.flexbox(center, center);
       padding: 10px;
 
