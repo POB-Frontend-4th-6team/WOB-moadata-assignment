@@ -11,6 +11,7 @@ header {
 
   .userMenus {
     @include flexbox.flexbox(around, center);
+    gap: 8px;
 
     li {
       @include flexbox.flexbox(center, center);
@@ -46,7 +47,12 @@ header {
     }
   }
   @include responsive.after(ML) {
+    @include flexbox.flexbox(end, center);
     width: calc(100% - 70px);
     margin-left: 70px;
+  }
+
+  @include responsive.after(SD) {
+    @include flexbox.flexbox(between, center);
   }
 }
