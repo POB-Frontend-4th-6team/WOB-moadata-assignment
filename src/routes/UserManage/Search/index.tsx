@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, FormEventHandler, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 
@@ -46,6 +46,7 @@ const Search = () => {
         endDate: Number(dayjs(weeks[1]).format('YYYYMMDD')),
       })
     }
+
     if (currentCategory === '회원번호') {
       setUserInputData({
         ...userInputData,

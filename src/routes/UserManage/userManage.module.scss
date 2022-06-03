@@ -14,18 +14,23 @@
     font-weight: 600;
   }
 
-  .userManageContainer {
-    display: flex;
+  .searchContainer {
+    @include flexbox.flexbox(center, center);
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
-}
 
-tr {
-  border: 1px solid black;
-}
+  p {
+    margin-top: 30px;
+    font-size: 17px;
 
-th {
-  border: 1px solid black;
+    mark {
+      color: colors.$HOVER_SIGNATURE_COLOR;
+      background-color: transparent;
+    }
+  }
+
+  .resultContainer {
+    width: 100%;
+    margin-top: 20px;
+  }
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'hooks'
+import { useEffect, useState, useRef } from 'hooks'
 
 import styles from './userManage.module.scss'
 import Search from './Search'
@@ -10,9 +10,9 @@ import { getMemberInfo } from 'services/user'
 import { useRecoilValue } from 'recoil'
 
 const UserManage = () => {
-  const [member, setMember] = useState<MemberStateProps[]>([])
-
   const searchOptions = useRecoilValue(userInputDataState)
+
+  const [member, setMember] = useState<MemberStateProps[]>([])
 
   const searchedMemberList = getMemberInfo({
     id: searchOptions.userId,
@@ -25,27 +25,19 @@ const UserManage = () => {
     setMember(searchedMemberList)
   }, [searchOptions])
 
-  const Results: JSX.Element[] = member.map((data) => <Result data={data} key={`userId_${data.nickname}`} />)
+  const countMember = member.length
 
   return (
     <section className={styles.container}>
       <h2>회원 관리</h2>
-      <div className={styles.userManageContainer}>
+      <div className={styles.searchContainer}>
         <Search />
-        <table>
-          <thead>
-            <tr>
-              <th>회원번호</th>
-              <th>가입일</th>
-              <th>닉네임</th>
-              <th>로그인 ID</th>
-              <th>성별</th>
-              <th>생년월일</th>
-              <th>상세</th>
-            </tr>
-          </thead>
-          <tbody>{Results}</tbody>
-        </table>
+      </div>
+      <p>
+        전체 총 <mark>{countMember}</mark> 명의 회원이 검색되었습니다.
+      </p>
+      <div className={styles.resultContainer}>
+        <Result memberList={member} />
       </div>
     </section>
   )
