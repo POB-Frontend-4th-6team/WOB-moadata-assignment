@@ -21,8 +21,6 @@
   @include responsive.after(SD) {
     @include flexbox.flexbox(start, center);
     flex: 1;
-  }
-  @include responsive.after(ML) {
     padding-left: 0;
   }
 }
