@@ -44,26 +44,28 @@ const Sidebar = () => {
 
   return (
     <aside className={styles.sidebarContainer}>
-      <ul className={styles.desktopMenu}>
-        <li>
-          <Link to='/'>
-            <LogoImage className={styles.logo} />
-          </Link>
-        </li>
-        <li>
-          <NavLink to='/' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
-            <BiHomeAlt size='30px' className={styles.icon} />
-            <span>백오피스 홈</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='userManage' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
-            <BiIdCard size='30px' className={styles.icon} />
-            <span>회원 관리</span>
-          </NavLink>
-        </li>
-      </ul>
-      {mobileMenuBtnList}
+      <nav>
+        <ul className={styles.desktopMenu}>
+          <li>
+            <Link to='/'>
+              <LogoImage className={styles.logo} />
+            </Link>
+          </li>
+          <li>
+            <NavLink to='/' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
+              <BiHomeAlt size='30px' className={styles.icon} />
+              <span>백오피스 홈</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='userManage' className={({ isActive }) => cx({ [styles.isActive]: isActive })}>
+              <BiIdCard size='30px' className={styles.icon} />
+              <span>회원 관리</span>
+            </NavLink>
+          </li>
+        </ul>
+        {mobileMenuBtnList}
+      </nav>
     </aside>
   )
 }
