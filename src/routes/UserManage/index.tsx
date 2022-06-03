@@ -1,26 +1,30 @@
-import { useEffect, useMount, useState } from 'hooks'
+import { useEffect, useMount, useState, useMemo } from 'hooks'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-
-import styles from './userManage.module.scss'
-import Search from './Search'
-import Result from './Result'
 
 import { MemberStateProps } from 'types/user'
 import { userInputDataState } from 'states/userSearch'
 import { getMemberInfo } from 'services/user'
 import { breadcrumb } from 'states/breadcrumb'
 
+import styles from './userManage.module.scss'
+import Search from './Search'
+import Result from './Result'
+
 const UserManage = () => {
   const searchOptions = useRecoilValue(userInputDataState)
   const setBreadcrumb = useSetRecoilState(breadcrumb)
   const [member, setMember] = useState<MemberStateProps[]>([])
 
-  const searchedMemberList = getMemberInfo({
-    id: searchOptions.userId,
-    number: searchOptions.userNumber,
-    startDate: searchOptions.startDate,
-    endDate: searchOptions.endDate,
-  })
+  const searchedMemberList = useMemo(
+    () =>
+      getMemberInfo({
+        id: searchOptions.userId,
+        number: searchOptions.userNumber,
+        startDate: searchOptions.startDate,
+        endDate: searchOptions.endDate,
+      }),
+    [searchOptions.endDate, searchOptions.startDate, searchOptions.userId, searchOptions.userNumber]
+  )
 
   useMount(() => {
     setBreadcrumb({
@@ -33,7 +37,7 @@ const UserManage = () => {
 
   useEffect(() => {
     setMember(searchedMemberList)
-  }, [searchOptions])
+  }, [searchedMemberList])
 
   const countMember = member.length
 
