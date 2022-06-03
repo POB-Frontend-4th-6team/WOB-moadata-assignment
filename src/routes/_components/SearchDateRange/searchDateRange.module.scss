@@ -1,52 +1,89 @@
 @use '/src/styles/constants/colors';
 @use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
 
 .container {
-  @include flexbox.flexbox(center, center);
-  position: relative;
-  z-index: 1000;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   gap: 20px;
+  width: 100%;
+
+  @include responsive.after(MD) {
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include responsive.after(LD) {
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
 .inputs {
-  @include flexbox.flexbox(center, center);
-  flex-wrap: nowrap;
+  @include flexbox.flexbox(between, center);
 
-  label {
-    margin-right: 20px;
-    white-space: nowrap;
+  @include responsive.after(ML) {
+    @include flexbox.flexbox(start, center);
   }
 
-  input {
-    width: 40%;
-    height: 40px;
-    font-size: 16px;
-    color: colors.$TRANSPARENT;
-    text-align: center;
-    text-shadow: 0 0 0 black;
-    border: 1px solid colors.$GRAYA;
-    border-radius: 10px;
+  .inputContainer {
+    display: flex;
+    align-items: center;
+    color: colors.$MAIN_TEXT_COLOR;
 
-    &:hover {
-      cursor: pointer;
+    input {
+      width: 50%;
+      max-width: 200px;
+      height: 40px;
+      font-size: 15px;
+      text-align: center;
+      border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
+      border-radius: 8px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    span {
+      margin: 0 10px;
     }
   }
-}
 
-.calendarIcon {
-  width: 30px;
-  height: 30px;
-
-  &:hover {
-    cursor: pointer;
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 40px;
+    padding: 10px;
+    margin-right: 20px;
+    font-size: 15px;
+    white-space: nowrap;
   }
 }
 
 .buttons {
   display: flex;
-  flex-wrap: nowrap;
-}
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 
-.dateRange {
-  height: 400px;
+  @include responsive.after(SD) {
+    justify-content: flex-end;
+  }
+
+  button {
+    width: 30%;
+    margin-left: 0;
+
+    @include responsive.after(SD) {
+      max-width: 190px;
+      margin-left: 16px;
+    }
+
+    @include responsive.after(LD) {
+      width: 100px;
+    }
+  }
 }

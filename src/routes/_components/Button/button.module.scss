@@ -2,19 +2,14 @@
 @use '/src/styles/mixins/flexbox';
 
 .button {
-  @include flexbox.flexbox;
-  margin-left: auto;
   white-space: nowrap;
-  border: 1px solid colors.$GRAYA;
+  background-color: colors.$BG_COLOR;
+  border: 1px solid colors.$BORDER_COLOR;
   transition: 200ms;
-
-  + .button {
-    margin-left: 16px;
-  }
 
   &.primary {
     color: colors.$WHITE;
-    background-color: #586cf5;
+    background-color: colors.$SIGNATURE_COLOR;
     border-color: transparent;
   }
 
@@ -29,6 +24,6 @@
     height: 40px;
     padding: 0 24px;
     font-size: 14px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 }

@@ -1,12 +1,62 @@
-table {
-  margin: 10px;
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
 
-  th {
-    padding: 10px;
+.tableContainer {
+  overflow-x: auto;
+  background: colors.$WHITE;
+  border-radius: 20px;
+  box-shadow: colors.$BOX_SHADOW 0 8px 24px;
+
+  &::-webkit-scrollbar {
+    display: block;
+    height: 10px;
+    background-color: colors.$WHITE;
   }
 
-  td {
-    padding: 10px;
-    border: 1px solid black;
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(colors.$MAIN_TEXT_COLOR, 0.1);
+    border-radius: 10px;
+  }
+
+  table {
+    width: 100%;
+    min-width: 700px;
+    font-size: 15px;
+    text-align: center;
+    table-layout: fixed;
+
+    thead {
+      height: 50px;
+      background-color: colors.$BORDER_COLOR_2;
+      border-bottom: 1px solid colors.$BORDER_COLOR;
+    }
+
+    tr {
+      height: 50px;
+    }
+
+    th,
+    td {
+      height: 50px;
+      word-break: keep-all;
+      vertical-align: middle;
+      border-bottom: 1px solid colors.$BORDER_COLOR_2;
+    }
+
+    .linkButton {
+      height: 30px;
+      padding: 0 12px;
+      white-space: nowrap;
+      background-color: colors.$BG_COLOR;
+      border: 1px solid colors.$BORDER_COLOR;
+      border-radius: 6px;
+      transition: 200ms;
+
+      &:hover {
+        color: colors.$WHITE;
+        background-color: colors.$SIGNATURE_COLOR;
+      }
+    }
   }
 }

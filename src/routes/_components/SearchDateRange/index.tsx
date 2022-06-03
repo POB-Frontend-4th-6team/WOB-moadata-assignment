@@ -66,31 +66,33 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
     <section className={styles.container}>
       <div className={styles.inputs}>
         <label htmlFor='dateRange'>조회 기간</label>
-        <input
-          id='dateRange'
-          type='text'
-          placeholder={startDate}
-          value={startDate}
-          onChange={handleStartDateInput}
-          onClick={handleOpenDatePickerModal}
-        />
-        &nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;
-        <input
-          type='text'
-          placeholder={endDate}
-          value={endDate}
-          onChange={handleEndDateInput}
-          onClick={handleOpenDatePickerModal}
-        />
+        <div className={styles.inputContainer}>
+          <input
+            id='dateRange'
+            type='text'
+            placeholder={startDate}
+            value={startDate}
+            onChange={handleStartDateInput}
+            onClick={handleOpenDatePickerModal}
+          />
+          <span>~</span>
+          <input
+            type='text'
+            placeholder={endDate}
+            value={endDate}
+            onChange={handleEndDateInput}
+            onClick={handleOpenDatePickerModal}
+          />
+        </div>
       </div>
       <div className={styles.buttons}>
-        <Button size='large' primary={selectedPeriod === '오늘'} onClick={handleSetToToday}>
+        <Button type='button' size='large' primary={selectedPeriod === '오늘'} onClick={handleSetToToday}>
           오늘
         </Button>
-        <Button size='large' primary={selectedPeriod === '일주일'} onClick={handleSetToOneWeek}>
+        <Button type='button' size='large' primary={selectedPeriod === '일주일'} onClick={handleSetToOneWeek}>
           일주일
         </Button>
-        <Button size='large' primary={selectedPeriod === '전체'} onClick={handleSetToAll}>
+        <Button type='button' size='large' primary={selectedPeriod === '전체'} onClick={handleSetToAll}>
           전체
         </Button>
       </div>

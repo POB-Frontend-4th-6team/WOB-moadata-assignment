@@ -1,29 +1,97 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
+
 .container {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid black;
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+  width: 100%;
+  min-width: 400px;
+  padding: 10px 20px 30px;
+  background-color: colors.$WHITE;
+  border-radius: 20px;
+  box-shadow: colors.$BOX_SHADOW 0 8px 24px;
 
-  label {
-    margin-left: 30px;
+  @include responsive.after(MD) {
+    gap: 20px;
+    padding: 30px 20px;
   }
-}
 
-.userInfoInputsContainer {
-  display: flex;
-  align-items: center;
+  .column {
+    @include flexbox.flexbox(between, center);
+    width: 100%;
+    line-height: 30px;
 
-  .dropDown {
-    height: 30px;
-    border: 1px solid black;
+    @include responsive.after(ML) {
+      @include flexbox.flexbox(start, center);
+      grid-template-rows: 40px 40px 40px;
+
+      input {
+        width: 70%;
+        max-width: 300px;
+      }
+    }
+
+    .dropDownInput {
+      width: 70%;
+      max-width: 300px;
+      height: 40px;
+      padding: 3px 14px;
+      margin-left: 20px;
+      line-height: 30px;
+      border: 1px solid rgba(colors.$BORDER_COLOR, 0.8);
+      border-radius: 8px;
+
+      @include responsive.after(ML) {
+        max-width: 280px;
+      }
+    }
   }
-}
 
-.dateRangeInputContainer {
-  display: flex;
-}
+  .secondColumn {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
 
-.formButtonsContainer {
-  display: flex;
-  margin-right: 20px;
-  margin-left: auto;
+    @include responsive.after(MD) {
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr;
+    }
+
+    @include responsive.after(LD) {
+      grid-template-rows: 1fr;
+      grid-template-columns: 3fr 1fr;
+    }
+  }
+
+  .buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    button {
+      width: 50%;
+
+      + button {
+        margin-left: 16px;
+      }
+    }
+
+    @include responsive.after(ML) {
+      justify-content: flex-end;
+
+      button {
+        width: 150px;
+      }
+    }
+
+    @include responsive.after(LD) {
+      button {
+        width: 100px;
+      }
+    }
+  }
 }

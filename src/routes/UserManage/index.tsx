@@ -1,4 +1,5 @@
 import { useEffect, useMount, useState } from 'hooks'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import styles from './userManage.module.scss'
 import Search from './Search'
@@ -7,13 +8,16 @@ import Result from './Result'
 import { MemberStateProps } from 'types/user'
 import { userInputDataState } from 'states/userSearch'
 import { getMemberInfo } from 'services/user'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { breadcrumb } from 'states/breadcrumb'
 
 const UserManage = () => {
   const [member, setMember] = useState<MemberStateProps[]>([])
+
+const UserManage = () => {
   const searchOptions = useRecoilValue(userInputDataState)
   const setBreadcrumb = useSetRecoilState(breadcrumb)
+
+  const [member, setMember] = useState<MemberStateProps[]>([])
 
   const searchedMemberList = getMemberInfo({
     id: searchOptions.userId,
@@ -35,27 +39,21 @@ const UserManage = () => {
     setMember(searchedMemberList)
   }, [searchOptions])
 
-  const Results: JSX.Element[] = member.map((data) => <Result data={data} key={`userId_${data.nickname}`} />)
+  const countMember = member.length
 
   return (
-    <div className={styles.container}>
-      <h2>UserManage</h2>
-      <Search />
-      <table>
-        <thead>
-          <tr>
-            <th>회원번호</th>
-            <th>가입일</th>
-            <th>닉네임</th>
-            <th>로그인 ID</th>
-            <th>성별</th>
-            <th>생년월일</th>
-            <th>상세</th>
-          </tr>
-        </thead>
-        <tbody>{Results}</tbody>
-      </table>
-    </div>
+    <section className={styles.container}>
+      <h2>회원 관리</h2>
+      <div className={styles.searchContainer}>
+        <Search />
+      </div>
+      <p>
+        전체 총 <mark>{countMember}</mark> 명의 회원이 검색되었습니다.
+      </p>
+      <div className={styles.resultContainer}>
+        <Result memberList={member} />
+      </div>
+    </section>
   )
 }
 

@@ -116,6 +116,17 @@
             color: colors.$MAIN_TEXT_COLOR;
           }
 
+          .separator {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background: colors.$SIGNATURE_COLOR;
+            opacity: 0;
+            transition: all 0.2s cubic-bezier(0, 0, 0.52, 1.11);
+            transform: scaleX(0) translateY(-2px);
+            transform-origin: 50%;
+          }
+
           input {
             width: 100%;
             height: 35px;
@@ -124,11 +135,16 @@
             color: colors.$MAIN_TEXT_COLOR;
             letter-spacing: 0.1px;
             border-bottom: solid 1px colors.$BORDER_COLOR;
-            transition: all 1s ease;
+            transition: all 0.3s ease-in-out;
 
-            &:focus {
-              border-bottom: solid 1px colors.$SIGNATURE_COLOR;
+            &:focus + .separator {
+              opacity: 1;
+              transform: scaleX(1) translateY(-1px);
             }
+          }
+
+          input:hover {
+            border-bottom: 1px solid colors.$BLACK;
           }
 
           .faUserIcon,
