@@ -76,7 +76,7 @@ const SearchDateRange = ({ setWeeks }: IProps) => {
       setDateRange([{ ...dateRange[0], startDate: new Date('2022-01-01'), endDate: new Date() }])
       setIsSearchInputReset(false)
     }
-  }, [dateRange, isSearchInputReset, setIsSearchInputReset, setWeeks, today])
+  }, [dateRange, isSearchInputReset, setIsSearchInputReset, setWeeks])
 
   return (
     <section className={styles.container}>
