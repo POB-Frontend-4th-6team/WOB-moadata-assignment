@@ -3,8 +3,7 @@
 @use '/src/styles/constants/colors';
 
 .container {
-  @include flexbox.flexbox(start, center);
-  flex: 1;
+  display: none;
   padding-left: 10px;
 
   a {
@@ -17,8 +16,12 @@
       margin: 0 10px;
       content: '>';
     }
+    white-space: nowrap;
   }
-
+  @include responsive.after(SD) {
+    @include flexbox.flexbox(start, center);
+    flex: 1;
+  }
   @include responsive.after(ML) {
     padding-left: 0;
   }
