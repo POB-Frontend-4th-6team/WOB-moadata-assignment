@@ -8,7 +8,7 @@ import { Step } from 'assets/svgs'
 import styles from './chart.module.scss'
 import SearchDateRange from 'routes/_components/SearchDateRange'
 
-const StepRateChart = () => {
+const StepRateChart = ({ userId }: { userId: string }) => {
   const [chartData, setChartData] = useState<IChartObject[]>([])
   const [weeks, setWeeks] = useState<string[]>([])
   const total = useMemo(() => chartData.reduce((prev, cur) => prev + cur.y, 0), [chartData])
@@ -19,9 +19,9 @@ const StepRateChart = () => {
   }, [chartData])
 
   useEffect(() => {
-    if (weeks.length && weeks[0] === weeks[1]) setChartData(getTodayRateData(weeks, 'member136', 'step'))
-    else setChartData(getPeriodRateData(weeks, 'member136', 'step'))
-  }, [weeks])
+    if (weeks.length && weeks[0] === weeks[1]) setChartData(getTodayRateData(weeks, userId, 'step'))
+    else setChartData(getPeriodRateData(weeks, userId, 'step'))
+  }, [userId, weeks])
 
   return (
     <section className={styles.container}>

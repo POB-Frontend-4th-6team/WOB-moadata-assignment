@@ -11,7 +11,7 @@ import StepRateChart from './Charts/StepRateChart'
 
 const UserInfo = () => {
   const { userId } = useParams()
-  const user = getUserInfoWithId(userId)
+  const user = getUserInfoWithId(userId!)
   const setBreadcrumb = useSetRecoilState(breadcrumb)
 
   useMount(() => {
@@ -60,8 +60,8 @@ const UserInfo = () => {
         </section>
       )}
       <div className={styles.charts}>
-        <HeartRateChart userId={user?.user_id} />
-        <StepRateChart />
+        <HeartRateChart userId={user.user_id} />
+        <StepRateChart userId={user.user_id} />
       </div>
     </>
   )

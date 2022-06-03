@@ -14,9 +14,9 @@ const getMemberSeq = (id: string) => {
   return findUser?.member_seq
 }
 
-export const getUserInfoWithId = (id: string | undefined) => {
+export const getUserInfoWithId = (id: string) => {
   const findUser = users.find((value) => value.user_id === id)
-  return findUser
+  return findUser!
 }
 
 export const getMemberInfo = (props: IProps) => {
