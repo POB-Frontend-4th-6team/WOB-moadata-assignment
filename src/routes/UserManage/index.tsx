@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'hooks'
+import { useEffect, useMount, useState } from 'hooks'
 
 import styles from './userManage.module.scss'
 import Search from './Search'
@@ -7,18 +7,28 @@ import Result from './Result'
 import { MemberStateProps } from 'types/user'
 import { userInputDataState } from 'states/userSearch'
 import { getMemberInfo } from 'services/user'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { breadcrumb } from 'states/breadcrumb'
 
 const UserManage = () => {
   const [member, setMember] = useState<MemberStateProps[]>([])
-
   const searchOptions = useRecoilValue(userInputDataState)
+  const setBreadcrumb = useSetRecoilState(breadcrumb)
 
   const searchedMemberList = getMemberInfo({
     id: searchOptions.userId,
     number: searchOptions.userNumber,
     startDate: searchOptions.startDate,
     endDate: searchOptions.endDate,
+  })
+
+  useMount(() => {
+    setBreadcrumb({
+      text: [
+        { text: '홈', disabled: false, href: '/' },
+        { text: '회원정보', disabled: true, href: 'userManage' },
+      ],
+    })
   })
 
   useEffect(() => {
