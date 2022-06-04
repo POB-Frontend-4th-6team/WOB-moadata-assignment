@@ -1,6 +1,8 @@
 # MoA data
 ## 배포
-추가 예정
+주소: \
+ID: moatest1\
+PW: test
 
 ## 참여 인원
 
