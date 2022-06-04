@@ -1,5 +1,29 @@
-.container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+
+.button {
+  white-space: nowrap;
+  background-color: colors.$BG_COLOR;
+  border: 1px solid colors.$BORDER_COLOR;
+  transition: 200ms;
+
+  &.primary {
+    color: colors.$WHITE;
+    background-color: colors.$SIGNATURE_COLOR;
+    border-color: transparent;
+  }
+
+  &.small {
+    height: 24px;
+    padding: 0 12px;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+
+  &.large {
+    height: 40px;
+    padding: 0 24px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
 }

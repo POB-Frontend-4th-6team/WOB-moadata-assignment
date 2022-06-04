@@ -1,0 +1,62 @@
+@use '/src/styles/constants/colors';
+@use '/src/styles/mixins/flexbox';
+@use '/src/styles/mixins/responsive';
+
+.container {
+  width: 100%;
+  margin-top: 30px;
+
+  @include responsive.after(LD) {
+    width: calc(50% - 15px);
+    margin-top: 0;
+  }
+
+  h3 {
+    margin-bottom: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    color: colors.$MAIN_TEXT_COLOR;
+  }
+
+  .chartContainer {
+    padding: 30px;
+    background: colors.$WHITE;
+    border-radius: 20px;
+    box-shadow: colors.$BOX_SHADOW 0 8px 24px;
+
+    .chart {
+      overflow-x: scroll;
+      overflow-y: hidden;
+
+      &::-webkit-scrollbar {
+        display: block;
+        height: 10px;
+        background-color: colors.$WHITE;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(colors.$MAIN_TEXT_COLOR, 0.1);
+        border-radius: 10px;
+      }
+    }
+
+    .info {
+      .title {
+        margin-top: 20px;
+        @include flexbox.flexbox(start, center);
+
+        span {
+          margin-left: 5px;
+          font-size: 18px;
+          font-weight: 600;
+          color: colors.$MAIN_TEXT_COLOR;
+        }
+      }
+
+      .date {
+        margin: 20px 0;
+        color: colors.$MAIN_TEXT_COLOR;
+      }
+    }
+  }
+}
