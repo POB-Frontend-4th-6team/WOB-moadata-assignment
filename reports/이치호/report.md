@@ -6,6 +6,8 @@
 
 > 역할
 
+<img width="569" alt="스크린샷 2022-06-04 19 46 47" src="https://user-images.githubusercontent.com/87627359/171995927-48950daf-6770-496d-bf40-e5e3dea69f79.png">
+
 
 회원 검색창에서 `로그인 아이디, 회원 번호, 조회 기간` 을 props로 데이터 반환 함수에 넘기면, 해당 조건을 충족하는 유저 객체가 담긴 배열이 온다.
 
@@ -21,6 +23,8 @@
 
 일단 색상은 정해졌다.
 
+<img width="168" alt="스크린샷 2022-06-04 19 51 51" src="https://user-images.githubusercontent.com/87627359/171995943-ca292a57-c65f-4b65-8f3c-4248198abda6.png">
+
 사람인 색상 #4876EF
 
 `전체 총 5 명의 회원이 검색되었습니다.` 라는 문구에서 ‘5’도 사람인 색상을 넣어 통일감을 줘야겠다.
@@ -30,10 +34,6 @@ Pagination을 구현할 때 버튼 색상도 마찬가지로 구현해줘야 겠
 > 팀에서 이런 식으로 해보자고 정한 디자인. 역시 팀원의 선택을 따르는 게 맘이 편하구나. (나는 스타일 감각이 좀 부족한 거 같다. 자주 좋은 디자인을 염탐하는 수밖에..)
 
 데이터 가공에 시간이 좀 걸린다고 하시니, 일단 더미데이터를 생성해서 작업해보도록 하자.
-
-만드는데 좀 걸림.
-
-일단 이 객체들로 작업하고 있었는데, 모아 데이터는 유저가 세개라는 얘기를 듣고 당장 지워버렸다.
 
 ----------
 
@@ -47,19 +47,52 @@ Pagination을 구현할 때 버튼 색상도 마찬가지로 구현해줘야 겠
 
 이게 검색에 쓰일 검색 창이었는데, 뭔가 이상했다.
 
+<img width="635" alt="스크린샷 2022-06-04 19 52 42" src="https://user-images.githubusercontent.com/87627359/171995971-0bb64444-4bbe-4957-84dc-10af0d92fd81.png">
+
 > 로그인ID 도 겹치치 않을 거고.. 회원번호도 겹치지 않는 상수 아닌가? 두개가 왜 같이있지?
 
 이 주제로 팀원들과 얘기를 한 결과, 로그인 아이디와 회원번호는 드롭다운 아이템으로 넣어주고, 둘 중 하나를 골라 사용할 수 있게 만들었다.
 
 ### 결과 목록을 반환하는 함수는 어떻게 만들까?
 
-지금 검색창으로부터 총 3개의 파라미터를 함수가 받게 된다. (닉네임 검색과 유저 번호 검색 중 택 1)
+```js
+interface IProps {
+  id: string | undefined
+  number: number | undefined
+  startDate: number
+  endDate: number
+}
 
-props는 id, number, startDate, endDate다.
+export const getMemberInfo = (props: IProps) => {
+  if (props.id && !props.number) return filterUserWithIdAndDate(props.id, props.startDate, props.endDate)
+  if (props.number && !props.id) return filterUserWithNumberAndDate(props.number, props.startDate, props.endDate)
+  if (!props.number && !props.id) return filterUserWithOnlyDate(props.startDate, props.endDate)
+
+  return []
+}
+```
+
+지금 검색창으로부터 최대 3개, 최소 2개의 파라미터를 함수가 받게 된다. (닉네임 검색과 유저 번호 검색 중 택 1)
+
+props는 id?, number?, startDate, endDate다.
 
 id가 있을 땐 , `filterUserWithIdAndDate` 함수를 실행시키고,
 
 number가 있을 땐 `filterUserWithNumberAndDate` 함수를 실행시켜준다.
+
+```js
+//함수는 이런식이다.
+
+export const filterUserWithNumberAndDate = (number: number, startDate: number, endDate: number) => {
+  const numberIncludeUsers = users.filter((user) => user.member_seq.toString().includes(number.toString()))
+
+  const includeDateArray = dateIncludeUsersArray(users, startDate, endDate)
+
+  const result = numberIncludeUsers.filter((ids) => includeDateArray.find((date) => ids.member_seq === date.member_seq))
+
+  return result
+}
+```
 
 결과적으론 각 함수가 두개의 배열을 반환하고, 배열을 비교해 동일한 객체를 반환한다.
 
@@ -82,9 +115,19 @@ number가 있을 땐 `filterUserWithNumberAndDate` 함수를 실행시켜준다.
 
 ### 생각해보니까, 하나 깜빡한게 있었다, id, number 매개변수가 둘 다 안오면?
 
+```js
+export const filterUserWithOnlyDate = (startDate: number, endDate: number) => {
+  const includeDateArray = dateIncludeUsersArray(users, startDate, endDate)
+
+  return includeDateArray
+}
+```
+
 바로 함수 하나를 만들었다. 어떤 경우에도 시작일과 종료일은 오기때문에, 이 조건에 맞는 객체만 배열에 담아 반환한다.
 
 ### 퍼지 문자열을 구현해보자
+
+https://github.com/bluewings/korean-regexp
 
 나는 일단 이 라이브러리를 굉장히 좋아한다. Lodash에도 escapeRegexp라는 문법? 이 있는 듯한데, lodash 라이브러리가 좀 무겁단 소리가 많아서 웬만하면 이 라이브러리를 사용하는 편이다.
 
