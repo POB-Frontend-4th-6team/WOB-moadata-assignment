@@ -1,9 +1,21 @@
 @use '/src/styles/constants/colors';
+@use '/src/styles/mixins/responsive';
 
 .container {
+  @include responsive.after(ML) {
+    transform: scale(0.7) translateX(-160px) translateY(-40px);
+  }
+
+  @include responsive.after(SD) {
+    transform: scale(0.8) translateX(-90px) translateY(0);
+  }
+
+  @include responsive.after(MD) {
+    transform: scale(1) translateX(90px) translateY(0);
+  }
   position: absolute;
   top: 0;
-  left: 105px;
+  left: 0;
   z-index: 1000;
   display: flex;
   flex-direction: column;
@@ -12,6 +24,7 @@
   background-color: colors.$WHITE;
   border-radius: 10px;
   box-shadow: 0 3px 7px rgba(0, 0, 0, 30%);
+  transform: scale(0.65) translateX(-210px) translateY(-60px);
 }
 
 .calendarContainer {
