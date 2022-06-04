@@ -1,6 +1,6 @@
 # MoA data
 ## 배포
-주소: \
+주소: https://moadata-team6.netlify.app \
 ID: moatest1\
 PW: test
 
