@@ -11,14 +11,12 @@ header {
 
   .userMenus {
     @include flexbox.flexbox(around, center);
-    gap: 10px;
+    gap: 8px;
 
     li {
       @include flexbox.flexbox(center, center);
 
       &:nth-child(2) {
-        width: 100px;
-
         span {
           margin-left: 5px;
           color: colors.$MAIN_TEXT_COLOR;
@@ -49,7 +47,12 @@ header {
     }
   }
   @include responsive.after(ML) {
+    @include flexbox.flexbox(end, center);
     width: calc(100% - 70px);
     margin-left: 70px;
+  }
+
+  @include responsive.after(SD) {
+    @include flexbox.flexbox(between, center);
   }
 }

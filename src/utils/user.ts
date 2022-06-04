@@ -1,7 +1,7 @@
 import users from 'assets/jsons/user/member.json'
 import { getRegExp } from 'korean-regexp'
 
-interface Props {
+interface IProps {
   member_seq: number
   user_id: string
   nickname: string
@@ -16,7 +16,7 @@ export const stringDateToNumber = (userDate: string) => {
   return dateToNumber
 }
 
-const dateIncludeUsersArray = (props: Props[], startDate: number, endDate: number) => {
+const dateIncludeUsersArray = (props: IProps[], startDate: number, endDate: number) => {
   const dateIncludeUsers = props.filter(
     (user) =>
       stringDateToNumber(user.registered_date) >= startDate && stringDateToNumber(user.registered_date) <= endDate

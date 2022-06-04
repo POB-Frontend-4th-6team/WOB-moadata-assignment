@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import store from 'store'
 import { useRecoilState } from 'recoil'
 
 import { sidebarDrawer } from 'states/sidebarDrawer'
@@ -9,12 +8,12 @@ import styles from './header.module.scss'
 
 const Header = () => {
   const navigate = useNavigate()
+  const name = sessionStorage.getItem('admin')
 
   const [isSidebarShow, setSidebar] = useRecoilState(sidebarDrawer)
 
   const handleLogOut = () => {
     sessionStorage.removeItem('admin')
-    store.remove('admin')
     navigate('login')
   }
   const handleMobileClick = () => {
@@ -33,7 +32,7 @@ const Header = () => {
         </li>
         <li>
           <Profile />
-          <span>admin님</span>
+          <span>{name}님</span>
         </li>
         <li>
           <button type='button' onClick={handleLogOut}>

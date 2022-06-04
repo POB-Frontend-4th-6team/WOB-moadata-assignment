@@ -58,7 +58,11 @@
           position: relative;
           display: block;
           margin: 20px;
-          transition: 300ms all;
+          transition: 100ms all;
+
+          &.isActive {
+            color: colors.$MAIN_TEXT_COLOR;
+          }
 
           span {
             @include position.absolute(30% auto auto 50px);
@@ -103,14 +107,21 @@
   background-color: colors.$WHITE;
   box-shadow: colors.$BOX_SHADOW 0 8px 8px 0;
 
+  @include responsive.after(ML) {
+    display: none;
+  }
+
   li {
     width: 100%;
     transition: 200ms;
 
     a {
-
       @include flexbox.flexbox(center, center);
       padding: 10px;
+
+      &.isMobaileActive {
+        color: colors.$SIGNATURE_COLOR;
+      }
 
       svg {
         margin-right: 5px;

@@ -8,13 +8,15 @@ import { Heartrate } from 'assets/svgs'
 import styles from './chart.module.scss'
 import SearchDateRange from 'routes/_components/SearchDateRange'
 
-const HeartRateChart = () => {
+const HeartRateChart = ({ userId }: { userId: string }) => {
   const [chartData, setChartData] = useState<IChartObject[]>([])
-  const [weeks, setWeeks] = useState<string[]>(['2022-02-26', '2022-04-24'])
+  const [weeks, setWeeks] = useState<string[]>([])
+  const average = Math.round(chartData.reduce((a, c) => a + c.y, 0) / chartData.length)
+  const period = `${chartData[0]?.x} ~ ${chartData[chartData.length - 1]?.x}`
 
   useEffect(() => {
-    setChartData(getPeriodRateData(weeks, 'member136', 'heart'))
-  }, [weeks])
+    setChartData(getPeriodRateData(weeks, userId, 'heart'))
+  }, [weeks, userId])
 
   return (
     <section className={styles.container}>
@@ -54,9 +56,9 @@ const HeartRateChart = () => {
         <div className={styles.info}>
           <p className={styles.title}>
             <Heartrate width={20} height={20} />
-            <span>평균 82bpm</span>
+            <span>평균 {average} bpm</span>
           </p>
-          <p className={styles.date}>2022-04-20</p>
+          <p className={styles.date}>{period}</p>
         </div>
         <SearchDateRange setWeeks={setWeeks} />
       </div>

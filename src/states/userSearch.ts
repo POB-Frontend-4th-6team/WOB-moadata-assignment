@@ -14,3 +14,8 @@ export const userInputDataState = atom<IUserInputData>({
   key: '#userInputDataState',
   default: { userId: undefined, userNumber: undefined, startDate: 20220101, endDate: today },
 })
+
+export const isSearchInputResetState = atom<boolean>({
+  key: '#isSearchInputResetState',
+  default: false,
+})

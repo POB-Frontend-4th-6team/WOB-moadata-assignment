@@ -144,7 +144,7 @@
           }
 
           input:hover {
-            border-bottom: 1px solid colors.$BLACK;
+            border-bottom: 1px solid colors.$LOGIN_BLACK;
           }
 
           .faUserIcon,
@@ -162,7 +162,7 @@
         }
 
         .rememberBox {
-          @include flexbox.flexbox(start, center);
+          @include flexbox.flexbox(start,center);
           margin: 15px 0 0;
           font-size: 12px;
 

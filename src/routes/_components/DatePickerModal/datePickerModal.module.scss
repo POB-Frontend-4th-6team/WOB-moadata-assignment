@@ -15,12 +15,14 @@
 }
 
 .calendarContainer {
-  height: 500px;
-  margin-bottom: -30px;
+  height: 460px;
 }
 
 .buttonContainer {
+  z-index: 1;
   display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: -10px;
   margin-right: 10px;
-  margin-left: auto;
 }
