@@ -1,13 +1,9 @@
 import dayjs from 'dayjs'
 import { stepRate, heartRate } from 'assets/jsons/index'
+import { IChartObject } from 'types/chart.d'
 
-interface IRateObject {
-  x: string
-  y: number
-}
-
-const mergeArray = (firstArray: IRateObject[], secondArray: IRateObject[]) =>
-  firstArray.reduce((acc: IRateObject[], { x, y }) => {
+const mergeArray = (firstArray: IChartObject[], secondArray: IChartObject[]) =>
+  firstArray.reduce((acc: IChartObject[], { x, y }) => {
     const index = secondArray.findIndex((secondValue) => secondValue.x === x)
 
     if (index !== -1) acc.push({ x, y: secondArray[index].y })
@@ -24,34 +20,37 @@ const getJsonData = (seq: number, type: string) => {
     return stepData
   }
 
-  const heartData = heartRate[seq as keyof typeof heartRate].map((value) => {
-    return { x: value.crt_ymdt, y: value.avg_beat }
-  })
-  return heartData
+  if (type === 'heart') {
+    const heartData = heartRate[seq as keyof typeof heartRate].map((value) => {
+      return { x: value.crt_ymdt, y: value.avg_beat }
+    })
+    return heartData
+  }
+
+  throw new Error('Error')
 }
 
 const initializeDataObject = (type: string, dateList: string[]) => {
   let tempDate = dateList[0]
   const tempX = type === 'step' ? 0 : 60
-  const tmepInitialList: IRateObject[] = [{ x: dayjs(tempDate).format('YY-MM-DD'), y: tempX }]
+  const tmepInitialList: IChartObject[] = [{ x: dayjs(tempDate).format('YY-MM-DD'), y: tempX }]
 
   while (tempDate < dateList[1]) {
     tempDate = dayjs(tempDate).add(1, 'day').format('YYYY-MM-DD')
-    if (type === 'step') tmepInitialList.push({ x: dayjs(tempDate).format('YY-MM-DD'), y: tempX })
-    else tmepInitialList.push({ x: tempDate, y: tempX })
+    tmepInitialList.push({ x: dayjs(tempDate).format('YY-MM-DD'), y: tempX })
   }
 
   return tmepInitialList
 }
 
-const filterDataByDate = (data: IRateObject[], dateList: string[]) => {
+const filterDataByDate = (data: IChartObject[], dateList: string[]) => {
   const startDate = dateList[0]
   const endDate = dateList[dateList.length - 1]
 
   return data.filter((value) => value.x >= startDate && value.x <= `${endDate} 23:59:59`)
 }
 
-const convertTodayData = (data: IRateObject[], type: string) => {
+const convertTodayData = (data: IChartObject[], type: string) => {
   const convertedData = data.map((value) => {
     const tempDate = dayjs(value.x).format('HH:mm')
     return {
@@ -69,7 +68,7 @@ const convertTodayData = (data: IRateObject[], type: string) => {
   return convertedData.reverse()
 }
 
-const convertPeriodData = (data: IRateObject[], type: string) => {
+const convertPeriodData = (data: IChartObject[], type: string) => {
   const convertedData = data.reduce((acc: { [key: string]: { x: string; y: number; count: number } }, { x, y }) => {
     const getDate = dayjs(x).format('YY-MM-DD')
     if (!acc[getDate]) {

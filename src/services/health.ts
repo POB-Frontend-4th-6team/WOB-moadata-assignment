@@ -16,6 +16,10 @@ const getTodayRateData = (dateList: string[], id: string, type: string) => {
   const filteredData = filterDataByDate(data, dateList)
   const convertedData = convertTodayData(filteredData, type)
 
+  if (convertedData.length === 0) {
+    convertedData.push({ x: dateList[0], y: 0 })
+  }
+
   return convertedData
 }
 

@@ -1,20 +1,30 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import dayjs from 'dayjs'
+import { Range } from 'react-date-range'
+import { useRecoilState } from 'recoil'
+
+import { isSearchInputResetState } from 'states/userSearch'
 
 import { Button } from '../Button'
 import styles from './searchDateRange.module.scss'
-import { CalendarIcon } from 'assets/svgs'
 import DatePickerModal from '../DatePickerModal'
 
 interface IProps {
-  weeks: string[]
   setWeeks: Dispatch<SetStateAction<string[]>>
 }
 
-const SearchDateRange = ({ weeks, setWeeks }: IProps) => {
-  console.log('weeks:', weeks)
-
+const SearchDateRange = ({ setWeeks }: IProps) => {
   const today = new Date()
+
+  const [dateRange, setDateRange] = useState<Range[]>([
+    {
+      startDate: today,
+      endDate: today,
+      key: 'selection',
+    },
+  ])
+
+  const [isSearchInputReset, setIsSearchInputReset] = useRecoilState(isSearchInputResetState)
 
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false)
   const [startDate, setStartDate] = useState('전체')
@@ -35,58 +45,85 @@ const SearchDateRange = ({ weeks, setWeeks }: IProps) => {
 
   const handleSetToToday = () => {
     setSelectedPeriod('오늘')
+    setStartDate(dayjs(today).format('YYYY-MM-DD'))
+    setEndDate(dayjs(today).format('YYYY-MM-DD'))
     setWeeks([dayjs(today).format('YYYY-MM-DD'), dayjs(today).format('YYYY-MM-DD')])
+    setDateRange([{ ...dateRange[0], startDate: today, endDate: today }])
   }
 
   const handleSetToOneWeek = () => {
     setSelectedPeriod('일주일')
+    setStartDate(dayjs(today).add(-6, 'day').format('YYYY-MM-DD'))
+    setEndDate(dayjs(today).format('YYYY-MM-DD'))
     setWeeks([dayjs(today).add(-6, 'day').format('YYYY-MM-DD'), dayjs(today).format('YYYY-MM-DD')])
+    setDateRange([{ ...dateRange[0], startDate: dayjs(today).add(-6, 'day').toDate(), endDate: dayjs(today).toDate() }])
   }
 
   const handleSetToAll = () => {
     setSelectedPeriod('전체')
-    setWeeks(['전체', '전체'])
+    setStartDate('전체')
+    setEndDate('전체')
+    setWeeks([])
+    setDateRange([{ ...dateRange[0], startDate: today, endDate: today }])
   }
 
+  useEffect(() => {
+    if (isSearchInputReset) {
+      setSelectedPeriod('전체')
+      setStartDate('전체')
+      setEndDate('전체')
+      setWeeks([])
+      setDateRange([{ ...dateRange[0], startDate: new Date('2022-01-01'), endDate: new Date() }])
+      setIsSearchInputReset(false)
+    }
+  }, [dateRange, isSearchInputReset, setIsSearchInputReset, setWeeks])
+
   return (
-    <form className={styles.container}>
+    <div className={styles.container}>
       <div className={styles.inputs}>
         <label htmlFor='dateRange'>조회 기간</label>
-        <input
-          id='dateRange'
-          type='text'
-          placeholder={`${weeks[0]}`}
-          value={weeks[0]}
-          onChange={handleStartDateInput}
-          disabled={isDatePickerOpen}
-        />
-        &nbsp;&nbsp; ~&nbsp;&nbsp;&nbsp;
-        <input
-          type='text'
-          placeholder={`${weeks[1]}`}
-          value={weeks[1]}
-          onChange={handleEndDateInput}
-          disabled={isDatePickerOpen}
-        />
+        <div className={styles.inputContainer}>
+          <input
+            id='dateRange'
+            type='text'
+            placeholder={startDate}
+            value={startDate}
+            onChange={handleStartDateInput}
+            onClick={handleOpenDatePickerModal}
+          />
+          <span>~</span>
+          <input
+            type='text'
+            placeholder={endDate}
+            value={endDate}
+            onChange={handleEndDateInput}
+            onClick={handleOpenDatePickerModal}
+          />
+        </div>
       </div>
-      <CalendarIcon className={styles.calendarIcon} onClick={handleOpenDatePickerModal} />
       <div className={styles.buttons}>
-        <Button size='large' primary={selectedPeriod === '오늘'} onClick={handleSetToToday}>
+        <Button type='button' size='large' primary={selectedPeriod === '오늘'} onClick={handleSetToToday}>
           오늘
         </Button>
-        <Button size='large' primary={selectedPeriod === '일주일'} onClick={handleSetToOneWeek}>
+        <Button type='button' size='large' primary={selectedPeriod === '일주일'} onClick={handleSetToOneWeek}>
           일주일
         </Button>
-        <Button size='large' primary={selectedPeriod === '전체'} onClick={handleSetToAll}>
+        <Button type='button' size='large' primary={selectedPeriod === '전체'} onClick={handleSetToAll}>
           전체
         </Button>
       </div>
       {isDatePickerOpen && (
-        <div className={styles.datePicker}>
-          <DatePickerModal setIsDatePickerOpen={setIsDatePickerOpen} setWeeks={setWeeks} />
-        </div>
+        <DatePickerModal
+          dateRange={dateRange}
+          setDateRange={setDateRange}
+          setIsDatePickerOpen={setIsDatePickerOpen}
+          setWeeks={setWeeks}
+          setStartDate={setStartDate}
+          setEndDate={setEndDate}
+          setSelectedPeriod={setSelectedPeriod}
+        />
       )}
-    </form>
+    </div>
   )
 }
 

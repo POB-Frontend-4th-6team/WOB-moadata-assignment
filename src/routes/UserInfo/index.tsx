@@ -1,39 +1,69 @@
-import StepRate from './StepRate'
+import { useParams } from 'react-router-dom'
+import { useSetRecoilState } from 'recoil'
+
+import { useMount } from 'hooks'
+import { getUserInfoWithId } from 'services/user'
+import { breadcrumb } from 'states/breadcrumb'
+
 import styles from './userInfo.module.scss'
+import HeartRateChart from './Charts/HeartRateChart'
+import StepRateChart from './Charts/StepRateChart'
 
 const UserInfo = () => {
+  const { userId } = useParams()
+  const user = getUserInfoWithId(userId!)
+  const setBreadcrumb = useSetRecoilState(breadcrumb)
+
+  useMount(() => {
+    setBreadcrumb({
+      text: [
+        { text: '홈', disabled: false, href: '/' },
+        { text: '회원정보', disabled: false, href: 'userManage' },
+        { text: '회원상세정보', disabled: true, href: 'userInfo' },
+      ],
+    })
+  })
+
   return (
-    <div className={styles.container}>
-      <h1>회원 상세 정보</h1>
-      <section className={styles.infoContainer}>
-        <dl>
-          <div>
-            <dt>로그인 ID</dt>
-            <dd>member136</dd>
+    <>
+      {user && (
+        <section className={styles.container}>
+          <h2>회원 상세 정보</h2>
+          <div className={styles.infoContainer}>
+            <dl>
+              <div className={styles.infoBox}>
+                <dt>로그인 ID</dt>
+                <dd>{user.nickname}</dd>
+              </div>
+              <div className={styles.infoBox}>
+                <dt>회원 번호</dt>
+                <dd>{user.member_seq}</dd>
+              </div>
+              <div className={styles.infoBox}>
+                <dt>가입일</dt>
+                <dd>{user.registered_date}</dd>
+              </div>
+              <div className={styles.infoBox}>
+                <dt>닉네임</dt>
+                <dd>{user.nickname}</dd>
+              </div>
+              <div className={styles.infoBox}>
+                <dt>성별</dt>
+                <dd>{user.gender}</dd>
+              </div>
+              <div className={styles.infoBox}>
+                <dt>생년월일</dt>
+                <dd>{user.birth}</dd>
+              </div>
+            </dl>
           </div>
-          <div>
-            <dt>회원 번호</dt>
-            <dd>136</dd>
-          </div>
-          <div>
-            <dt>가입일</dt>
-            <dd>2020-04-16</dd>
-          </div>
-          <div>
-            <dt>닉네임</dt>
-            <dd>모아데이터1</dd>
-          </div>
-          <div>
-            <dt>성별</dt>
-            <dd>남</dd>
-          </div>
-          <div>
-            <dt>생년월일</dt>
-            <dd>1998-02-22</dd>
-          </div>
-        </dl>
-      </section>
-    </div>
+        </section>
+      )}
+      <div className={styles.charts}>
+        <HeartRateChart userId={user.user_id} />
+        <StepRateChart userId={user.user_id} />
+      </div>
+    </>
   )
 }
 
