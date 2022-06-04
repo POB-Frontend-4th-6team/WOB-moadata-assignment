@@ -25,11 +25,13 @@
 ![userInfo](https://user-images.githubusercontent.com/65527334/172000139-d48fcac5-5827-4b58-9d7e-bddeae1bc312.gif)
 
 ### 헤더 css 오류 수정
-- 반응형을 고려하여 모바일 화면일 때 왼쪽에 나타나는 breadcrumb가 없어지게 된다. 없어진 뒤 오른쪽에 정렬되어있던 알람아이콘, 유저정보, 로그아웃 버튼이 왼쪽정렬로 변경되는 오류 발생
+- 반응형을 고려하여 모바일 화면일 때 왼쪽에 나타나는 breadcrumb가 없어지게 된다. 없어진 뒤 오른쪽에 정렬되어있던 알람아이콘, 유저정보, 로그아웃 버튼이 왼쪽정렬로 변경되는 오류 발생<br/>
+
 => display속성인 justify-content를 수정하였습니다.
 
 ### breadcrumb 오류 수정
-- 회원상세페이지로 넘어갔을 때 breadcrumb가 나타나지 않았고 다른 화면에서도 마지막에 있는 title을 클릭시 오류 발생
+- 회원상세페이지로 넘어갔을 때 breadcrumb가 나타나지 않았고 다른 화면에서도 마지막에 있는 title을 클릭시 오류 발생<br/>
+
 => 기존에는 breadcrumb가 recoil로 되어있지 않았고 다른 팀원이 만든 코드다보니 수정하는데 어려움이 있었습니다. 양해를 구하고 breadcrumb를 recoil로 관리하였습니다.
 ```
 export const breadcrumb = atom<IBreadcrumb>({
